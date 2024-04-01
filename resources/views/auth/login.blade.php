@@ -88,20 +88,7 @@
                                </div>
                            </div>
 
-                   <!-- <div class="wrapper">
-           
-                        <div class="captcha-area">
-                            <div class="captcha-img">
-                            
-                                <span class="captcha"></span>
-                            </div>
-                            <button class="reload-btn"><i class="fa fa-refresh"></i></button>
-                        </div>
-                                
-                                <input type="text" id="input_code" placeholder="Enter captcha" class="form-control" maxlength="6" spellcheck="false" required>
-                            
-                                <div class="status-text"></div>
-                   </div> -->
+                 
 
                    <div class="row">
 
@@ -131,7 +118,7 @@
 
             </div>
 
-            <center>
+                    <center>
                    
                    <div class="status-text mb-4"></div>
 
@@ -142,7 +129,7 @@
                            <div class="form-group text-center"><button class="btn btn-primary account-btn check-btn" type="submit"  >Login</button>
                            </div>
                            <!-- </form> -->
-                           <div class="account-footer">
+                           <div class="account-footer" hidden>
                                <p>Belum Punya Akun ? <a href="{{ route('register') }}">Register</a></p>
                            </div>
                        </form>

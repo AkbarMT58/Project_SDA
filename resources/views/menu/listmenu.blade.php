@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
@@ -148,23 +148,14 @@
                 </li> -->
 
                 <li class="menu-title">Settings</li>
-                <li class="{{set_active(['menus/page','roles/permissions/page','users/page'])}} submenu">
-                    <a href="#" class="{{ set_active(['menus/page','roles/permissions/page','users/page']) ? 'noti-dot' : '' }}"><i class="la la-gear"></i>
-                    <span> Settings </span> <span class="menu-arrow"></span></a>
-
-                    <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
-              
-                <li  ><a class="{{set_active(['menus/page'])}}" href="{{ route('menus/page') }}" href="{{ route('menus/page') }}"><i class="la la-building"></i><span style="margin-left:20px;">Menu</span></a></li>
-                <li  ><a class="{{set_active(['roles/permissions/page'])}}" href="{{ route('roles/permissions/page') }}"><i class="la la-key"></i><span style="margin-left:20px;">Roles & Permissions</span></a></li>
-                <li  ><a class="{{set_active(['users/page'])}}" href="{{ route('users/page') }}"><i class="la la-user"></i><span style="margin-left:20px;"> User</span></a></li>
-                    </ul>
-                    </li>
+                <li  ><a class="{{set_active(['menus/page'])}}" href="{{ route('menus/page') }}" href="{{ route('menus/page') }}"><i class="la la-building"></i><span>Menu</span></a></li>
+                <li ><a class="{{set_active(['roles/permissions/page'])}}" href="{{ route('roles/permissions/page') }}"><i class="la la-key"></i><span>Roles & Permissions</span></a></li>
+                <li   ><a class="{{set_active(['users/page'])}}" href="{{ route('users/page') }}"><i class="la la-user"></i><span>User</span></a></li>
             </ul>
         </div>
     </div>
 </div>
-<!-- /Sidebar -->
-    
+<!-- /Sidebar -
   
     <!-- Page Wrapper -->
     <div class="page-wrapper">
@@ -198,19 +189,19 @@
                     <div class="col-sm-6 col-md-3">  
                         <div class="form-group form-focus">
                             <input type="text" class="form-control floating" name="employee_id">
-                            <label class="focus-label">Employee ID</label>
+                            <label class="focus-label">Parent</label>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">  
                         <div class="form-group form-focus">
                             <input type="text" class="form-control floating">
-                            <label class="focus-label">Employee Name</label>
+                            <label class="focus-label">Child</label>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3"> 
                         <div class="form-group form-focus">
                             <input type="text" class="form-control floating">
-                            <label class="focus-label">Position</label>
+                            <label class="focus-label">Sub Child</label>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">  
@@ -232,14 +223,12 @@
                                     <th>Menu ID</th>
                                     <th>Parent ID</th>
                                     <th>Nama Parent</th>
-                                  
                                     <th>Child ID</th>
                                     <th>Nama Child</th>
-                                    <th>Sub Child ID</th>
+                                    <th>Sub Child ID</th> 
                                     <th>Nama Sub Child</th>
-
-                                    <th>Link Modul</th>
-                                    <th>Icon</th>
+                                    <th>Link Modul</th> 
+                                    <!-- <th>Icon</th>  -->
                                     <th class="text-right no-sort">Action</th>
                                 </tr>
                             </thead>
@@ -258,7 +247,7 @@
                                     <td>{{ $items->phone_number }}</td>
                                     <td>{{ $items->join_date }}</td>
                                     <td>{{ $items->role_name }}</td>
-                                    <td>{{ $items->role_name }}</td>
+                                    <!-- <td>{{ $items->role_name }}</td>  -->
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -283,7 +272,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Employee</h5>
+                        <h5 class="modal-title">Add Menu</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -294,7 +283,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Full Name</label>
+                                        <label class="col-form-label">Nama Menu</label>
                                         <select class="select" id="name" name="name">
                                             <option value="">-- Select --</option>
                                             @foreach ($userList as $key=>$user )
@@ -304,11 +293,8 @@
                                     </div>
                                 </div>
                             
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" id="email" name="email" placeholder="Auto email" readonly>
-                                    </div>
+                                <div class="col-sm-6" >
+                                   
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">

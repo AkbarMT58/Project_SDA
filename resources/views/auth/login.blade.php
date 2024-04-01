@@ -5,15 +5,7 @@
 
     <div class="row">
 
-    <!-- <div class="col-md-3">
-
-    
-    <div class="mt-4"  >
-            <a href="#"><img src="{{ URL::to('assets/images/logo_dsda.png') }}" width="200px"  ></a> 
-        </div>
-
-
-    </div> -->
+   
 
     <div class="col-md-12">
 

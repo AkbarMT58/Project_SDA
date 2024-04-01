@@ -917,6 +917,13 @@
                                                 <input type="hidden" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>User Name</label>
+                                                <input type="text" class="form-control" id="username" name="username" value="{{ $information->username }}">
+                                               
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Birth Date</label>

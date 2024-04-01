@@ -14,7 +14,8 @@ class ForgotPasswordController extends Controller
 {
     public function getEmail()
     {
-       return view('auth.passwords.email');
+        $title="Login SDA";
+       return view('auth.passwords.email',compact('title'));
     }
 
     public function postEmail(Request $request)

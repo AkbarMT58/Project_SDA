@@ -154,21 +154,14 @@ class UserManagementController extends Controller
             {
                 $image_name = $request->hidden_image;
                 $image = $request->file('images');
-                if($image_name =='photo_defaults.jpg')
-                {
-                    if($image != '')
-                    {
-                        $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                        $image->move(public_path('/assets/images/'), $image_name);
-                    }
-                } else {
+              
                     if($image != '')
                     {
                         $image_name = rand() . '.' . $image->getClientOriginalExtension();
                         $image->move(public_path('/assets/images/'), $image_name);
                         unlink('assets/images/'.Auth::user()->avatar);
                     }
-                }
+               
                 $update = [
                     'user_id' => $request->user_id,
                     'name'   => $request->name,
@@ -179,6 +172,7 @@ class UserManagementController extends Controller
 
             $information = ProfileInformation::updateOrCreate(['user_id' => $request->user_id]);
             $information->name         = $request->name;
+            $information->username     = $request->username;
             $information->user_id      = $request->user_id;
             $information->email        = $request->email;
             $information->birth_date   = $request->birthDate;
@@ -196,11 +190,11 @@ class UserManagementController extends Controller
             $information->save();
             
             DB::commit();
-            Toastr::success('Profile Information successfully :)','Success');
+            Toastr::success('Informasi Profile Sukses :)','Success');
             return redirect()->back();
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('Add Profile Information fail :)','Error');
+            Toastr::error('Profile Informasi Gagal Dilakukan :)','Error');
             return redirect()->back();
         }
     }

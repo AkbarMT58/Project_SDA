@@ -180,8 +180,8 @@ Route::controller(MenuController::class)->group(function () {
 
     Route::get('menus/page', 'listAllMenu')->middleware('auth')->name('menus/page');
     Route::post('menus/save', 'addRecord')->middleware('auth')->name('menus/save');
-    Route::post('menus/update', 'editMenusPermissions')->middleware('auth')->name('menus/update');
-    Route::post('menus/delete', 'deleteMenusPermissions')->middleware('auth')->name('menus/delete');
+    Route::post('menus/update', 'editMenus')->middleware('auth')->name('menus/update');
+    Route::post('menus/delete', 'deleteMenus')->middleware('auth')->name('menus/delete');
 
 });
 

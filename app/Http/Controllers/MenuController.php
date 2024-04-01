@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\department;
 use App\Models\User;
 use App\Models\module_permission;
+use App\Models\Menu;
 
 class MenuController extends Controller
 {
@@ -16,99 +17,75 @@ class MenuController extends Controller
     // all menu list
     public function listAllMenu()
     {
-        $users = DB::table('users')
-                    ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+        $menus = DB::table('menus')
+                 
                     ->get();
 
          $userList = DB::table('users')->get();
          $permission_lists = DB::table('permission_lists')->get();
-        return view('menu.listmenu',compact('users','userList','permission_lists'));
+        return view('menu.listmenu',compact('menus','userList','permission_lists'));
     }
 
     // save data menu
-    public function saveRecord(Request $request)
+    public function addRecord(Request $request)
     {
         $request->validate([
-            'name'        => 'required|string|max:255',
-            'email'       => 'required|string|email',
-            'birthDate'   => 'required|string|max:255',
-            'gender'      => 'required|string|max:255',
-            'employee_id' => 'required|string|max:255',
-            'company'     => 'required|string|max:255',
+
+
+            'namamenu'              => '',
+            'namaicons'             => '',
+            'categorymenu'          => '',
+            'indexno'               => '',
+            'linkmenu'              => '',
+            
         ]);
 
         DB::beginTransaction();
         try{
 
-            $employees = Employee::where('email', '=',$request->email)->first();
-            if ($employees === null)
-            {
-
-                $employee = new Employee;
-                $employee->name         = $request->name;
-                $employee->email        = $request->email;
-                $employee->birth_date   = $request->birthDate;
-                $employee->gender       = $request->gender;
-                $employee->employee_id  = $request->employee_id;
-                $employee->company      = $request->company;
-                $employee->save();
+         
+                $menus = new Menu;
+                $menus->    namamenu        = $request->namamenu;
+                $menus->    namaicons       = $request->namaicons;
+                $menus->    categorymenu    = $request->namacategory;
+                $menus->    index_no        = $request->indexno;
+                $menus->    link_menu       = $request->linkmenu;
+                $menus->save();
     
-                for($i=0;$i<count($request->id_count);$i++)
-                {
-                    $module_permissions = [
-                        'employee_id' => $request->employee_id,
-                        'module_permission' => $request->permission[$i],
-                        'id_count'          => $request->id_count[$i],
-                        'read'              => $request->read[$i],
-                        'write'             => $request->write[$i],
-                        'create'            => $request->create[$i],
-                        'delete'            => $request->delete[$i],
-                        'import'            => $request->import[$i],
-                        'export'            => $request->export[$i],
-                    ];
-                    DB::table('module_permissions')->insert($module_permissions);
-                }
                 
                 DB::commit();
-                Toastr::success('Add new employee successfully :)','Success');
-                return redirect()->route('all/employee/card');
-            } else {
-                DB::rollback();
-                Toastr::error('Add new employee exits :)','Error');
-                return redirect()->back();
-            }
+                Toastr::success('Penambahan data menu berhasil :)','Success');
+                return redirect()->route('menus/page');
+           
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('Add new employee fail :)','Error');
+            Toastr::error('Penambahan data menu gagal :)','Error');
             return redirect()->back();
         }
     }
     // view edit record
-    public function viewRecord($employee_id)
+    public function editMenus($id_menu)
     {
-        $permission = DB::table('employees')
-            ->join('module_permissions', 'employees.employee_id', '=', 'module_permissions.employee_id')
-            ->select('employees.*', 'module_permissions.*')
-            ->where('employees.employee_id','=',$employee_id)
+        $menus = DB::table('menus')
+            ->where('menus.id','=',$id_menu)
             ->get();
-        $employees = DB::table('employees')->where('employee_id',$employee_id)->get();
-        return view('form.edit.editemployee',compact('employees','permission'));
+       
+        return view('menu.edit',compact('menus'));
     }
     // update record employee
     public function updateRecord( Request $request)
     {
         DB::beginTransaction();
         try{
-            // update table Employee
-            $updateEmployee = [
+            // update table menu
+            $updateMenu= [
+
                 'id'=>$request->id,
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'birth_date'=>$request->birth_date,
-                'gender'=>$request->gender,
-                'employee_id'=>$request->employee_id,
-                'company'=>$request->company,
+                'linkmenu'=>$request->birth_date,
+              
+                
             ];
             // update table user
             $updateUser = [
@@ -120,8 +97,8 @@ class MenuController extends Controller
             // update table module_permissions
             for($i=0;$i<count($request->id_permission);$i++)
             {
-                $UpdateModule_permissions = [
-                    'employee_id' => $request->employee_id,
+                $UpdateModule_menu= [
+                    ''       => $request->employee_id,
                     'module_permission' => $request->permission[$i],
                     'id'                => $request->id_permission[$i],
                     'read'              => $request->read[$i],
@@ -131,7 +108,7 @@ class MenuController extends Controller
                     'import'            => $request->import[$i],
                     'export'            => $request->export[$i],
                 ];
-                module_permission::where('id',$request->id_permission[$i])->update($UpdateModule_permissions);
+                module_permission::where('id',$request->id_permission[$i])->update($UpdateModule_menu);
             }
 
             User::where('id',$request->id)->update($updateUser);
@@ -165,7 +142,7 @@ class MenuController extends Controller
             return redirect()->back();
         }
     }
-    // employee search
+    // menu search
     public function employeeSearch(Request $request)
     {
         $users = DB::table('users')

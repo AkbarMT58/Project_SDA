@@ -220,40 +220,32 @@
                             <thead>
                                 <tr>
                                     <th>Nama Menu</th>
-                                    <th>Menu ID</th>
-                                    <th>Parent ID</th>
-                                    <th>Nama Parent</th>
-                                    <th>Child ID</th>
-                                    <th>Nama Child</th>
-                                    <th>Sub Child ID</th> 
-                                    <th>Nama Sub Child</th>
-                                    <th>Link Modul</th> 
-                                    <!-- <th>Icon</th>  -->
+                                    <th>Kategori Menu</th>
+                                    <th>Link Menu</th>
+                                    <th>Index No</th> 
+                                    <th>Nama Class Icon</th>
                                     <th class="text-right no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $items )
+                                @foreach ($menus as $menu )
                                 <tr>
                                     <td>
-                                    {{ $items->user_id }}
+                                    {{ $menu->id}}
                                     </td>
-                                   
-                                    <td>{{ $items->email }}</td>
-                                    <td>{{ $items->phone_number }}</td>
-                                    <td>{{ $items->join_date }}</td>
-                                    <td>{{ $items->role_name }}</td>
-                                    <td>{{ $items->email }}</td>
-                                    <td>{{ $items->phone_number }}</td>
-                                    <td>{{ $items->join_date }}</td>
-                                    <td>{{ $items->role_name }}</td>
-                                    <!-- <td>{{ $items->role_name }}</td>  -->
+    
+                                    <td>{{ $menu->namamenu }}</td>
+                                    <td>{{ $menu->categorymenu }}</td>
+                                    <td>{{ $menu->link_menu }}</td>
+                                    <td>{{ $menu->namaicons }}</td>
+                                  
+                       
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$items->user_id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$items->user_id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_menus{{$menu->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -267,7 +259,7 @@
         </div>
         <!-- /Page Content -->
       
-        <!-- Add Employee Modal -->
+        <!-- Add Menu Modal -->
         <div id="add_employee" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -277,120 +269,171 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div class="m-4">
+                        <Label>Kategori Menu :</Label>
+                        <br>
+                        <td >               1. Parent Menu</td>
+                        <br>
+                        <td >               2. Child Menu</td>
+                        <br>
+                        <td >               3. Sub Child Menu</td>
+
+                    </div>
                     <div class="modal-body">
-                        <form action="{{ route('all/employee/save') }}" method="POST">
+                        <form action="{{ route('menus/save') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Nama Menu</label>
-                                        <select class="select" id="name" name="name">
-                                            <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->user_id }} data-email={{ $user->email }}>{{ $user->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input class="form-control" type="text" name="namamenu">
+                                       
                                     </div>
                                 </div>
                             
                                 <div class="col-sm-6" >
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Category ID</label>
+                                        <input class="form-control" type="number" name="namacategory" >
+                                       
+                                </div>
+                               
                                    
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Birth Date</label>
-                                        <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
-                                        </div>
-                                    </div>
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Link Menu</label>
+                                        <input class="form-control" type="text" name="linkmenu" >
+                                       
                                 </div>
+                               
+                                </div>
+
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Gender</label>
-                                        <select class="select form-control" id="gender" name="gender">
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group">
+                                        <label class="col-form-label">Index No</label>
+                                        <input class="form-control" type="number" name="indexno" >
+                                       
+                                </div>
+                                    
                                 </div>
                                 <div class="col-sm-6">  
-                                    <div class="form-group">
-                                        <label class="col-form-label">Employee ID <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="employee_id" name="employee_id" placeholder="Auto id employee" readonly>
-                                    </div>
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Nama Class Icon</label>
+                                        <input class="form-control" type="text" name="namaclassicon" >
+                                       
+                                </div>
+                                    
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Company</label>
-                                        <select class="select" id="company" name="company">
-                                            <option value="">-- Select --</option>
-                                            <option value="Soeng Souy">Soeng Souy</option>
-                                            <option value="StarGame Kh">StarGame Kh</option>
-                                        </select>
-                                    </div>
+                                  
                                 </div>
                             </div>
-                            <div class="table-responsive m-t-15">
-                                <table class="table table-striped custom-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Module Permission</th>
-                                            <th class="text-center">Read</th>
-                                            <th class="text-center">Write</th>
-                                            <th class="text-center">Create</th>
-                                            <th class="text-center">Delete</th>
-                                            <th class="text-center">Import</th>
-                                            <th class="text-center">Export</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                            $key = 0;
-                                            $key1 = 0;
-                                        ?>
-                                        @foreach ($permission_lists as $lists )
-                                        <tr>
-                                            <td>{{ $lists->permission_name }}</td>
-                                            <input type="hidden" name="permission[]" value="{{ $lists->permission_name }}">
-                                            <input type="hidden" name="id_count[]" value="{{ $lists->id }}">
-                                            <td class="text-center">
-                                                <input type="checkbox" class="read{{ ++$key }}" id="read" name="read[]" value="Y"{{ $lists->read =="Y" ? 'checked' : ''}} >
-                                                <input type="checkbox" class="read{{ ++$key1 }}" id="read" name="read[]" value="N" {{ $lists->read =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="write{{ ++$key }}" id="write" name="write[]" value="Y" {{ $lists->write =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="write{{ ++$key1 }}" id="write" name="write[]" value="N" {{ $lists->write =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="create{{ ++$key }}" id="create" name="create[]" value="Y" {{ $lists->create =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="create{{ ++$key1 }}" id="create" name="create[]" value="N" {{ $lists->create =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="delete{{ ++$key }}" id="delete" name="delete[]" value="Y" {{ $lists->delete =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="delete{{ ++$key1 }}" id="delete" name="delete[]" value="N" {{ $lists->delete =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="import{{ ++$key }}" id="import" name="import[]" value="Y" {{ $lists->import =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="import{{ ++$key1 }}" id="import" name="import[]" value="N" {{ $lists->import =="N" ? 'checked' : ''}}>
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="export{{ ++$key }}" id="export" name="export[]" value="Y" {{ $lists->export =="Y" ? 'checked' : ''}}>
-                                                <input type="checkbox" class="export{{ ++$key1 }}" id="export" name="export[]" value="N" {{ $lists->export =="N" ? 'checked' : ''}}>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                    
                             <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
+                                <button class="btn btn-primary submit-btn">Simpan</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /Add Employee Modal -->
+        <!-- /Add Menu Modal -->
+
+
+        @foreach ($menus as $menu )
+        
+          <!-- Add Edit Menu Modal -->
+          <div id="edit_menus{{$menu->id}}" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Menu</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="m-4">
+                        <Label>Kategori Menu :</Label>
+                        <br>
+                        <td >               1. Parent Menu</td>
+                        <br>
+                        <td >               2. Child Menu</td>
+                        <br>
+                        <td >               3. Sub Child Menu</td>
+
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('menus/save') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Nama Menu</label>
+                                        <input class="form-control" type="text" name="namamenu" value="{{$menu->namamenu}}">
+                                       
+                                    </div>
+                                </div>
+                            
+                                <div class="col-sm-6" >
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Category ID</label>
+                                        <input class="form-control" type="number" name="namacategory" value="{{$menu->categorymenu}}"  >
+                                       
+                                </div>
+                               
+                                   
+                                </div>
+                                <div class="col-md-6">
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Link Menu</label>
+                                        <input class="form-control" type="text" name="linkmenu" value="{{$menu->link_menu}}" >
+                                       
+                                </div>
+                               
+                                </div>
+
+                                <div class="col-md-6">
+                                <div class="form-group">
+                                        <label class="col-form-label">Index No</label>
+                                        <input class="form-control" type="number" name="indexno"  value="{{$menu->index_no}}">
+                                       
+                                </div>
+                                    
+                                </div>
+                                <div class="col-sm-6">  
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Nama Class Icon</label>
+                                        <input class="form-control" type="text" name="namaclassicon" value="{{$menu->namaicons}}"  >
+                                       
+                                </div>
+                                    
+                                </div>
+                                <div class="col-sm-6">
+                                  
+                                </div>
+                            </div>
+                    
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Add Edit Menu Modal -->
+
+        @endforeach
+
+
+
     </div>
     <!-- /Page Wrapper -->
     @section('script')

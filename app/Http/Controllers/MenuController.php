@@ -27,7 +27,7 @@ class MenuController extends Controller
     }
 
     // save data menu
-    public function addRecord(Request $request)
+    public function addMenus(Request $request)
     {
         $request->validate([
 
@@ -73,53 +73,44 @@ class MenuController extends Controller
         return view('menu.edit',compact('menus'));
     }
     // update record employee
-    public function updateRecord( Request $request)
+    public function updateMenus( Request $request)
     {
         DB::beginTransaction();
+        $request->validate([
+
+            'namamenu'              => '',
+            'namaicons'             => '',
+            'categorymenu'          => '',
+            'indexno'               => '',
+            'linkmenu'              => '',
+            
+        ]);
+
+      
         try{
-            // update table menu
-            $updateMenu= [
 
-                'id'=>$request->id,
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'linkmenu'=>$request->birth_date,
               
-                
-            ];
-            // update table user
-            $updateUser = [
-                'id'=>$request->id,
-                'name'=>$request->name,
-                'email'=>$request->email,
-            ];
-
-            // update table module_permissions
-            for($i=0;$i<count($request->id_permission);$i++)
-            {
-                $UpdateModule_menu= [
-                    ''       => $request->employee_id,
-                    'module_permission' => $request->permission[$i],
-                    'id'                => $request->id_permission[$i],
-                    'read'              => $request->read[$i],
-                    'write'             => $request->write[$i],
-                    'create'            => $request->create[$i],
-                    'delete'            => $request->delete[$i],
-                    'import'            => $request->import[$i],
-                    'export'            => $request->export[$i],
+                $menus = [
+                    'namamenu'            => $request->namamenu,
+                    'namaicons'           => $request->namaclassicon,
+                    'categorymenu'        => $request->namacategory,
+                    'index_no'            => $request->indexno,
+                    'link_menu'           => $request->linkmenu,
+                   
                 ];
-                module_permission::where('id',$request->id_permission[$i])->update($UpdateModule_menu);
-            }
 
-            User::where('id',$request->id)->update($updateUser);
-            Employee::where('id',$request->id)->update($updateEmployee);
+
+                
+              
+            Menu::where('id',$request->id)->update($menus);
+            
         
             DB::commit();
-            Toastr::success('updated record successfully :)','Success');
-            return redirect()->route('all/employee/card');
+            Toastr::success('updated menus successfully :)','Success');
+            return redirect()->route('menus/page');
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('updated record fail :)','Error');
+            Toastr::error('updated menus fail :)','Error');
             return redirect()->back();
         }
     }

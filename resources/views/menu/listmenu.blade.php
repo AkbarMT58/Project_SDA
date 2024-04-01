@@ -219,6 +219,7 @@
                         <table class="table table-striped custom-table datatable">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Nama Menu</th>
                                     <th>Kategori Menu</th>
                                     <th>Link Menu</th>
@@ -237,6 +238,7 @@
                                     <td>{{ $menu->namamenu }}</td>
                                     <td>{{ $menu->categorymenu }}</td>
                                     <td>{{ $menu->link_menu }}</td>
+                                    <td>{{ $menu->index_no }}</td>
                                     <td>{{ $menu->namaicons }}</td>
                                   
                        
@@ -345,7 +347,7 @@
 
 
         @foreach ($menus as $menu )
-        
+
           <!-- Add Edit Menu Modal -->
           <div id="edit_menus{{$menu->id}}" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -367,12 +369,15 @@
 
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('menus/save') }}" method="POST">
+                        <form action="{{ route('menus/update') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Nama Menu</label>
+
+                                        <input class="form-control" type="text" name="id" value="{{$menu->id}}" >
+                                       
                                         <input class="form-control" type="text" name="namamenu" value="{{$menu->namamenu}}">
                                        
                                     </div>

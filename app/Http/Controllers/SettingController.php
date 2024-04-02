@@ -18,7 +18,8 @@ class SettingController extends Controller
     public function rolesPermissions()
     {
         $rolesPermissions = RolesPermissions::All();
-        return view('settings.rolespermissions',compact('rolesPermissions'));
+        $title="Setting Roles SDA CMS";
+        return view('settings.rolespermissions',compact('rolesPermissions','title'));
     }
 
     // add role permissions

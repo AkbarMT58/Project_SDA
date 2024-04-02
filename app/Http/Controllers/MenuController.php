@@ -17,13 +17,11 @@ class MenuController extends Controller
     // all menu list
     public function listAllMenu()
     {
-        $menus = DB::table('menus')
-                 
-                    ->get();
-
+        $menus = DB::table('menus')->get();
+        $title="Setting Menu SDA CMS";
          $userList = DB::table('users')->get();
          $permission_lists = DB::table('permission_lists')->get();
-        return view('menu.listmenu',compact('menus','userList','permission_lists'));
+        return view('menu.listmenu',compact('menus','userList','permission_lists','title'));
     }
 
     // save data menu
@@ -115,21 +113,20 @@ class MenuController extends Controller
         }
     }
     // delete record
-    public function deleteRecord($employee_id)
+    public function deleteMenus(Request $request)
     {
         DB::beginTransaction();
         try{
 
-            Employee::where('employee_id',$employee_id)->delete();
-            module_permission::where('employee_id',$employee_id)->delete();
-
+            Menu::where('id',$request->id)->delete();
+          
             DB::commit();
-            Toastr::success('Delete record successfully :)','Success');
-            return redirect()->route('all/employee/card');
+            Toastr::success('Delete menu sukses :)','Success');
+            return redirect()->back();
 
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('Delete record fail :)','Error');
+            Toastr::error('Delete menu gagal :)','Error');
             return redirect()->back();
         }
     }
@@ -295,112 +292,6 @@ class MenuController extends Controller
         return view('form.employeelist',compact('users','userList','permission_lists'));
     }
 
-    // employee profile with all controller user
-    public function profileEmployee($user_id)
-    {
-        $users = DB::table('users')
-                ->leftJoin('personal_information','personal_information.user_id','users.user_id')
-                ->leftJoin('profile_information','profile_information.user_id','users.user_id')
-                ->where('users.user_id',$user_id)
-                ->first();
-        $user = DB::table('users')
-                ->leftJoin('personal_information','personal_information.user_id','users.user_id')
-                ->leftJoin('profile_information','profile_information.user_id','users.user_id')
-                ->where('users.user_id',$user_id)
-                ->get(); 
-        return view('form.employeeprofile',compact('user','users'));
-    }
-
-    /** page departments */
-    public function index()
-    {
-        $departments = DB::table('departments')->get();
-        return view('form.departments',compact('departments'));
-    }
-
-    /** save record department */
-    public function saveRecordDepartment(Request $request)
-    {
-        $request->validate([
-            'department'        => 'required|string|max:255',
-        ]);
-
-        DB::beginTransaction();
-        try{
-
-            $department = department::where('department',$request->department)->first();
-            if ($department === null)
-            {
-                $department = new department;
-                $department->department = $request->department;
-                $department->save();
-    
-                DB::commit();
-                Toastr::success('Add new department successfully :)','Success');
-                return redirect()->route('form/departments/page');
-            } else {
-                DB::rollback();
-                Toastr::error('Add new department exits :)','Error');
-                return redirect()->back();
-            }
-        }catch(\Exception $e){
-            DB::rollback();
-            Toastr::error('Add new department fail :)','Error');
-            return redirect()->back();
-        }
-    }
-
-    /** update record department */
-    public function updateRecordDepartment(Request $request)
-    {
-        DB::beginTransaction();
-        try{
-            // update table departments
-            $department = [
-                'id'=>$request->id,
-                'department'=>$request->department,
-            ];
-            department::where('id',$request->id)->update($department);
-        
-            DB::commit();
-            Toastr::success('updated record successfully :)','Success');
-            return redirect()->route('form/departments/page');
-        } catch(\Exception $e) {
-            DB::rollback();
-            Toastr::error('updated record fail :)','Error');
-            return redirect()->back();
-        }
-    }
-
-    /** delete record department */
-    public function deleteRecordDepartment(Request $request) 
-    {
-        try {
-
-            department::destroy($request->id);
-            Toastr::success('Department deleted successfully :)','Success');
-            return redirect()->back();
-        
-        } catch(\Exception $e) {
-
-            DB::rollback();
-            Toastr::error('Department delete fail :)','Error');
-            return redirect()->back();
-        }
-    }
-
-    
-
-    /** page time sheet */
-    public function timeSheetIndex()
-    {
-        return view('form.timesheet');
-    }
-
-    /** page overtime */
-    public function overTimeIndex()
-    {
-        return view('form.overtime');
-    }
+   
 
 }

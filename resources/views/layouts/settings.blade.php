@@ -7,7 +7,7 @@
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
         <meta name="author" content="Soeng Souy">
         <meta name="robots" content="noindex, nofollow">
-        <title>Settings - SDA</title>
+        <title>{{$title}}</title>
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/images/551906403.png') }}">
 		<!-- Bootstrap CSS -->

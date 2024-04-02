@@ -38,6 +38,7 @@ use App\Http\Controllers\UserController;
 */
 
 /** for side bar menu active */
+
 function set_active( $route ) {
     if( is_array( $route ) ){
         return in_array(Request::path(), $route) ? 'active' : '';
@@ -45,9 +46,18 @@ function set_active( $route ) {
     return Request::path() == $route ? 'active' : '';
 }
 
+
+
 Route::get('/', function () {
-    return view('auth.login');
+
+    $title="Login SDA";
+    
+    return view('auth.login',compact('title'));
+
+    
 });
+
+
 
 Route::group(['middleware'=>'auth'],function()
 {
@@ -181,7 +191,7 @@ Route::controller(MenuController::class)->group(function () {
     Route::get('menus/page', 'listAllMenu')->middleware('auth')->name('menus/page');
     Route::post('menus/save', 'addMenus')->middleware('auth')->name('menus/save');
     Route::post('menus/update', 'updateMenus')->middleware('auth')->name('menus/update');
-    Route::post('menus/delete', 'deleteMenus')->middleware('auth')->name('menus/delete');
+    Route::get('menus/delete/{id}', 'deleteMenus')->middleware('auth');
 
 });
 

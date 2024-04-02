@@ -247,7 +247,7 @@
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" data-toggle="modal" data-target="#edit_menus{{$menu->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                <a class="dropdown-item" href="{{url('menus/delete/'.$menu->id)}}"  onclick="return confirm('Apakah anda ingin menghapus ini?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -434,6 +434,13 @@
             </div>
         </div>
         <!-- /Add Edit Menu Modal -->
+
+
+
+
+        <!-- Modal Delete  -->
+
+
 
         @endforeach
 

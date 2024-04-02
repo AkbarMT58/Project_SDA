@@ -21,9 +21,10 @@ class UserController extends Controller
                     ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
                     ->get();
 
+        $title="Setting User SDA CMS";
          $userList = DB::table('users')->get();
          $permission_lists = DB::table('permission_lists')->get();
-        return view('usermanagement.listUser',compact('users','userList','permission_lists'));
+        return view('usermanagement.listUser',compact('users','userList','permission_lists','title'));
     }
 
     // save data menu

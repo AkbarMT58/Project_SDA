@@ -233,12 +233,12 @@
                                 @foreach ($users as $items )
                                 <tr>
                                     <td>
-                                    {{ $items->user_id }}
+                                    {{ $items->name }}
                                     </td>
                                    
                                     <td>{{ $items->email }}</td>
-                                    <td>{{ $items->foto }}</td>
-                                    <td>{{ $items->role }}</td>
+                                    <td>{{ $items->avatar }}</td>
+                                    <td>{{ $items->role_name }}</td>
                                     <td>{{ $items->position }}</td>
                                     <td>{{ $items->department }}</td>
                                    
@@ -247,7 +247,7 @@
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{ url('all/employee/view/edit/'.$items->user_id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_users{{$items->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                 <a class="dropdown-item" href="{{url('all/employee/delete/'.$items->user_id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
@@ -262,12 +262,15 @@
         </div>
         <!-- /Page Content -->
       
-        <!-- Add Employee Modal -->
-        <div id="add_employee" class="modal custom-modal fade" role="dialog">
+
+        @foreach ($users as $items )
+
+        <!-- Add Users Modal -->
+        <div id="edit_users{{$items->id}}" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add User</h5>
+                        <h5 class="modal-title">Edit User</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -302,6 +305,13 @@
                              
                           </div>
                                 </div>
+                                <div class="col-md-6" >
+                                <div class="form-group">
+                              <label>Username</label>
+                              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="username">
+                             
+                          </div>
+                                </div>
                                 <div class="col-md-6">
 
                                 <div class="form-group">
@@ -314,19 +324,28 @@
 
                                 <label class="col-form-label">Role</label>
 
-                                 <select class="select" id="name" name="name">
+                                 <select class="select" id="rolename" name="rolename">
                                             <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
+                                            <!-- @foreach ($userList as $key=>$user )
                                                 <option value="{{ $user->name }}" data-employee_id={{ $user->user_id }} data-email={{ $user->email }}>{{ $user->name }}</option>
-                                            @endforeach
+                                            @endforeach -->
                                         </select> 
                                    
                                 </div>
                             
                             </div>
+
+                            <div class="col-md-6">
+
+                            <div class="form-group">
+                            <label>No Telepon</label>
+                            <input type="text" class="form-control" name="no_telepon" placeholder="Isi No Telepon">
+                            </div>
+                            
+                            </div>
                  
                                <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Submit</button>
+                                <button class="btn btn-primary submit-btn">Simpan</button>
                               </div>
                         </form>
                     </div>
@@ -334,6 +353,8 @@
             </div>
         </div>
         <!-- /Add Employee Modal -->
+
+        @endforeach
     </div>
     <!-- /Page Wrapper -->
     @section('script')

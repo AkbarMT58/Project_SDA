@@ -17,8 +17,7 @@ class UserController extends Controller
     public function listAllUser()
     {
         $users = DB::table('users')
-                    ->join('employees', 'users.user_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                   
                     ->get();
 
         $title="Setting User SDA CMS";
@@ -28,60 +27,50 @@ class UserController extends Controller
     }
 
     // save data menu
-    public function saveRecord(Request $request)
+    public function saveUser(Request $request)
     {
+       
         $request->validate([
-            'name'        => 'required|string|max:255',
-            'email'       => 'required|string|email',
-            'birthDate'   => 'required|string|max:255',
-            'gender'      => 'required|string|max:255',
-            'employee_id' => 'required|string|max:255',
-            'company'     => 'required|string|max:255',
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users',
+            'role_name' => '',
+            'password'  => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required',
         ]);
 
+        $dt       = Carbon::now();
+        $todayDate = $dt->toDayDateTimeString();
+        
         DB::beginTransaction();
         try{
 
-            $employees = Employee::where('email', '=',$request->email)->first();
-            if ($employees === null)
+            $users = User::where('email', '=',$request->email)->first();
+            if ($users === null)
             {
 
-                $employee = new Employee;
-                $employee->name         = $request->name;
-                $employee->email        = $request->email;
-                $employee->birth_date   = $request->birthDate;
-                $employee->gender       = $request->gender;
-                $employee->employee_id  = $request->employee_id;
-                $employee->company      = $request->company;
-                $employee->save();
+                $users = new User;
+                $users->username     = $request->username;
+                $users->name         = $request->name;
+                $users->email        = $request->email;
+                $users->join_date    = $todayDate;
+                $users->role_name    = $request->rolename;
+                $users->status       = 'Active';
+                $users->password     =  Hash::make($request->password);
+                $users->phone_number = $request->no_telepon;
+                $users->save();
     
-                for($i=0;$i<count($request->id_count);$i++)
-                {
-                    $module_permissions = [
-                        'employee_id' => $request->employee_id,
-                        'module_permission' => $request->permission[$i],
-                        'id_count'          => $request->id_count[$i],
-                        'read'              => $request->read[$i],
-                        'write'             => $request->write[$i],
-                        'create'            => $request->create[$i],
-                        'delete'            => $request->delete[$i],
-                        'import'            => $request->import[$i],
-                        'export'            => $request->export[$i],
-                    ];
-                    DB::table('module_permissions')->insert($module_permissions);
-                }
-                
+        
                 DB::commit();
-                Toastr::success('Add new employee successfully :)','Success');
-                return redirect()->route('all/employee/card');
+                Toastr::success('Add new users successfully :)','Success');
+                return redirect()->route('users/page');
             } else {
                 DB::rollback();
-                Toastr::error('Add new employee exits :)','Error');
+                Toastr::error('Add new users exits :)','Error');
                 return redirect()->back();
             }
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('Add new employee fail :)','Error');
+            Toastr::error('Add new users fail :)','Error');
             return redirect()->back();
         }
     }
@@ -96,54 +85,33 @@ class UserController extends Controller
         $employees = DB::table('employees')->where('employee_id',$employee_id)->get();
         return view('form.edit.editemployee',compact('employees','permission'));
     }
-    // update record employee
-    public function updateRecord( Request $request)
+    // update  Users
+    public function updateMenu( Request $request)
     {
         DB::beginTransaction();
         try{
-            // update table Employee
-            $updateEmployee = [
-                'id'=>$request->id,
+            // update table Users
+
+            $updateUsers = [
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'birth_date'=>$request->birth_date,
-                'gender'=>$request->gender,
-                'employee_id'=>$request->employee_id,
-                'company'=>$request->company,
-            ];
-            // update table user
-            $updateUser = [
-                'id'=>$request->id,
-                'name'=>$request->name,
-                'email'=>$request->email,
+                'username'=>$request->username,
+                'join_date'=>'',
+                'role_name'=>$request->rolename,
+                'status'=>$request->status,
+                'password'=> Hash::make($request->password),
+                'phone_number'=>$request->no_telepon,
             ];
 
-            // update table module_permissions
-            for($i=0;$i<count($request->id_permission);$i++)
-            {
-                $UpdateModule_permissions = [
-                    'employee_id' => $request->employee_id,
-                    'module_permission' => $request->permission[$i],
-                    'id'                => $request->id_permission[$i],
-                    'read'              => $request->read[$i],
-                    'write'             => $request->write[$i],
-                    'create'            => $request->create[$i],
-                    'delete'            => $request->delete[$i],
-                    'import'            => $request->import[$i],
-                    'export'            => $request->export[$i],
-                ];
-                module_permission::where('id',$request->id_permission[$i])->update($UpdateModule_permissions);
-            }
 
-            User::where('id',$request->id)->update($updateUser);
-            Employee::where('id',$request->id)->update($updateEmployee);
+            User::where('id',$request->id)->update($updateUsers);
         
             DB::commit();
-            Toastr::success('updated record successfully :)','Success');
-            return redirect()->route('all/employee/card');
+            Toastr::success('updated menu successfully :)','Success');
+            return redirect()->route('menus/page');
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('updated record fail :)','Error');
+            Toastr::error('updated menu fail :)','Error');
             return redirect()->back();
         }
     }

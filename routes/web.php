@@ -199,8 +199,8 @@ Route::controller(MenuController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
 
     Route::get('users/page', 'listAllUser')->middleware('auth')->name('users/page');
-    Route::post('users/save', 'addRecord')->middleware('auth')->name('users/save');
-    Route::post('users/update', 'edituserPermissions')->middleware('auth')->name('users/update');
+    Route::post('users/save', 'saveUsers')->middleware('auth')->name('users/save');
+    Route::post('users/update', 'updateUsers')->middleware('auth')->name('users/update');
     Route::post('users/delete', 'deleteUserPermissions')->middleware('auth')->name('menus/delete');
 
 });

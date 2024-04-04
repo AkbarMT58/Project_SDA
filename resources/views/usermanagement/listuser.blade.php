@@ -172,7 +172,7 @@
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add User</a>
+                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_users"><i class="fa fa-plus"></i> Add User</a>
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                             <a href="{{ route('all/employee/list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
@@ -261,41 +261,34 @@
             </div>
         </div>
         <!-- /Page Content -->
-      
 
-        @foreach ($users as $items )
-
-        <!-- Add Users Modal -->
-        <div id="edit_users{{$items->id}}" class="modal custom-modal fade" role="dialog">
+         <!-- Add Users Modal -->
+         <div id="add_users" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit User</h5>
+                        <h5 class="modal-title">Add User</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('all/employee/save') }}" method="POST">
+                        <form action="{{ route('users/save') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Nama Lengkap</label>
-                                        <!-- <select class="select" id="name" name="name">
-                                            <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->user_id }} data-email={{ $user->email }}>{{ $user->name }}</option>
-                                            @endforeach
-                                        </select> -->
+                                      
                                         <input class="form-control" type="text" id="name" placeholder="Isi Nama Lengkap"  name="name">
+                             
                                     </div>
                                 </div>
                             
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" id="email" name="email" placeholder="Isi Email" readonly>
+                                        <input class="form-control" type="email" id="email" name="email" placeholder="Isi Email" >
                                     </div>
                                 </div>
                                 <div class="col-md-6" >
@@ -308,7 +301,7 @@
                                 <div class="col-md-6" >
                                 <div class="form-group">
                               <label>Username</label>
-                              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="username">
+                              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="username" >
                              
                           </div>
                                 </div>
@@ -316,7 +309,7 @@
 
                                 <div class="form-group">
                               <label>Repeat Password</label>
-                              <input type="password" class="form-control" name="password_confirmation" placeholder="Choose Repeat Password">
+                              <input type="password" class="form-control" name="password_confirmation" placeholder="Choose Repeat Password" >
                           </div>
                                   
                                 </div>
@@ -324,11 +317,12 @@
 
                                 <label class="col-form-label">Role</label>
 
-                                 <select class="select" id="rolename" name="rolename">
-                                            <option value="">-- Select --</option>
-                                            <!-- @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->user_id }} data-email={{ $user->email }}>{{ $user->name }}</option>
-                                            @endforeach -->
+                                 <select class="form-control" id="rolename" name="rolename" >
+                                        
+                                @foreach ($rolelist as $key=>$roles )
+                                                <option value="{{ $roles->id }}" >{{ $roles->role_type }}</option>
+                                @endforeach
+
                                         </select> 
                                    
                                 </div>
@@ -339,7 +333,95 @@
 
                             <div class="form-group">
                             <label>No Telepon</label>
-                            <input type="text" class="form-control" name="no_telepon" placeholder="Isi No Telepon">
+                            <input type="text" class="form-control" name="no_telepon" placeholder="Isi No Telepon" >
+                            </div>
+                            
+                            </div>
+                 
+                               <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Simpan</button>
+                              </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Add User Modal -->
+      
+
+        @foreach ($users as $items )
+
+        <!-- Edit Users Modal -->
+        <div id="edit_users{{$items->id}}" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('users/update') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Nama Lengkap</label>
+                                       
+
+                                        <input class="form-control" type="text" id="name" placeholder="Isi Nama Lengkap"  name="name" value="{{ $items->name}}">
+                                        <input class="form-control" type="text" id="id" placeholder="Isi Nama Lengkap"  name="id" value="{{ $items->id}}">
+                                    </div>
+                                </div>
+                            
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Email <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="email" id="email" name="email" placeholder="Isi Email"  value="{{ $items->email}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6" >
+                                <div class="form-group">
+                              <label>Password</label>
+                              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+                             
+                          </div>
+                                </div>
+                                <div class="col-md-6" >
+                                <div class="form-group">
+                              <label>Username</label>
+                              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="username" value="{{ $items->username}}">
+                             
+                          </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                <div class="form-group">
+                              <label>Repeat Password</label>
+                              <input type="password" class="form-control" name="password_confirmation" placeholder="Choose Repeat Password" >
+                          </div>
+                                  
+                                </div>
+                                <div class="col-sm-6">  
+
+                                <label class="col-form-label">Role</label>
+
+                                 <select class="select" id="rolename" name="rolename" >
+                                            
+                                            <option value="{{ $items->role_name}}">{{ $items->role_name}}</option>
+                                           
+                                </select> 
+                                   
+                                </div>
+                            
+                            </div>
+
+                            <div class="col-md-6">
+
+                            <div class="form-group">
+                            <label>No Telepon</label>
+                            <input type="text" class="form-control" name="no_telepon" placeholder="Isi No Telepon" value="{{ $items->phone_number}}">
                             </div>
                             
                             </div>

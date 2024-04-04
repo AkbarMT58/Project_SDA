@@ -9,6 +9,11 @@ use App\Models\Employee;
 use App\Models\department;
 use App\Models\User;
 use App\Models\module_permission;
+use App\Models\roleTypeUser;
+use Hash;
+use Auth;
+use Session;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -20,32 +25,33 @@ class UserController extends Controller
                    
                     ->get();
 
-        $title="Setting User SDA CMS";
-         $userList = DB::table('users')->get();
+         $title="Setting User SDA CMS";
+         $rolelist = DB::table('role_type_users')->get();
          $permission_lists = DB::table('permission_lists')->get();
-        return view('usermanagement.listUser',compact('users','userList','permission_lists','title'));
+        return view('usermanagement.listUser',compact('users','rolelist','permission_lists','title'));
     }
 
     // save data menu
-    public function saveUser(Request $request)
+    public function saveUsers(Request $request)
     {
+
+        $dt       = Carbon::now();
+        $todayDate = $dt->toDayDateTimeString();
        
         $request->validate([
             'name'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users',
-            'role_name' => '',
             'password'  => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required',
+            
         ]);
 
-        $dt       = Carbon::now();
-        $todayDate = $dt->toDayDateTimeString();
+     
         
         DB::beginTransaction();
         try{
 
-            $users = User::where('email', '=',$request->email)->first();
-            if ($users === null)
+            $users_verifications = User::where('email', '=',$request->email)->first();
+            if ($users_verifications === null)
             {
 
                 $users = new User;
@@ -86,7 +92,7 @@ class UserController extends Controller
         return view('form.edit.editemployee',compact('employees','permission'));
     }
     // update  Users
-    public function updateMenu( Request $request)
+    public function updateUsers( Request $request)
     {
         DB::beginTransaction();
         try{
@@ -96,9 +102,8 @@ class UserController extends Controller
                 'name'=>$request->name,
                 'email'=>$request->email,
                 'username'=>$request->username,
-                'join_date'=>'',
                 'role_name'=>$request->rolename,
-                'status'=>$request->status,
+                // 'status'=>$request->status,
                 'password'=> Hash::make($request->password),
                 'phone_number'=>$request->no_telepon,
             ];
@@ -107,11 +112,11 @@ class UserController extends Controller
             User::where('id',$request->id)->update($updateUsers);
         
             DB::commit();
-            Toastr::success('updated menu successfully :)','Success');
-            return redirect()->route('menus/page');
+            Toastr::success('updated users successfully :)','Success');
+            return redirect()->route('users/page');
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('updated menu fail :)','Error');
+            Toastr::error('updated users fail :)','Error');
             return redirect()->back();
         }
     }

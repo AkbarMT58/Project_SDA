@@ -1,4 +1,4 @@
-@extends('layouts.settings')
+@extends('layouts.master')
 @section('content')
 
     <!-- Sidebar -->
@@ -165,14 +165,14 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">User</h3>
+                        <h3 class="page-title">Roles & Permission</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">User</li>
+                            <li class="breadcrumb-item active">Roles</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_users"><i class="fa fa-plus"></i> Add User</a>
+                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_users"><i class="fa fa-plus"></i> Add Roles</a>
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                             <a href="{{ route('all/employee/list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
@@ -219,36 +219,40 @@
                         <table class="table table-striped custom-table datatable">
                             <thead>
                                 <tr>
-                                    <th>Nama User</th>
-                                    <th>Email</th>
-                                    <th>Foto</th>
-                                    <th>Role</th>
-                                    <th>Position</th>
-                                    <th>Departemen</th>
+                                    <th>ID</th>
+                                    <th>Nama Roles</th>
+                                    <th>Modul Akses</th>
+                                    <th>Action</th>
+                           
+                           
                                    
-                                    <th class="text-right no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $items )
+                                @foreach ($rolesPermissions as $roles )
                                 <tr>
                                     <td>
-                                    {{ $items->name }}
+                                    {{ $roles->id }}
                                     </td>
                                    
-                                    <td>{{ $items->email }}</td>
-                                    <td>{{ $items->avatar }}</td>
-                                    <td>{{ $items->role_name }}</td>
-                                    <td>{{ $items->position }}</td>
-                                    <td>{{ $items->department }}</td>
+                                    <td>{{ $roles->role_type }}</td>
+                                    <td>
+                                      
+                                    <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Modul Akses</a>
+                                    <a class="btn btn-warning" style="color:black;" data-toggle="modal" data-target="#edit_modulakses{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit Modul Akses</a>
+
+                                    </td>
+                                  
                                    
                                    
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                          
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_users{{$items->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$items->user_id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_users{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$roles->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -262,12 +266,12 @@
         </div>
         <!-- /Page Content -->
 
-         <!-- Add Users Modal -->
+         <!-- Add Roles Modal -->
          <div id="add_users" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add User</h5>
+                        <h5 class="modal-title">Add Roles</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -276,67 +280,18 @@
                         <form action="{{ route('users/save') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label class="col-form-label">Nama Lengkap</label>
+                                        <label class="col-form-label">Nama Roles</label>
                                       
-                                        <input class="form-control" type="text" id="name" placeholder="Isi Nama Lengkap"  name="name">
+                                        <input class="form-control" type="text" id="name" placeholder="Isi Nama Roles"  name="nameroles">
                              
                                     </div>
                                 </div>
+
+                         </div>
                             
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" id="email" name="email" placeholder="Isi Email" >
-                                    </div>
-                                </div>
-                                <div class="col-md-6" >
-                                <div class="form-group">
-                              <label>Password</label>
-                              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
-                             
-                          </div>
-                                </div>
-                                <div class="col-md-6" >
-                                <div class="form-group">
-                              <label>Username</label>
-                              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="username" >
-                             
-                          </div>
-                                </div>
-                                <div class="col-md-6">
-
-                                <div class="form-group">
-                              <label>Repeat Password</label>
-                              <input type="password" class="form-control" name="password_confirmation" placeholder="Choose Repeat Password" >
-                          </div>
-                                  
-                                </div>
-                                <div class="col-sm-6">  
-
-                                <label class="col-form-label">Role</label>
-
-                                 <select class="form-control" id="rolename" name="rolename" >
-                                        
-                                @foreach ($rolelist as $key=>$roles )
-                                                <option value="{{ $roles->id }}" >{{ $roles->role_type }}</option>
-                                @endforeach
-
-                                        </select> 
-                                   
-                                </div>
-                            
-                            </div>
-
-                            <div class="col-md-6">
-
-                            <div class="form-group">
-                            <label>No Telepon</label>
-                            <input type="text" class="form-control" name="no_telepon" placeholder="Isi No Telepon" >
-                            </div>
-                            
-                            </div>
+                              
                  
                                <div class="submit-section">
                                 <button class="btn btn-primary submit-btn">Simpan</button>
@@ -346,17 +301,16 @@
                 </div>
             </div>
         </div>
-        <!-- /Add User Modal -->
+        <!-- /Add Roles Modal -->
       
 
-        @foreach ($users as $items )
-
-        <!-- Edit Users Modal -->
-        <div id="edit_users{{$items->id}}" class="modal custom-modal fade" role="dialog">
+        @foreach ($rolesPermissions as $roles )
+        <!-- Edit Roles Modal -->
+        <div id="edit_users{{$roles->id}}" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit User</h5>
+                        <h5 class="modal-title">Edit Roles</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -365,67 +319,20 @@
                         <form action="{{ route('users/update') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label class="col-form-label">Nama Lengkap</label>
+                                        <label class="col-form-label">Nama Roles</label>
                                        
 
-                                        <input class="form-control" type="text" id="name" placeholder="Isi Nama Lengkap"  name="name" value="{{ $items->name}}">
-                                        <input class="form-control" type="text" id="id" placeholder="Isi Nama Lengkap"  name="id" value="{{ $items->id}}">
+                                        <input class="form-control" type="text" id="name" placeholder="Nama Roles"  name="name" value="{{ $roles->name}}">
+                                        <input class="form-control" type="hidden" id="id"   name="id" value="{{ $roles->id}}">
                                     </div>
                                 </div>
                             
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" id="email" name="email" placeholder="Isi Email"  value="{{ $items->email}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6" >
-                                <div class="form-group">
-                              <label>Password</label>
-                              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
-                             
-                          </div>
-                                </div>
-                                <div class="col-md-6" >
-                                <div class="form-group">
-                              <label>Username</label>
-                              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="username" value="{{ $items->username}}">
-                             
-                          </div>
-                                </div>
-                                <div class="col-md-6">
-
-                                <div class="form-group">
-                              <label>Repeat Password</label>
-                              <input type="password" class="form-control" name="password_confirmation" placeholder="Choose Repeat Password" >
-                          </div>
-                                  
-                                </div>
-                                <div class="col-sm-6">  
-
-                                <label class="col-form-label">Role</label>
-
-                                 <select class="form-control" id="rolename" name="rolename" >
-                                            
-                                            <option value="{{ $items->role_name}}">{{ $items->role_name}}</option>
-                                           
-                                </select> 
-                                   
-                                </div>
+                               
                             
-                            </div>
-
-                            <div class="col-md-6">
-
-                            <div class="form-group">
-                            <label>No Telepon</label>
-                            <input type="text" class="form-control" name="no_telepon" placeholder="Isi No Telepon" value="{{ $items->phone_number}}">
-                            </div>
-                            
-                            </div>
-                 
+                     </div>
+                          
                                <div class="submit-section">
                                 <button class="btn btn-primary submit-btn">Simpan</button>
                               </div>
@@ -434,7 +341,266 @@
                 </div>
             </div>
         </div>
-        <!-- /Add Employee Modal -->
+        <!-- /Add Roles Modal -->
+
+        @endforeach
+
+
+        
+        @foreach ($rolesPermissions as $roles )
+        <!-- Add Modul Akses Modal -->
+
+        <div id="add_modulakses{{$roles->id}}" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Modul Akses</h5>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('users/update') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                <div class="table-responsive">
+                                
+                        <br>
+                        <h4  >Roles : {{$roles->role_type}}</h4>
+                        <table class="table table-striped custom-table datatable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama Menu/Modul</th>
+                                    <th>Category Menu</th>
+                                    <th>Category Sub Menu</th>
+                                    <th>View</th>
+                                    <th>Create</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                   
+                                    <th>Action</th>
+                           
+                           
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($menus as $menu )
+                                <tr>
+                                    <td>
+                                    {{ $menu->id }}
+                                    </td>
+                                   
+                                    <td>{{ $menu->namamenu }}</td>
+                                    <td>
+                                    {{ $menu->categorymenu}}
+                                    </td>
+                                    <td>
+                                    {{ $menu->sub_categorymenu}}
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]view" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+                                   <input type="checkbox" name="[]create" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]edit" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]delete" />
+                                   
+                                   </td>
+                                 
+                                  
+                                   
+                                   
+                                    <td class="text-right">
+                                        <div class="dropdown dropdown-action">
+
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                          
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_users{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$roles->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                                  
+                                        
+                                        <input class="form-control" type="hidden" id="id"   name="id" value="{{ $roles->id}}">
+                                    
+                                </div>
+                            
+                               
+                            
+                     </div>
+                          
+                               <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Simpan</button>
+                              </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Add Modul Modal -->
+
+        @endforeach
+
+
+
+        @foreach ($rolesPermissions as $roles )
+        <!-- Edit Modul Akses Modal -->
+
+        @php
+
+        
+
+        $modul_permission = DB::table('module_permissions')
+
+        ->select('menus.id','menus.categorymenu','menus.sub_categorymenu','module_permissions.view','module_permissions.create','module_permissions.edit','module_permissions.delete')
+
+        ->leftJoin('menus','menus.id','=','module_permissions.module_permission')
+        
+        ->where('role_id',$roles->id)->get();
+
+
+        @endphp
+
+        <div id="edit_modulakses{{$roles->id}}" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Modul Akses</h5>
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('users/update') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                <div class="table-responsive">
+                                
+                        <br>
+                        <h4  >Roles : {{$roles->role_type}}</h4>
+                        <table class="table table-striped custom-table datatable" >
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama Menu/Modul</th>
+                                    <th>Category Menu</th>
+                                    <th>Category Sub Menu</th>
+                                    <th>View</th>
+                                    <th>Create</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                   
+                                    <th>Action</th>
+                           
+                           
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 @foreach ($modul_permission as $modul )
+                                <tr>
+                                    <td>
+                                    {{ $modul->id }}
+                                    </td>
+                                   
+                                    <td>{{ $modul->namamenu }}</td>
+                                    <td>
+                                    {{ $modul->categorymenu}}
+                                    </td>
+                                    <td>
+                                    {{ $modul->sub_categorymenu}}
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]view" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+                                   <input type="checkbox" name="[]create" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]edit" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]delete" />
+                                   
+                                   </td>
+                                 
+                                  
+                                   
+                                   
+                                    <td class="text-right">
+                                        <div class="dropdown dropdown-action">
+
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                          
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_users{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$roles->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                                  
+                                        
+                                        <input class="form-control" type="hidden" id="id"   name="id" value="{{ $roles->id}}">
+                                    
+                                </div>
+                            
+                               
+                            
+                     </div>
+                          
+                               <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Simpan</button>
+                              </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Add Modul Modal -->
 
         @endforeach
     </div>

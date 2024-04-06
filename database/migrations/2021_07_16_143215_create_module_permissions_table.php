@@ -15,12 +15,12 @@ class CreateModulePermissionsTable extends Migration
     {
         Schema::create('module_permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_id')->nullable();
+            $table->string('role_id')->nullable();
             $table->string('module_permission')->nullable();
             $table->string('id_count')->nullable();
-            $table->string('read')->nullable();
-            $table->string('write')->nullable();
+            $table->string('view')->nullable();
             $table->string('create')->nullable();
+            $table->string('edit')->nullable();
             $table->string('delete')->nullable();
             $table->string('import')->nullable();
             $table->string('export')->nullable();

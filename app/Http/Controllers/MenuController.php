@@ -33,6 +33,7 @@ class MenuController extends Controller
             'namamenu'              => '',
             'namaicons'             => '',
             'categorymenu'          => '',
+            'subcategorymenu'          => '',
             'indexno'               => '',
             'linkmenu'              => '',
             
@@ -41,11 +42,12 @@ class MenuController extends Controller
         DB::beginTransaction();
         try{
 
-         
+           
                 $menus = new Menu;
                 $menus->    namamenu        = $request->namamenu;
-                $menus->    namaicons       = $request->namaicons;
+                $menus->    namaicons       = $request->namaclassicon;
                 $menus->    categorymenu    = $request->namacategory;
+                $menus->    sub_categorymenu    = $request->subcategorymenu;
                 $menus->    index_no        = $request->indexno;
                 $menus->    link_menu       = $request->linkmenu;
                 $menus->save();
@@ -92,6 +94,7 @@ class MenuController extends Controller
                     'namamenu'            => $request->namamenu,
                     'namaicons'           => $request->namaclassicon,
                     'categorymenu'        => $request->namacategory,
+                    'sub_categorymenu'    => $request->subcategorymenu,
                     'index_no'            => $request->indexno,
                     'link_menu'           => $request->linkmenu,
                    

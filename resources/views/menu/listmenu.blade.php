@@ -155,7 +155,7 @@
         </div>
     </div>
 </div>
-<!-- /Sidebar -
+<!-- /Sidebar -->
   
     <!-- Page Wrapper -->
     <div class="page-wrapper">
@@ -222,6 +222,7 @@
                                     <th>ID</th>
                                     <th>Nama Menu</th>
                                     <th>Kategori Menu</th>
+                                    <th>Sub Kategori Menu</th>
                                     <th>Link Menu</th>
                                     <th>Index No</th> 
                                     <th>Nama Class Icon</th>
@@ -237,6 +238,7 @@
     
                                     <td>{{ $menu->namamenu }}</td>
                                     <td>{{ $menu->categorymenu }}</td>
+                                    <td>{{ $menu->sub_categorymenu }}</td>
                                     <td>{{ $menu->link_menu }}</td>
                                     <td>{{ $menu->index_no }}</td>
                                     <td>{{ $menu->namaicons }}</td>
@@ -298,6 +300,16 @@
                                 <div class="form-group">
                                         <label class="col-form-label">Category ID</label>
                                         <input class="form-control" type="number" name="namacategory" >
+                                       
+                                </div>
+                               
+                                   
+                                </div>
+                                <div class="col-md-6" >
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Sub Category Menu</label>
+                                        <input class="form-control" type="number" name="subcategorymenu" >
                                        
                                 </div>
                                
@@ -376,7 +388,7 @@
                                     <div class="form-group">
                                         <label class="col-form-label">Nama Menu</label>
 
-                                        <input class="form-control" type="text" name="id" value="{{$menu->id}}" >
+                                        <input class="form-control" type="hidden" name="id" value="{{$menu->id}}" >
                                        
                                         <input class="form-control" type="text" name="namamenu" value="{{$menu->namamenu}}">
                                        
@@ -392,6 +404,16 @@
                                 </div>
                                
                                    
+                                </div>
+                                <div class="col-sm-6" >
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Sub Category Menu</label>
+                                        <input class="form-control" type="number" name="subcategorymenu" value="{{$menu->sub_categorymenu}}" >
+                                    
+                                </div>
+
+                                
                                 </div>
                                 <div class="col-md-6">
 

@@ -24,6 +24,7 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\PersonalInformationController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolesController;
 
 
 /*
@@ -80,7 +81,7 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 // -----------------------------settings----------------------------------------//
-Route::controller(SettingController::class)->group(function () {
+Route::controller(RolesController::class)->group(function () {
     Route::get('company/settings/page', 'companySettings')->middleware('auth')->name('company/settings/page');
     Route::get('roles/permissions/page', 'rolesPermissions')->middleware('auth')->name('roles/permissions/page');
     Route::post('roles/permissions/save', 'addRecord')->middleware('auth')->name('roles/permissions/save');

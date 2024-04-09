@@ -238,7 +238,7 @@
                                     <td>{{ $roles->role_type }}</td>
                                     <td>
                                       
-                                    <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Modul Akses</a>
+                                    <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}"><i class="fa fa-plus"></i> Modul Akses</a>
                                     <a class="btn btn-warning" style="color:black;" data-toggle="modal" data-target="#edit_modulakses{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit Modul Akses</a>
 
                                     </td>
@@ -361,15 +361,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('users/update') }}" method="POST">
-                            @csrf
+                        <form action="{{ route('roles/permissions/modulaccess/save') }}" method="POST" >
+                        @csrf
                             <div class="row">
                                 <div class="col-sm-12">
 
                                 <div class="table-responsive">
                                 
                         <br>
-                        <h4  >Roles : {{$roles->role_type}}</h4>
+                        <h4>Roles : {{$roles->role_type}}</h4>
                         <table class="table table-striped custom-table datatable">
                             <thead>
                                 <tr>
@@ -382,7 +382,7 @@
                                     <th>Edit</th>
                                     <th>Delete</th>
                                    
-                                    <th>Action</th>
+                                  
                            
                            
                                    
@@ -393,6 +393,8 @@
                                 <tr>
                                     <td>
                                     {{ $menu->id }}
+                                    <input type="text" name="idmenu[]" value="{{$menu->id}}"  />
+                                    <input type="text" name="roleid[]" value="{{$roles->id}}" />
                                     </td>
                                    
                                     <td>{{ $menu->namamenu }}</td>
@@ -405,41 +407,31 @@
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]view" />
+                                   <input type="checkbox" name="view[]" value="1" />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox" name="[]create" />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox" name="[]edit" />
+                                   <input type="checkbox" name="create[]" value="1" />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]delete" />
+                                   <input type="checkbox" name="edit[]" value="1" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="delete[]"  value="1"/>
                                    
                                    </td>
                                  
                                   
                                    
                                    
-                                    <td class="text-right">
-                                        <div class="dropdown dropdown-action">
-
-                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                          
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_users{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$roles->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
+                                   
                                 </tr>
                                 @endforeach
                             </tbody>

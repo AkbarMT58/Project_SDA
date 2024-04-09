@@ -87,6 +87,11 @@ Route::controller(RolesController::class)->group(function () {
     Route::post('roles/permissions/save', 'addRecord')->middleware('auth')->name('roles/permissions/save');
     Route::post('roles/permissions/update', 'editRolesPermissions')->middleware('auth')->name('roles/permissions/update');
     Route::post('roles/permissions/delete', 'deleteRolesPermissions')->middleware('auth')->name('roles/permissions/delete');
+
+    // daerah add module page permission
+    Route::post('roles/permissions/modulaccess/save', 'addModules')->middleware('auth')->name('roles/permissions/modulaccess/save');
+    Route::post('roles/permissions/modulaccess/update', 'editModules')->middleware('auth')->name('roles/permissions/modulaccess/update');
+
 });
 
 // -----------------------------login----------------------------------------//

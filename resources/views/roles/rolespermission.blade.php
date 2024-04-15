@@ -361,7 +361,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('roles/permissions/modulaccess/save') }}" method="POST" >
+                       
                         @csrf
                             <div class="row">
                                 <div class="col-sm-12">
@@ -393,8 +393,8 @@
                                 <tr>
                                     <td>
                                     {{ $menu->id }}
-                                    <input type="text" name="idmenu[]" value="{{$menu->id}}"  />
-                                    <input type="text" name="roleid[]" value="{{$roles->id}}" />
+                                    <input type="hidden" name="idmenu" class="id_menu{{$roles->id}}" value="{{$menu->id}}"  />
+                                    <input type="hidden" name="roleid" class="id_roles{{$roles->id}}" value="{{$roles->id}}" />
                                     </td>
                                    
                                     <td>{{ $menu->namamenu }}</td>
@@ -407,24 +407,24 @@
                                  
                                    <td>
 
-                                   <input type="checkbox" name="view[]" value="1" />
+                                   <input type="checkbox" name="view[]"  value="1"  id="c_view{{$menu->id}}" onClick="Akses_View('{{$roles->id}}','{{$menu->id}}')"  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox" name="create[]" value="1" />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox" name="edit[]" value="1" />
+                                   <input type="checkbox" name="create[]"  value="1" id="c_create{{$menu->id}}"  onClick="Akses_Create('{{$roles->id}}','{{$menu->id}}')" />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox" name="delete[]"  value="1"/>
+                                   <input type="checkbox" name="edit[]"  value="1" id="c_edit{{$menu->id}}"  onClick="Akses_Edit('{{$roles->id}}','{{$menu->id}}')" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="delete[]"  value="1" id="c_delete{{$menu->id}}" onClick="Akses_Delete('{{$roles->id}}','{{$menu->id}}')"/>
                                    
                                    </td>
                                  
@@ -448,9 +448,9 @@
                      </div>
                           
                                <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Simpan</button>
+                                <button class="btn btn-primary submit-btn" id="btnsubmit"  >Simpan</button>
                               </div>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -518,7 +518,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 @foreach ($modul_permission as $modul )
+                                 @foreach ($menus as $modul )
                                 <tr>
                                     <td>
                                     {{ $modul->id }}
@@ -585,7 +585,7 @@
                      </div>
                           
                                <div class="submit-section">
-                                <button class="btn btn-primary submit-btn">Simpan</button>
+                                <button class="btn btn-primary submit-btn"  >Simpan</button>
                               </div>
                         </form>
                     </div>
@@ -622,5 +622,254 @@
             $('#email').val($(this).find(':selected').data('email'));
         });
     </script>
+
+
+    
+
+    <script>
+
+        function Tambahakses_modul(role_id) {
+
+        // var form=$(this)
+        // e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        
+            // var $box = $(this);
+            // if ($box.is(":checked"))
+            // {
+            //     var group = "input:checkbox[class='" + $box.attr("class") + "']";
+            //     $(group).prop("checked", false);
+            //     $box.prop("checked", true);
+            // }
+            // else
+            // {
+            //     $box.prop("checked", false);
+            // }
+
+            
+            // const input_modulaccess = new FormData();
+           
+            // var urlname = form.attr('action');
+
+            var id_menu = document.getElementsByClassName( 'id_menu'+role_id ),
+            in_idmenu  = [].map.call(id_menu, function( input ) {
+                return input.value;
+
+                
+            });
+
+            var role_id = document.getElementsByClassName( 'id_roles'+role_id ),
+            in_rolesid  = [].map.call(role_id, function( input ) {
+                return input.value;
+
+                
+            });
+
+            var c_view = document.getElementsByClassName( 'c_view'+role_id ),
+            in_c_view  = [].map.call(c_view, function( input ) {
+                return input.value;
+
+                
+            });
+
+            console.log("lihat data input idmenu: ",in_idmenu)
+            console.log("lihat data input role: ",in_rolesid)
+            console.log("lihat data input view: ",in_c_view)
+            
+
+           
+
+            // for (i = 0; i < x.length ;i++) {
+              
+
+            //     console.log("lihat data input: ",i)
+            // }
+                        
+
+                                
+
+       
+
+          //console.log("lihat data input: ",input_modulaccess);
+
+            // var tot_data_count=input_modulaccess.length;
+
+    
+
+
+            // $.ajax({
+
+            //     type: 'POST',
+            //     data:image_upload,
+            //     url: urlname,
+
+            //     headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     dataType: 'json',
+            //     contentType: false,
+            //     cache: false,
+            //     processData: false,
+            //     success: function (response) {
+
+            //         var data = response.report;
+
+            //         new Attention.Alert({
+
+            //     title: 'Notifikasi Berhasil!',
+            //     content:"Dokumen anda sudah berhasil disimpan.Terima kasih!",
+            //     useInnerHTML: true,
+            //     afterClose: () => {
+
+            //     window.location.reload();
+            //     }
+            //     });
+            // }
+            // });
+
+         
+
+
+
+        };
+
+
+        function Akses_View(roleid,idmenu){
+
+        var chk_view=document.getElementById("c_view"+idmenu).value;
+
+
+        var input_modulaccess=[{
+
+                    'role_id'                : roleid,
+                    'module_permission'      : idmenu,
+                     'view'                  : chk_view,
+                     'create'                : 0,
+                     'edit'                  : 0,
+                     'delete'                : 0
+
+
+        }];
+
+
+
+        //kirim data add modul access
+
+            $.ajax({
+
+                type: 'POST' ,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: `modulaccess/save`,
+                data: 
+                {
+                    _token: "{{ csrf_token() }}",
+                    role_id                : roleid,
+                    module_permission      : idmenu,
+                    view                  : chk_view,
+                     create                : 0,
+                     edit                  : 0,
+                     delete                : 0
+                },
+               
+                dataType: "text",
+                success: function (response) {
+
+                    console.log("after saving:",response);
+
+                    if(response!=''){
+
+                          toastr.success('Create new add modules successfully :)');
+                          $('#add_modulakses'+roleid).modal('hide');
+                    }
+
+                  
+
+                //         var data = response.report;
+
+                //         $('#namakaryawan'+ no_urut).empty();
+
+
+                // for (var i = 0; i < data.length; i++) {
+
+
+                // let select_option = '';
+
+                // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
+
+
+                // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
+
+
+                // $("#namakaryawan"+no_urut).select2({
+
+                // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
+
+                // });
+
+
+
+
+
+
+                // }
+
+
+                }
+
+                });
+
+
+        console.log("id menu:", idmenu);
+
+        console.log("value:", chk_view);
+
+
+        }
+
+        function Akses_Create(roleid,idmenu){
+
+        var chk_create=document.getElementById("c_create"+idmenu).value;
+
+
+        console.log("id create:", idmenu);
+
+        console.log("value:", chk_create);
+
+
+        }
+
+
+        function Akses_Edit(roleid,idmenu){
+
+        //console.log("id edit:", edit);
+
+        var chk_edit=document.getElementById("c_edit"+idmenu).value;
+
+        console.log("id edit:", idmenu);
+
+        console.log("value:", chk_edit);
+
+
+        }
+
+        function Akses_Delete(roleid,idmenu){
+
+       // console.log("id delete:", deleted);
+
+       var chk_delete=document.getElementById("c_delete"+idmenu).value;
+
+        console.log("id delete:", idmenu);
+
+        console.log("value:", chk_delete);
+
+
+
+        }
+
+    </script>
+
+
     @endsection
 @endsection

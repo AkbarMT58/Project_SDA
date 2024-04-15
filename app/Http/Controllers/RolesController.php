@@ -114,73 +114,170 @@ class RolesController extends Controller
 
         try{
 
-           $id_menu = array($request->idmenu) ;
+           $id_menu = ($request->idmenu) ;
+           $roleid=($request->roleid);
+           $view=($request->view);
+           $create=($request->create);
+           $edit=($request->edit);
+           $delete=($request->delete);
         
-           $roleid=array($request->roleid);
+                //    $tot_modul=count($id_menu);
+                $title="Setting Roles SDA CMS";
 
-           $view=array($request->view);
-           $create=array($request->create);
-           $edit=array($request->edit);
-           $delete=array($request->delete);
+                DB::table('module_permissions')->insert( [
+                    'role_id'                => $roleid,
+                    'module_permission'      => $id_menu,
+                     'view'                  => $view,
+                     'create'                => $create,
+                     'edit'                  => $edit,
+                     'delete'                => $delete
+                ]);
+
+                DB::commit();
+                Toastr::success('Create new add modules successfully :)','Success');
+
+                return response()->json(['data' => $request->all()], 200);
+
+
+               // return redirect()->back();
+
 
         
-           $tot_modul=count($id_menu);
+             
 
-         
+            //   for($i=0;$i < $tot_modul;$i++){
 
-          
-        
+               
+            //         // dump($modules_in);
+            //         //  echo '<pre>';
+            //         //  print_r($id_menu[$i]);
+            //         //  echo '</pre>';
 
-                for($i=0;$i < $tot_modul;$i++){
+            //     DB::table('module_permissions')->insert( [
+            //         'role_id'                => $roleid,
+            //         'module_permission'      => $id_menu,
+            //          'view'                  => $view,
+            //          'create'                => $create,
+            //          'edit'                  => $edit,
+            //          'delete'                => $delete
+            //     ]);
 
-                  
-                    $modules_in= [
-                        'role_id'               => $roleid,
-                        'module_permission'      => $id_menu,
-                         'view'                  => $view[$i],
-                         'create'                => $create[$i],
-                         'edit'                  => $edit[$i],
-                         'delete'                => $delete[$i],
-                    ];
+            //     // $modul_access_in=array();
 
-         
-        
-                
+            //     // $modul_access_in = new module_permission();
+            //     // $modul_access_in->roleid =$roleid[$i];
+            //     // $modul_access_in->module_permission =$id_menu[$i];
+            //     // $modul_access_in->view = $view[$i];
+            //     // $modul_access_in->create =$create[$i];
+            //     // $modul_access_in->edit = $edit[$i];
+            //     // $modul_access_in->delete = $edit[$i];
+
+            //     // $modul_access_in->save();
+
               
 
-                }
-
-                //dd( $modules_in);
-
-                module_permission::create($modules_in);
+            //     //dump($modul_access_in);
                  
 
-                   DB::commit();
-                   Toastr::success('Create new add modules successfully :)','Success');
-                   return redirect()->back();
-   
+            //     DB::commit();
+            //     Toastr::success('Create new add modules successfully :)','Success');
+            //     return redirect()->back();
 
+
+
+
+                   
+            //      //module_permission::create($modules_in);
+
+                 
+
+    
+
+            //     }
+
+               
+
+               
+
+                
+
+               
         
 
-            // else{
-
-            //     DB::rollback();
-            //     Toastr::error('Modules proccess exits :)','Error');
-            //     return redirect()->back();
-            // }
-
-            // DB::commit();
-            // Toastr::success('Create new add modules successfully :)','Success');
-            // return redirect()->back();
-
-     
-               
 
         }catch(\Exception $e){
             DB::rollback();
             Toastr::error('Add Module fail :)','Error');
             return redirect()->back();
         }
+
+
+
+        // $id_menu = array($request->idmenu) ;
+        // $roleid=($request->roleid);
+        // $view=array($request->view);
+        // $create=array($request->create);
+        // $edit=array($request->edit);
+        // $delete=array($request->delete);
+     
+        // $tot_modul=count($id_menu);
+        // $title="Setting Roles SDA CMS";
+
+     
+          
+
+        //    for($i=0;$i < $tot_modul;$i++){
+
+            
+                 // dump($modules_in);
+
+                 //  echo '<pre>';
+                 //  print_r($id_menu[$i]);
+                 //  echo '</pre>';
+
+            //  DB::table('module_permissions')->insert( [
+            //      'role_id'                => $roleid,
+            //      'module_permission'      => $request->idmenu,
+            //       'view'                  => $view[$i],
+            //       'create'                => $create[$i],
+            //       'edit'                  => $edit[$i],
+            //       'delete'                => $delete[$i]
+            //  ]);
+
+                // $modul_access_in=[];
+
+                // $modul_access_in = new module_permission;
+                // $modul_access_in->roleid =$roleid;
+                // $modul_access_in->module_permission =$id_menu;
+                // $modul_access_in->view = $view[$i];
+                // $modul_access_in->create =$create[$i];
+                // $modul_access_in->edit = $edit[$i];
+                // $modul_access_in->delete = $edit[$i];
+
+                // $modul_access_in->save();
+
+  
+
+            //  dump([
+            //          'role_id'                => $roleid,
+            //          'module_permission'      =>$request->idmenu,
+            //           'view'                  => $view[$i],
+            //           'create'                => $create[$i],
+            //           'edit'                  => $edit[$i],
+            //           'delete'                => $delete[$i]
+            //      ]);
+              
+
+            //  DB::commit();
+            //  Toastr::success('Create new add modules successfully :)','Success');
+            //  return redirect()->back();
+
+            // }
+
+    
+
+
+
     }
 
     public function editModules(Request $request)

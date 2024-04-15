@@ -334,6 +334,8 @@ $(document).ready(function() {
 		});
 	}
 
+
+
 });
 
 // Loader
@@ -396,3 +398,4 @@ function removeContent(){
  captcha.innerText = "";
  statusTxt.style.display = "none";
 }
+

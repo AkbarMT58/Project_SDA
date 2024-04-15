@@ -447,9 +447,7 @@
                             
                      </div>
                           
-                               <div class="submit-section">
-                                <button class="btn btn-primary submit-btn" id="btnsubmit"  >Simpan</button>
-                              </div>
+                             
                         
                     </div>
                 </div>
@@ -466,15 +464,19 @@
 
         @php
 
+
+
+        $modul_permission = DB::table('menus as a')
+
+        ->select('a.id','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
         
+        ->where("b.role_id",$roles->id)
 
-        $modul_permission = DB::table('module_permissions')
-
-        ->select('menus.id','menus.categorymenu','menus.sub_categorymenu','module_permissions.view','module_permissions.create','module_permissions.edit','module_permissions.delete')
-
-        ->leftJoin('menus','menus.id','=','module_permissions.module_permission')
+        ->orderBy("a.index_no",'ASC')
         
-        ->where('role_id',$roles->id)->get();
+        ->get();
 
 
         @endphp
@@ -518,7 +520,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 @foreach ($menus as $modul )
+                                 @foreach ($modul_permission as $modul )
                                 <tr>
                                     <td>
                                     {{ $modul->id }}
@@ -534,24 +536,24 @@
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]view" />
+                                   <input type="checkbox" name="[]view" @if($modul->view == '1')  {{'Checked'}} @else {{''}} @endif  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox" name="[]create" />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox" name="[]edit" />
+                                   <input type="checkbox" name="[]create" @if($modul->create == '1')  {{'Checked'}} @else {{''}} @endif  />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]delete" />
+                                   <input type="checkbox" name="[]edit" @if($modul->edit == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]delete"  @if($modul->delete == '1')  {{'Checked'}} @else {{''}} @endif />
                                    
                                    </td>
                                  
@@ -583,10 +585,10 @@
                                
                             
                      </div>
-                          
+<!--                           
                                <div class="submit-section">
                                 <button class="btn btn-primary submit-btn"  >Simpan</button>
-                              </div>
+                              </div> -->
                         </form>
                     </div>
                 </div>
@@ -739,20 +741,6 @@
         var chk_view=document.getElementById("c_view"+idmenu).value;
 
 
-        var input_modulaccess=[{
-
-                    'role_id'                : roleid,
-                    'module_permission'      : idmenu,
-                     'view'                  : chk_view,
-                     'create'                : 0,
-                     'edit'                  : 0,
-                     'delete'                : 0
-
-
-        }];
-
-
-
         //kirim data add modul access
 
             $.ajax({
@@ -831,6 +819,74 @@
         function Akses_Create(roleid,idmenu){
 
         var chk_create=document.getElementById("c_create"+idmenu).value;
+
+          //kirim data add modul access
+
+                        $.ajax({
+
+                type: 'POST' ,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: `modulaccess/save`,
+                data: 
+                {
+                    _token: "{{ csrf_token() }}",
+                    role_id                : roleid,
+                    module_permission      : idmenu,
+                    view                  : 0,
+                    create                : chk_create,
+                    edit                  : 0,
+                    delete                : 0
+                },
+
+                dataType: "text",
+                success: function (response) {
+
+                    console.log("after saving:",response);
+
+                    if(response!=''){
+
+                        toastr.success('Create new add modules successfully :)');
+                        $('#add_modulakses'+roleid).modal('hide');
+                    }
+
+                
+
+                //         var data = response.report;
+
+                //         $('#namakaryawan'+ no_urut).empty();
+
+
+                // for (var i = 0; i < data.length; i++) {
+
+
+                // let select_option = '';
+
+                // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
+
+
+                // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
+
+
+                // $("#namakaryawan"+no_urut).select2({
+
+                // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
+
+                // });
+
+
+
+
+
+
+                // }
+
+
+                }
+
+                });
+
 
 
         console.log("id create:", idmenu);

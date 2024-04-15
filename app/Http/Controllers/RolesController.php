@@ -114,8 +114,8 @@ class RolesController extends Controller
 
         try{
 
-           $id_menu = ($request->idmenu) ;
-           $roleid=($request->roleid);
+           $id_menu = ($request->module_permission) ;
+           $roleid=($request->role_id);
            $view=($request->view);
            $create=($request->create);
            $edit=($request->edit);

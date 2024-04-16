@@ -536,24 +536,24 @@
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]view" @if($modul->view == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   <input type="checkbox" name="[]view"  id="c_view{{$menu->id}}"  onClick="Update_View('{{$roles->id}}','{{$menu->id}}')"  @if($modul->view == '1')  {{'Checked'}} @else {{''}} @endif  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox" name="[]create" @if($modul->create == '1')  {{'Checked'}} @else {{''}} @endif  />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox" name="[]edit" @if($modul->edit == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   <input type="checkbox" name="[]create" id="c_create{{$menu->id}}" onClick="Update_Create('{{$roles->id}}','{{$menu->id}}')" @if($modul->create == '1')  {{'Checked'}} @else {{''}} @endif  />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]delete"  @if($modul->delete == '1')  {{'Checked'}} @else {{''}} @endif />
+                                   <input type="checkbox" name="[]edit" id="c_edit{{$menu->id}}" onClick="Update_Edit('{{$roles->id}}','{{$menu->id}}')" @if($modul->edit == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]delete" id="c_delete{{$menu->id}}" onClick="Update_Delete('{{$roles->id}}','{{$menu->id}}')" @if($modul->delete == '1')  {{'Checked'}} @else {{''}} @endif />
                                    
                                    </td>
                                  
@@ -735,6 +735,8 @@
 
         };
 
+        //add modul akses----------------------------------------------------------------------------------------------------------
+
 
         function Akses_View(roleid,idmenu){
 
@@ -834,10 +836,8 @@
                     _token: "{{ csrf_token() }}",
                     role_id                : roleid,
                     module_permission      : idmenu,
-                    view                  : 0,
                     create                : chk_create,
-                    edit                  : 0,
-                    delete                : 0
+                 
                 },
 
                 dataType: "text",
@@ -903,6 +903,70 @@
 
         var chk_edit=document.getElementById("c_edit"+idmenu).value;
 
+                            $.ajax({
+
+                    type: 'POST' ,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `modulaccess/save`,
+                    data: 
+                    {
+                        _token: "{{ csrf_token() }}",
+                        role_id                : roleid,
+                        module_permission      : idmenu,
+                        edit                   : chk_edit,
+                       
+                    },
+
+                    dataType: "text",
+                    success: function (response) {
+
+                        console.log("after saving:",response);
+
+                        if(response!=''){
+
+                            toastr.success('Create new add modules successfully :)');
+                            $('#add_modulakses'+roleid).modal('hide');
+                        }
+
+
+
+                    //         var data = response.report;
+
+                    //         $('#namakaryawan'+ no_urut).empty();
+
+
+                    // for (var i = 0; i < data.length; i++) {
+
+
+                    // let select_option = '';
+
+                    // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
+
+
+                    // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
+
+
+                    // $("#namakaryawan"+no_urut).select2({
+
+                    // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
+
+                    // });
+
+
+
+
+
+
+                    // }
+
+
+                    }
+
+                    });
+
+
         console.log("id edit:", idmenu);
 
         console.log("value:", chk_edit);
@@ -916,6 +980,70 @@
 
        var chk_delete=document.getElementById("c_delete"+idmenu).value;
 
+       $.ajax({
+
+        type: 'POST' ,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: `modulaccess/save`,
+        data: 
+        {
+            _token: "{{ csrf_token() }}",
+            role_id                : roleid,
+            module_permission      : idmenu,
+            delete                 : chk_delete,
+        
+        },
+
+        dataType: "text",
+        success: function (response) {
+
+            console.log("after saving:",response);
+
+            if(response!=''){
+
+                toastr.success('Create new add modules successfully :)');
+                $('#add_modulakses'+roleid).modal('hide');
+            }
+
+
+
+        //         var data = response.report;
+
+        //         $('#namakaryawan'+ no_urut).empty();
+
+
+        // for (var i = 0; i < data.length; i++) {
+
+
+        // let select_option = '';
+
+        // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
+
+
+        // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
+
+
+        // $("#namakaryawan"+no_urut).select2({
+
+        // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
+
+        // });
+
+
+
+
+
+
+        // }
+
+
+        }
+
+        });
+
+
         console.log("id delete:", idmenu);
 
         console.log("value:", chk_delete);
@@ -923,6 +1051,17 @@
 
 
         }
+
+        //batas add modul akses -------------------------------------------------------------------------------------------
+
+
+
+        //update modul akses
+
+
+
+
+        //batas modul akses
 
     </script>
 

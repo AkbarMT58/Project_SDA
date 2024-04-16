@@ -111,7 +111,6 @@ class RolesController extends Controller
        DB::beginTransaction();
 
       
-
         try{
 
            $id_menu = ($request->module_permission) ;
@@ -133,72 +132,13 @@ class RolesController extends Controller
                      'delete'                => $delete
                 ]);
 
-                DB::commit();
-                Toastr::success('Create new add modules successfully :)','Success');
+                // DB::commit();
+                // Toastr::success('Create new add modules successfully :)','Success');
 
                 return response()->json(['data' => $request->all()], 200);
 
 
-               // return redirect()->back();
-
-
-        
-             
-
-            //   for($i=0;$i < $tot_modul;$i++){
-
-               
-            //         // dump($modules_in);
-            //         //  echo '<pre>';
-            //         //  print_r($id_menu[$i]);
-            //         //  echo '</pre>';
-
-            //     DB::table('module_permissions')->insert( [
-            //         'role_id'                => $roleid,
-            //         'module_permission'      => $id_menu,
-            //          'view'                  => $view,
-            //          'create'                => $create,
-            //          'edit'                  => $edit,
-            //          'delete'                => $delete
-            //     ]);
-
-            //     // $modul_access_in=array();
-
-            //     // $modul_access_in = new module_permission();
-            //     // $modul_access_in->roleid =$roleid[$i];
-            //     // $modul_access_in->module_permission =$id_menu[$i];
-            //     // $modul_access_in->view = $view[$i];
-            //     // $modul_access_in->create =$create[$i];
-            //     // $modul_access_in->edit = $edit[$i];
-            //     // $modul_access_in->delete = $edit[$i];
-
-            //     // $modul_access_in->save();
-
-              
-
-            //     //dump($modul_access_in);
-                 
-
-            //     DB::commit();
-            //     Toastr::success('Create new add modules successfully :)','Success');
-            //     return redirect()->back();
-
-
-
-
-                   
-            //      //module_permission::create($modules_in);
-
-                 
-
-    
-
-            //     }
-
-               
-
-               
-
+            
                 
 
                
@@ -213,69 +153,7 @@ class RolesController extends Controller
 
 
 
-        // $id_menu = array($request->idmenu) ;
-        // $roleid=($request->roleid);
-        // $view=array($request->view);
-        // $create=array($request->create);
-        // $edit=array($request->edit);
-        // $delete=array($request->delete);
-     
-        // $tot_modul=count($id_menu);
-        // $title="Setting Roles SDA CMS";
-
-     
-          
-
-        //    for($i=0;$i < $tot_modul;$i++){
-
-            
-                 // dump($modules_in);
-
-                 //  echo '<pre>';
-                 //  print_r($id_menu[$i]);
-                 //  echo '</pre>';
-
-            //  DB::table('module_permissions')->insert( [
-            //      'role_id'                => $roleid,
-            //      'module_permission'      => $request->idmenu,
-            //       'view'                  => $view[$i],
-            //       'create'                => $create[$i],
-            //       'edit'                  => $edit[$i],
-            //       'delete'                => $delete[$i]
-            //  ]);
-
-                // $modul_access_in=[];
-
-                // $modul_access_in = new module_permission;
-                // $modul_access_in->roleid =$roleid;
-                // $modul_access_in->module_permission =$id_menu;
-                // $modul_access_in->view = $view[$i];
-                // $modul_access_in->create =$create[$i];
-                // $modul_access_in->edit = $edit[$i];
-                // $modul_access_in->delete = $edit[$i];
-
-                // $modul_access_in->save();
-
-  
-
-            //  dump([
-            //          'role_id'                => $roleid,
-            //          'module_permission'      =>$request->idmenu,
-            //           'view'                  => $view[$i],
-            //           'create'                => $create[$i],
-            //           'edit'                  => $edit[$i],
-            //           'delete'                => $delete[$i]
-            //      ]);
-              
-
-            //  DB::commit();
-            //  Toastr::success('Create new add modules successfully :)','Success');
-            //  return redirect()->back();
-
-            // }
-
-    
-
+       
 
 
     }
@@ -284,20 +162,30 @@ class RolesController extends Controller
     {
         DB::beginTransaction();
         try{
-            $id        = $request->id;
-            $roleName  = $request->roleName;
-            
+           
+            $id_menu = ($request->module_permission) ;
+            $roleid=($request->role_id);
+            $view=($request->view);
+            $create=($request->create);
+            $edit=($request->edit);
+            $delete=($request->delete);
+
+
             $update = [
-                'id'               => $id,
-                'permissions_name' => $roleName,
+                'role_id'                => $roleid,
+                'module_permission'      => $id_menu,
+                 'view'                  => $view,
+                 'create'                => $create,
+                 'edit'                  => $edit,
+                 'delete'                => $delete
             ];
 
              // Edit modules permission
 
-            RolesPermissions::where('id',$id)->update($update);
-            DB::commit();
-            Toastr::success('Modules Name updated successfully :)','Success');
-            return redirect()->back();
+             module_permissions::where('id',$id_menu)->update($update);
+
+           
+            return response()->json(['data' => $request->all()], 200);
 
         }catch(\Exception $e){
             DB::rollback();

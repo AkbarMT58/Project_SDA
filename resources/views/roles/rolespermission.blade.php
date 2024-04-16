@@ -468,7 +468,7 @@
 
         $modul_permission = DB::table('menus as a')
 
-        ->select('a.id','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
 
         ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
         
@@ -536,24 +536,24 @@
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]view"  id="c_view{{$menu->id}}"  onClick="Update_View('{{$roles->id}}','{{$menu->id}}')"  @if($modul->view == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   <input type="checkbox" name="[]view"  id="c_view{{$modul->id}}"  onClick="Update_View('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')"  @if($modul->view == '1')  {{'Checked'}} @else {{''}} @endif  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox" name="[]create" id="c_create{{$menu->id}}" onClick="Update_Create('{{$roles->id}}','{{$menu->id}}')" @if($modul->create == '1')  {{'Checked'}} @else {{''}} @endif  />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox" name="[]edit" id="c_edit{{$menu->id}}" onClick="Update_Edit('{{$roles->id}}','{{$menu->id}}')" @if($modul->edit == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   <input type="checkbox" name="[]create" id="c_create{{$modul->id}}" onClick="Update_Create('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')" @if($modul->create == '1')  {{'Checked'}} @else {{''}} @endif  />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]delete" id="c_delete{{$menu->id}}" onClick="Update_Delete('{{$roles->id}}','{{$menu->id}}')" @if($modul->delete == '1')  {{'Checked'}} @else {{''}} @endif />
+                                   <input type="checkbox" name="[]edit" id="c_edit{{$modul->id}}" onClick="Update_Edit('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')" @if($modul->edit == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox" name="[]delete" id="c_delete{{$modul->id}}" onClick="Update_Delete('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')" @if($modul->delete == '1')  {{'Checked'}} @else {{''}} @endif />
                                    
                                    </td>
                                  
@@ -919,7 +919,7 @@
                        
                     },
 
-                    dataType: "text",
+                    dataType: "json",
                     success: function (response) {
 
                         console.log("after saving:",response);
@@ -996,7 +996,7 @@
         
         },
 
-        dataType: "text",
+        dataType: "json",
         success: function (response) {
 
             console.log("after saving:",response);
@@ -1054,9 +1054,464 @@
 
         //batas add modul akses -------------------------------------------------------------------------------------------
 
+        //update view modul akses
+
+        function Update_View(roleid,idmenu,cb,id_modul){
+
+            cb.value = cb.checked ? 1 : 0;
+
+            if(cb.value==1){
+
+                $.ajax({
+
+                    type: 'POST' ,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `modulaccess/update`,
+                    data: 
+                    {
+                        _token: "{{ csrf_token() }}",
+                        idmodul                : id_modul,
+                        role_id                : roleid,
+                        module_permission      : idmenu,
+                        view                   : cb.value,
+                     
+                        
+                      
+                    },
+
+                    dataType: "text",
+                    success: function (response) {
+
+                        console.log("after saving:",response);
+
+                        if(response!=''){
+
+                            toastr.success('Update view modules checked successfully :)');
+                            $('#edit_modulakses'+roleid).modal('hide');
+                        }
+
+                    
+
+
+
+
+                    }
+
+                    });
+
+
+                // console.log("lihat view:","berisi");
+
+
+
+            }else{
+
+
+                $.ajax({
+
+                type: 'POST' ,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: `modulaccess/update`,
+                data: 
+                {
+                    _token: "{{ csrf_token() }}",
+                    idmodul                : id_modul,
+                    role_id                : roleid,
+                    module_permission      : idmenu,
+                    view                   : cb.value
+                  
+                 
+
+            
+                
+                },
+
+                dataType: "text",
+                success: function (response) {
+
+                    console.log("after saving:",response);
+
+                    if(response!=''){
+
+                        toastr.success('Update view modules unchecked successfully :)');
+                        $('#edit_modulakses'+roleid).modal('hide');
+                    }
+
+
+
+
+
+
+                }
+
+                });
+
+
+
+               // console.log("lihat view:","kosong");
+
+            }
+          
+           
+           
+
+
+
+        }
+
+
 
 
         //update modul akses
+
+
+
+
+          //update create modul akses
+
+          function Update_Create(roleid,idmenu,cb,id_modul){
+
+                cb.value = cb.checked ? 1 : 0;
+
+                if(cb.value==1){
+
+                    $.ajax({
+
+                        type: 'POST' ,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: `modulaccess/update`,
+                        data: 
+                        {
+                            _token: "{{ csrf_token() }}",
+                            idmodul                : id_modul,
+                            role_id                : roleid,
+                            module_permission      : idmenu,
+                            create                 : cb.value,
+                        
+                            
+                        
+                        },
+
+                        dataType: "text",
+                        success: function (response) {
+
+                            console.log("after saving:",response);
+
+                            if(response!=''){
+
+                                toastr.success('Update create modules checked successfully :)');
+                                $('#edit_modulakses'+roleid).modal('hide');
+                            }
+
+                        
+
+
+
+
+                        }
+
+                        });
+
+
+                    // console.log("lihat view:","berisi");
+
+
+
+                }else{
+
+
+                    $.ajax({
+
+                    type: 'POST' ,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `modulaccess/update`,
+                    data: 
+                    {
+                        _token: "{{ csrf_token() }}",
+                        idmodul                : id_modul,
+                        role_id                : roleid,
+                        module_permission      : idmenu,
+                        view                   : cb.value
+                    
+                    
+
+
+                    
+                    },
+
+                    dataType: "text",
+                    success: function (response) {
+
+                        console.log("after saving:",response);
+
+                        if(response!=''){
+
+                            toastr.success('Update create modules unchecked successfully :)');
+                            $('#edit_modulakses'+roleid).modal('hide');
+                        }
+
+
+
+
+
+
+                    }
+
+                    });
+
+
+
+                // console.log("lihat view:","kosong");
+
+                }
+
+
+
+
+
+
+                }
+
+
+
+
+                //update create modul akses
+
+
+
+                //update edit modul akses
+
+          function Update_Edit(roleid,idmenu,cb,id_modul){
+
+            cb.value = cb.checked ? 1 : 0;
+
+            if(cb.value==1){
+
+                $.ajax({
+
+                    type: 'POST' ,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `modulaccess/update`,
+                    data: 
+                    {
+                        _token: "{{ csrf_token() }}",
+                        idmodul                : id_modul,
+                        role_id                : roleid,
+                        module_permission      : idmenu,
+                        edit                   : cb.value,
+                    
+                        
+                    
+                    },
+
+                    dataType: "text",
+                    success: function (response) {
+
+                        console.log("after saving:",response);
+
+                        if(response!=''){
+
+                            toastr.success('Update edit modules checked successfully :)');
+                            $('#edit_modulakses'+roleid).modal('hide');
+                        }
+
+                    
+
+
+
+
+                    }
+
+                    });
+
+
+    // console.log("lihat view:","berisi");
+
+
+
+            }else{
+
+
+                $.ajax({
+
+                type: 'POST' ,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: `modulaccess/update`,
+                data: 
+                {
+                    _token: "{{ csrf_token() }}",
+                    idmodul                : id_modul,
+                    role_id                : roleid,
+                    module_permission      : idmenu,
+                    edit                   : cb.value
+                
+                
+
+
+                
+                },
+
+                dataType: "text",
+                success: function (response) {
+
+                    console.log("after saving:",response);
+
+                    if(response!=''){
+
+                        toastr.success('Update edit modules unchecked successfully :)');
+                        $('#edit_modulakses'+roleid).modal('hide');
+                    }
+
+
+
+
+
+
+                }
+
+                });
+
+
+
+                    // console.log("lihat view:","kosong");
+
+                    }
+
+
+
+
+
+
+                    }
+
+
+            //update edit modul akses
+
+
+
+
+
+                   //update delete modul akses
+
+          function Update_Delete(roleid,idmenu,cb,id_modul){
+
+                cb.value = cb.checked ? 1 : 0;
+
+                if(cb.value==1){
+
+                    $.ajax({
+
+                        type: 'POST' ,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: `modulaccess/update`,
+                        data: 
+                        {
+                            _token: "{{ csrf_token() }}",
+                            idmodul                : id_modul,
+                            role_id                : roleid,
+                            module_permission      : idmenu,
+                            delete                 : cb.value,
+                    
+                        },
+
+                        dataType: "text",
+                        success: function (response) {
+
+                            console.log("after saving:",response);
+
+                            if(response!=''){
+
+                                toastr.success('Update delete modules checked successfully :)');
+                                $('#edit_modulakses'+roleid).modal('hide');
+                            }
+
+                        
+
+
+
+
+                        }
+
+                        });
+
+
+                // console.log("lihat view:","berisi");
+
+
+
+                }else{
+
+
+                    $.ajax({
+
+                    type: 'POST' ,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `modulaccess/update`,
+                    data: 
+                    {
+                        _token: "{{ csrf_token() }}",
+                        idmodul                : id_modul,
+                        role_id                : roleid,
+                        module_permission      : idmenu,
+                        delete                 : cb.value
+                    
+                    },
+
+                    dataType: "text",
+                    success: function (response) {
+
+                        console.log("after saving:",response);
+
+                        if(response!=''){
+
+                            toastr.success('Update edit modules unchecked successfully :)');
+                            $('#edit_modulakses'+roleid).modal('hide');
+                        }
+
+
+
+
+
+
+                    }
+
+                    });
+
+
+
+                        // console.log("lihat view:","kosong");
+
+                        }
+
+
+
+
+
+
+                        }
+
+
+        //update delete modul akses
+
+
+
+
 
 
 

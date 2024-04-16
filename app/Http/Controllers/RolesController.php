@@ -119,32 +119,63 @@ class RolesController extends Controller
            $create=($request->create);
            $edit=($request->edit);
            $delete=($request->delete);
+
+          
+           $avoid_duplicate_view=module_permission::select('view','id')
+          ->where('role_id',$roleid)
+          ->where('module_permission',$id_menu)
+          ->get();
+
+          $total_dataview=count($avoid_duplicate_view);
+
+          $i=0;
+          $all_array_view=[];
+          $all_array_id=[];
+          while($i <  $total_dataview ){
+
+          $dataall_view=$avoid_duplicate_view[$i]['view'];
+  
+          $dataall_id=$avoid_duplicate_view[$i]['id'];
+  
+          array_push( $all_array_id, $dataall_id);
+          array_push( $all_array_view, $dataall_view);
+         
+           $i++;
+  
+          }
+
+          
+
+        //    $avoid_duplicate_create=module_permission::select('create')->where('role_id',$roleid)
+        //    ->where('module_permission',$id_menu)
+        //    ->get();
+
+        //    $avoid_duplicate_edit=module_permission::select('edit')->where('role_id',$roleid)
+        //    ->where('module_permission',$id_menu)
+        //    ->get();
+
+        //    $avoid_duplicate_delete=module_permission::select('delete')->where('role_id',$roleid)
+        //    ->where('module_permission',$id_menu)
+        //    ->get();
         
-                //    $tot_modul=count($id_menu);
-                $title="Setting Roles SDA CMS";
-
-                DB::table('module_permissions')->insert( [
-                    'role_id'                => $roleid,
-                    'module_permission'      => $id_menu,
-                     'view'                  => $view,
-                     'create'                => $create,
-                     'edit'                  => $edit,
-                     'delete'                => $delete
-                ]);
-
-                // DB::commit();
-                // Toastr::success('Create new add modules successfully :)','Success');
-
-                return response()->json(['data' => $request->all()], 200);
-
-
             
-                
 
-               
-        
+        DB::table('module_permissions')->insert( [
+            'role_id'                => $roleid,
+            'module_permission'      => $id_menu,
+             'view'                  => $view,
+             'create'                => $create,
+             'edit'                  => $edit,
+             'delete'                => $delete
+        ]);
+
+        DB::commit();
+
+    
+        return response()->json(['data' => $request->all(),'data_view'=>$all_array_view,'data_id'=> $all_array_id ], 200);
 
 
+      
         }catch(\Exception $e){
             DB::rollback();
             Toastr::error('Add Module fail :)','Error');
@@ -169,23 +200,69 @@ class RolesController extends Controller
             $create=($request->create);
             $edit=($request->edit);
             $delete=($request->delete);
+            $id_modul=($request->idmodul);
+
+         
+                if($view!=''){
+
+                    $updates = [
+
+                        'role_id'                => $roleid,
+                        'module_permission'      => $id_menu,
+                         'view'                  => $view,
+                        
+                    ];
 
 
-            $update = [
-                'role_id'                => $roleid,
-                'module_permission'      => $id_menu,
-                 'view'                  => $view,
-                 'create'                => $create,
-                 'edit'                  => $edit,
-                 'delete'                => $delete
-            ];
+                }
 
+                if($create!=''){
+
+                    $updates = [
+
+                        'role_id'                => $roleid,
+                        'module_permission'      => $id_menu,
+                         'create'                => $create,
+                        
+                    ];
+
+
+                }
+                if($edit!=''){
+
+                    $updates = [
+
+                        'role_id'                => $roleid,
+                        'module_permission'      => $id_menu,
+                         'edit'                  => $edit,
+                        
+                    ];
+
+
+                }
+
+                if($delete!=''){
+
+                    $updates = [
+
+                        'role_id'                => $roleid,
+                        'module_permission'      => $id_menu,
+                         'delete'                => $delete,
+                        
+                    ];
+
+
+                }
+
+
+            
              // Edit modules permission
 
-             module_permissions::where('id',$id_menu)->update($update);
+             DB::table('module_permissions')->where('id',$id_modul)->update($updates);
+             DB::commit();
+            
 
-           
-            return response()->json(['data' => $request->all()], 200);
+            return response()->json(['data' => $updates], 200);
 
         }catch(\Exception $e){
             DB::rollback();

@@ -119,7 +119,7 @@ class RolesController extends Controller
            $create=($request->create);
            $edit=($request->edit);
            $delete=($request->delete);
-           $avoid_duplicate_view=module_permission::select('view','id')
+           $avoid_duplicate_view=module_permission::select('view','id','role_id','module_permission')
           ->where('role_id',$roleid)
           ->where('module_permission',$id_menu)
           ->get();
@@ -165,12 +165,15 @@ class RolesController extends Controller
         //    ->where('module_permission',$id_menu)
         //    ->get();
 
-        if($all_array_modulepermissions == $id_menu &&  $all_array_roleid==  $roleid ){
+        if($all_array_modulepermissions == [$id_menu] &&  $all_array_roleid ==  [$roleid]){
 
-            return response()->json(['data' =>"","message"=>"modul sudah ada dalam sistem!",404]);
+            return response()->json(['data' =>"","message"=>"modul sudah ada dalam sistem!","status"=>403]);
 
 
-        }else{
+        }
+
+
+       else{
 
             DB::table('module_permissions')->insert( [
                 'role_id'                => $roleid,
@@ -180,12 +183,16 @@ class RolesController extends Controller
                  'edit'                  => $edit,
                  'delete'                => $delete
             ]);
+
+           
     
             DB::commit();
+
+            return response()->json(['data' => $request->all(),'data_view'=>$all_array_view,'data_id'=> $all_array_id,'data_module'=>$all_array_modulepermissions,'data_role'=>$all_array_roleid,"status"=>200 ],200);
+    
     
         
-            return response()->json(['data' => $request->all(),'data_view'=>$all_array_view,'data_id'=> $all_array_id,'data_module'=>$all_array_modulepermissions ], 200);
-    
+          
 
 
         }

@@ -763,16 +763,24 @@
                      delete                : 0
                 },
                
-                dataType: "text",
+                dataType: "json",
                 success: function (response) {
 
                     console.log("after saving:",response);
+                    console.log("after saving:",response.status);
 
-                    if(response!=''){
+                    if(response.status==200){
 
                           toastr.success('Create new add modules successfully :)');
                           $('#add_modulakses'+roleid).modal('hide');
                     }
+
+                    if(response.status==403){
+
+                       toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                        $('#add_modulakses'+roleid).modal('hide');
+
+                        }
 
                   
 
@@ -840,16 +848,23 @@
                  
                 },
 
-                dataType: "text",
+                dataType: "json",
                 success: function (response) {
 
                     console.log("after saving:",response);
 
-                    if(response!=''){
+                    if(response.status==200){
 
                         toastr.success('Create new add modules successfully :)');
                         $('#add_modulakses'+roleid).modal('hide');
-                    }
+                        }
+
+                        if(response.status==403){
+
+                        toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                        $('#add_modulakses'+roleid).modal('hide');
+
+                        }
 
                 
 
@@ -924,11 +939,18 @@
 
                         console.log("after saving:",response);
 
-                        if(response!=''){
+                        if(response.status==200){
 
-                            toastr.success('Create new add modules successfully :)');
+                            toastr.success('Create new edit modules successfully :)');
                             $('#add_modulakses'+roleid).modal('hide');
-                        }
+                            }
+
+                            if(response.status==403){
+
+                            toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                            $('#add_modulakses'+roleid).modal('hide');
+
+                            }
 
 
 
@@ -1001,10 +1023,17 @@
 
             console.log("after saving:",response);
 
-            if(response!=''){
+            if(response.status==200){
 
-                toastr.success('Create new add modules successfully :)');
-                $('#add_modulakses'+roleid).modal('hide');
+            toastr.success('Create new delete modules successfully :)');
+            $('#add_modulakses'+roleid).modal('hide');
+            }
+
+            if(response.status==403){
+
+            toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+            $('#add_modulakses'+roleid).modal('hide');
+
             }
 
 

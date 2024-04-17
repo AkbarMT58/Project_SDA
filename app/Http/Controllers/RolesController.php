@@ -119,8 +119,6 @@ class RolesController extends Controller
            $create=($request->create);
            $edit=($request->edit);
            $delete=($request->delete);
-
-          
            $avoid_duplicate_view=module_permission::select('view','id')
           ->where('role_id',$roleid)
           ->where('module_permission',$id_menu)
@@ -131,14 +129,23 @@ class RolesController extends Controller
           $i=0;
           $all_array_view=[];
           $all_array_id=[];
+          $all_array_modulepermissions=[];
+          $all_array_roleid=[];
+
           while($i <  $total_dataview ){
 
           $dataall_view=$avoid_duplicate_view[$i]['view'];
   
           $dataall_id=$avoid_duplicate_view[$i]['id'];
+
+          $dataall_modulepermissions=$avoid_duplicate_view[$i]['module_permission'];
+
+          $dataall_roleid=$avoid_duplicate_view[$i]['role_id'];
   
           array_push( $all_array_id, $dataall_id);
           array_push( $all_array_view, $dataall_view);
+          array_push( $all_array_modulepermissions, $dataall_modulepermissions);
+          array_push( $all_array_roleid, $dataall_roleid);
          
            $i++;
   
@@ -157,23 +164,35 @@ class RolesController extends Controller
         //    $avoid_duplicate_delete=module_permission::select('delete')->where('role_id',$roleid)
         //    ->where('module_permission',$id_menu)
         //    ->get();
+
+        if($all_array_modulepermissions == $id_menu &&  $all_array_roleid==  $roleid ){
+
+            return response()->json(['data' =>"","message"=>"modul sudah ada dalam sistem!",404]);
+
+
+        }else{
+
+            DB::table('module_permissions')->insert( [
+                'role_id'                => $roleid,
+                'module_permission'      => $id_menu,
+                 'view'                  => $view,
+                 'create'                => $create,
+                 'edit'                  => $edit,
+                 'delete'                => $delete
+            ]);
+    
+            DB::commit();
+    
+        
+            return response()->json(['data' => $request->all(),'data_view'=>$all_array_view,'data_id'=> $all_array_id,'data_module'=>$all_array_modulepermissions ], 200);
+    
+
+
+        }
         
             
 
-        DB::table('module_permissions')->insert( [
-            'role_id'                => $roleid,
-            'module_permission'      => $id_menu,
-             'view'                  => $view,
-             'create'                => $create,
-             'edit'                  => $edit,
-             'delete'                => $delete
-        ]);
-
-        DB::commit();
-
-    
-        return response()->json(['data' => $request->all(),'data_view'=>$all_array_view,'data_id'=> $all_array_id ], 200);
-
+       
 
       
         }catch(\Exception $e){

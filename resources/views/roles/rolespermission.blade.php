@@ -238,7 +238,7 @@
                                     <td>{{ $roles->role_type }}</td>
                                     <td>
                                       
-                                    <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}"><i class="fa fa-plus"></i> Modul Akses</a>
+                                    <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}"><i class="fa fa-plus"></i> Add Modul Akses</a>
                                     <a class="btn btn-warning" style="color:black;" data-toggle="modal" data-target="#edit_modulakses{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit Modul Akses</a>
 
                                     </td>

@@ -28,7 +28,20 @@ class UserController extends Controller
          $title="Setting User SDA CMS";
          $rolelist = DB::table('role_type_users')->get();
          $permission_lists = DB::table('permission_lists')->get();
-        return view('usermanagement.listUser',compact('users','rolelist','permission_lists','title'));
+         $role_id=Auth::user()->role_name;
+
+         $modul_permission = DB::table('menus as a')
+ 
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+ 
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+        
+        ->where("b.role_id", $role_id)
+ 
+        ->orderBy("a.sub_categorymenu",'ASC')
+        
+        ->get();
+        return view('usermanagement.listUser',compact('users','rolelist','permission_lists','title','modul_permission'));
     }
 
     // save data menu

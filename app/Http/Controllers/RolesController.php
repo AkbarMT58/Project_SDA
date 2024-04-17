@@ -7,6 +7,8 @@ use App\Models\roleTypeUser;
 use App\Models\module_permission;
 use Brian2694\Toastr\Facades\Toastr;
 use DB;
+use Auth;
+
 class RolesController extends Controller
 {
     // company/settings/page
@@ -20,9 +22,22 @@ class RolesController extends Controller
     {
         $rolesPermissions = roleTypeUser::All();
         $menus = DB::table('menus')->get();
-        // $modul_permission = DB::table('module_permissions')->where('role_id',$request->role_id)->get();
+       
         $title="Setting Roles SDA CMS";
-        return view('roles.rolespermission',compact('rolesPermissions','title','menus'));
+        $role_id=Auth::user()->role_name;
+
+        $modul_permission = DB::table('menus as a')
+
+       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+
+       ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+       
+       ->where("b.role_id", $role_id)
+
+       ->orderBy("a.sub_categorymenu",'ASC')
+       
+       ->get();
+        return view('roles.rolespermission',compact('rolesPermissions','title','menus','modul_permission'));
     }
 
     // add role permissions

@@ -84,6 +84,7 @@ Route::controller(HomeController::class)->group(function () {
 Route::controller(RolesController::class)->group(function () {
     Route::get('company/settings/page', 'companySettings')->middleware('auth')->name('company/settings/page');
     Route::get('roles/permissions/page', 'rolesPermissions')->middleware('auth')->name('roles/permissions/page');
+    Route::get('roles/permissions/listaksesbyrole', 'tampilkan_Dataaksesmodul')->middleware('auth')->name('roles/permissions/listaksesbyrole');
     Route::post('roles/permissions/save', 'addRecord')->middleware('auth')->name('roles/permissions/save');
     Route::post('roles/permissions/update', 'editRolesPermissions')->middleware('auth')->name('roles/permissions/update');
     Route::post('roles/permissions/delete', 'deleteRolesPermissions')->middleware('auth')->name('roles/permissions/delete');

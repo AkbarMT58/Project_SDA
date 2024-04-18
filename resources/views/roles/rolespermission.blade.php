@@ -238,7 +238,7 @@
                                     <td>{{ $roles->role_type }}</td>
                                     <td>
                                       
-                                    <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}"><i class="fa fa-plus"></i> Add Modul Akses</a>
+                                    <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}" onClick="GetDataAccess_Modul('{{count($menus)}}','{{$roles->id}}')" ><i class="fa fa-plus"></i> Add Modul Akses</a>
                                     <a class="btn btn-warning" style="color:black;" data-toggle="modal" data-target="#edit_modulakses{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit Modul Akses</a>
 
                                     </td>
@@ -350,6 +350,28 @@
         @foreach ($rolesPermissions as $roles )
         <!-- Add Modul Akses Modal -->
 
+        
+        @php
+
+
+
+        $modul_permission = DB::table('menus as a')
+
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+        
+        ->where("b.role_id",$roles->id)
+
+        ->orderBy("a.sub_categorymenu",'ASC')
+        
+        ->get();
+
+
+        @endphp
+
+    
+
         <div id="add_modulakses{{$roles->id}}" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -381,15 +403,20 @@
                                     <th>Create</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
-                                   
-                                  
-                           
-                           
-                                   
+             
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($menus as $menu )
+
+                                @php
+
+
+
+                                    
+                            
+                                 @endphp
+                               
                                 <tr>
                                     <td>
                                     {{ $menu->id }}
@@ -403,36 +430,41 @@
                                     </td>
                                     <td>
                                     {{ $menu->sub_categorymenu}}
+                                    
                                    </td>
-                                 
+
                                    <td>
 
-                                   <input type="checkbox" name="view[]"  value="1"  id="c_view{{$menu->id}}" onClick="Akses_View('{{$roles->id}}','{{$menu->id}}')"  />
+                                   <input type="checkbox"    class="c_view{{$menu->id}}" onClick="Akses_View('{{$roles->id}}','{{$menu->id}}')"  value="1"  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox" name="create[]"  value="1" id="c_create{{$menu->id}}"  onClick="Akses_Create('{{$roles->id}}','{{$menu->id}}')" />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox" name="edit[]"  value="1" id="c_edit{{$menu->id}}"  onClick="Akses_Edit('{{$roles->id}}','{{$menu->id}}')" />
+                                   <input type="checkbox"   class="c_create{{$menu->id}}"  onClick="Akses_Create('{{$roles->id}}','{{$menu->id}}')" value="1"  />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox" name="delete[]"  value="1" id="c_delete{{$menu->id}}" onClick="Akses_Delete('{{$roles->id}}','{{$menu->id}}')"/>
+                                   <input type="checkbox"   class="c_edit{{$menu->id}}"  onClick="Akses_Edit('{{$roles->id}}','{{$menu->id}}')" value="1" />
                                    
                                    </td>
                                  
+                                   <td>
+
+                                   <input type="checkbox"   class="c_delete{{$menu->id}}" onClick="Akses_Delete('{{$roles->id}}','{{$menu->id}}')" value="1"  />
+                                   
+                                   </td>
+
                                   
+                                 
+                                 
                                    
                                    
                                    
                                 </tr>
+
+                               
                                 @endforeach
                             </tbody>
                         </table>
@@ -740,7 +772,7 @@
 
         function Akses_View(roleid,idmenu){
 
-        var chk_view=document.getElementById("c_view"+idmenu).value;
+        var chk_view=document.getElementsByClassName("c_view"+idmenu).value;
 
 
         //kirim data add modul access
@@ -828,7 +860,7 @@
 
         function Akses_Create(roleid,idmenu){
 
-        var chk_create=document.getElementById("c_create"+idmenu).value;
+        var chk_create=document.getElementsByClassName("c_create"+idmenu).value;
 
           //kirim data add modul access
 
@@ -916,7 +948,7 @@
 
         //console.log("id edit:", edit);
 
-        var chk_edit=document.getElementById("c_edit"+idmenu).value;
+        var chk_edit=document.getElementsByClassName("c_edit"+idmenu).value;
 
                             $.ajax({
 
@@ -1000,7 +1032,7 @@
 
        // console.log("id delete:", deleted);
 
-       var chk_delete=document.getElementById("c_delete"+idmenu).value;
+       var chk_delete=document.getElementsByClassName("c_delete"+idmenu).value;
 
        $.ajax({
 
@@ -1537,6 +1569,90 @@
 
 
         //update delete modul akses
+
+
+
+
+        function GetDataAccess_Modul(total_id,roleid){
+
+
+        
+                url_source =`listaksesbyrole`;
+
+                $.ajax({
+
+                type: 'GET' ,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url_source,
+                data:{
+
+                    "role_id":roleid
+
+
+                },
+               
+
+                dataType: "json",
+                success: function (response) {
+
+                    //console.log("after clicked:",response.data);
+
+                  
+
+                    for(var i=0;i <= response.data.length; i++){
+
+                         var id_menu_array=response.data[i].id;
+                         var view_array=response.data[i].view;
+                         var create_array=response.data[i].create;
+                         var edit_array=response.data[i].edit;
+                         var delete_array=response.data[i].delete;
+                        
+
+        
+                        $('.c_view'+id_menu_array+':input:checkbox').each(function() { this.checked = view_array; });
+                        $('.c_create'+id_menu_array+':input:checkbox').each(function() { this.checked = create_array; });
+                        $('.c_edit'+id_menu_array+':input:checkbox').each(function() { this.checked = edit_array; });
+                        $('.c_delete'+id_menu_array+':input:checkbox').each(function() { this.checked = delete_array; });
+        
+
+                        console.log("c_view"+id_menu_array);
+                        console.log("c_create"+id_menu_array);
+                        console.log("c_edit"+id_menu_array);
+                        console.log("c_delete"+id_menu_array);
+
+                       
+
+                     }
+
+                }
+
+                  
+
+
+
+
+
+
+                
+
+                });
+
+            
+
+
+
+                
+
+
+            
+
+
+
+
+
+        }
 
 
 

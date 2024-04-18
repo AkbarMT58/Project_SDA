@@ -206,9 +206,6 @@ class RolesController extends Controller
             return response()->json(['data' => $request->all(),'data_view'=>$all_array_view,'data_id'=> $all_array_id,'data_module'=>$all_array_modulepermissions,'data_role'=>$all_array_roleid,"status"=>200 ],200);
     
     
-        
-          
-
 
         }
         
@@ -310,6 +307,33 @@ class RolesController extends Controller
             Toastr::error('Modules Name update fail :)','Error');
             return redirect()->back();
         }
+    }
+
+
+    public function tampilkan_Dataaksesmodul(Request $request){
+
+        $role_id=Auth::user()->role_name;
+
+        $modul_permission = DB::table('menus as a')
+
+       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+
+       ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+       
+       ->where("b.role_id", $request->role_id)
+
+       ->orderBy("a.sub_categorymenu",'ASC')
+       
+       ->get();
+
+       return response()->json(['data' => $modul_permission ],200);
+    
+
+
+
+
+
+
     }
 
     

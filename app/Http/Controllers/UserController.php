@@ -41,7 +41,7 @@ class UserController extends Controller
         ->orderBy("a.sub_categorymenu",'ASC')
         
         ->get();
-        return view('usermanagement.listUser',compact('users','rolelist','permission_lists','title','modul_permission'));
+        return view('usermanagement.listuser',compact('users','rolelist','permission_lists','title','modul_permission'));
     }
 
     // save data menu

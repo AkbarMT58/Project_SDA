@@ -21,9 +21,11 @@ class RolesController extends Controller
     public function rolesPermissions(Request $request)
     {
         $rolesPermissions = roleTypeUser::All();
+        
         $menus = DB::table('menus')->get();
        
         $title="Setting Roles SDA CMS";
+
         $role_id=Auth::user()->role_name;
 
         $modul_permission = DB::table('menus as a')
@@ -37,7 +39,9 @@ class RolesController extends Controller
        ->orderBy("a.sub_categorymenu",'ASC')
        
        ->get();
-        return view('roles.rolespermission',compact('rolesPermissions','title','menus','modul_permission'));
+       $permission_lists = DB::table('permission_lists')->get();
+
+        return view('roles.rolespermission',compact('rolesPermissions','permission_lists','title','menus','modul_permission'));
     }
 
     // add role permissions

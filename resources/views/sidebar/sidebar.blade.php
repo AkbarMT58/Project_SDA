@@ -78,10 +78,11 @@
              
 
                 <li class="menu-title">@if($modulmenu->categorymenu==1){{$modulmenu->namamenu}} @endif</li>
+           
 
                 @if($modulmenu->categorymenu==2)
-
-                    <li class="{{set_active([$modulmenu->link_menu]) ? 'noti-dot' : '' }}"><a href="{{ $modulmenu->link_menu }}"><i class="{{$modulmenu->namaicons}}"></i><span>{{$modulmenu->namamenu}}</span></a></li>
+    
+                    <li class="{{set_active([$modulmenu->link_menu]) ? 'noti-dot' : '' }}"><a href="{{url('/')}}{{$modulmenu->link_menu}}"><i class="{{$modulmenu->namaicons}}"></i><span>{{$modulmenu->namamenu}}</span></a></li>
                 
                 @endif
 

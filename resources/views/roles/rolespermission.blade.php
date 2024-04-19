@@ -664,8 +664,6 @@
 
         function Akses_Create(roleid,idmenu,cb){
 
-        
-
         cb.value = cb.checked ? 1 : 0;
 
         if  (cb.value== '1'){
@@ -674,29 +672,30 @@
 
              $.ajax({
 
-type: 'POST' ,
-headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-},
-url: `modulaccess/save`,
-data: 
-{
-    _token: "{{ csrf_token() }}",
-    role_id                : roleid,
-    module_permission      : idmenu,
-    create                : cb.value,
- 
-},
+            type: 'POST' ,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: `modulaccess/save`,
+            data: 
+            {
+                _token: "{{ csrf_token() }}",
+                role_id                : roleid,
+                module_permission      : idmenu,
+                create                : cb.value,
+            
+            },
 
-dataType: "json",
-success: function (response) {
+            dataType: "json",
+            success: function (response) {
 
-    console.log("after saving:",response);
+        console.log("after saving:",response);
 
-    if(response.status==200){
+        if(response.status==200){
 
         toastr.success('Create new add modules successfully :)');
         $('#add_modulakses'+roleid).modal('hide');
+
         }
 
         if(response.status==403){
@@ -707,34 +706,29 @@ success: function (response) {
         }
 
 
+        }
 
-
-
-
-}
-
-});
-
-
-
+        });
 
 
         }else{
+
+            toastr.error('Failed Saving Data!You can not click unclicked! :)');
+            $('#add_modulakses'+roleid).modal('hide');
 
 
         }
 
          
-
-
         }
 
 
-        function Akses_Edit(roleid,idmenu){
+        function Akses_Edit(roleid,idmenu,cb){
 
-        //console.log("id edit:", edit);
+    
+        cb.value = cb.checked ? 1 : 0;
 
-        var chk_edit=document.getElementsByClassName("c_edit"+idmenu).value;
+                if  (cb.value== '1'){
 
                             $.ajax({
 
@@ -748,7 +742,7 @@ success: function (response) {
                         _token: "{{ csrf_token() }}",
                         role_id                : roleid,
                         module_permission      : idmenu,
-                        edit                   : chk_edit,
+                        edit                   : cb.value,
                        
                     },
 
@@ -771,55 +765,31 @@ success: function (response) {
                             }
 
 
-
-                    //         var data = response.report;
-
-                    //         $('#namakaryawan'+ no_urut).empty();
-
-
-                    // for (var i = 0; i < data.length; i++) {
-
-
-                    // let select_option = '';
-
-                    // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
-
-
-                    // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
-
-
-                    // $("#namakaryawan"+no_urut).select2({
-
-                    // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
-
-                    // });
-
-
-
-
-
-
-                    // }
-
-
                     }
 
                     });
 
+                }else{
 
-        console.log("id edit:", idmenu);
+                toastr.error('Failed Saving Data!You can not click unclicked! :)');
+                $('#add_modulakses'+roleid).modal('hide');
 
-        console.log("value:", chk_edit);
+
+                }
+
+
+     
 
 
         }
 
         function Akses_Delete(roleid,idmenu){
 
-       // console.log("id delete:", deleted);
+            cb.value = cb.checked ? 1 : 0;
 
-       var chk_delete=document.getElementsByClassName("c_delete"+idmenu).value;
+    if  (cb.value== '1'){
 
+    
        $.ajax({
 
         type: 'POST' ,
@@ -832,7 +802,7 @@ success: function (response) {
             _token: "{{ csrf_token() }}",
             role_id                : roleid,
             module_permission      : idmenu,
-            delete                 : chk_delete,
+            delete                 : cb.value,
         
         },
 
@@ -856,44 +826,19 @@ success: function (response) {
 
 
 
-        //         var data = response.report;
-
-        //         $('#namakaryawan'+ no_urut).empty();
-
-
-        // for (var i = 0; i < data.length; i++) {
-
-
-        // let select_option = '';
-
-        // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
-
-
-        // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
-
-
-        // $("#namakaryawan"+no_urut).select2({
-
-        // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
-
-        // });
-
-
-
-
-
-
-        // }
-
-
         }
 
         });
 
+         }else{
 
-        console.log("id delete:", idmenu);
+            
+            toastr.error('Failed Saving Data!You can not click unclicked! :)');
+            $('#add_modulakses'+roleid).modal('hide');
 
-        console.log("value:", chk_delete);
+
+         }
+
 
 
 

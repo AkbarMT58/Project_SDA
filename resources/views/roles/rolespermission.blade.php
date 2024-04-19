@@ -1348,7 +1348,7 @@
                     
                         },
 
-                        dataType: "text",
+                        dataType: "json",
                         success: function (response) {
 
                             console.log("after saving:",response);

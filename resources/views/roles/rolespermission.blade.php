@@ -307,8 +307,26 @@
 
         @endforeach
 
+       
+
 
         @foreach ($rolesPermissions as $roles )
+
+        @php
+
+        $datamenus = DB::table('menus as a')
+
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+
+        ->where("b.role_id", $roles->id)
+
+        ->orderBy("a.sub_categorymenu",'ASC')
+
+        ->get();
+
+        @endphp
         <!-- Edit Modul Akses Modal -->
 
         <div id="edit_modulakses{{$roles->id}}" class="modal custom-modal fade" role="dialog">
@@ -346,7 +364,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($menus as $menu )
+                                @foreach ($datamenus as $menu )
 
                                 <tr>
                                     <td>
@@ -366,24 +384,24 @@
 
                                    <td>
 
-                                   <input type="checkbox"    class="c_view{{$menu->id}}" onClick="Update_View('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')"  value="1"  />
+                                   <input type="checkbox"    class="c_view{{$menu->id}}" onClick="Update_View('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id_modul}}')"  value="1"  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox"   class="c_create{{$menu->id}}"  onClick="Update_Create('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')" value="1"  />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox"   class="c_edit{{$menu->id}}"  onClick="Update_Edit('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')" value="1" />
+                                   <input type="checkbox"   class="c_create{{$menu->id}}"  onClick="Update_Create('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id_modul}}')" value="1"  />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox"   class="c_delete{{$menu->id}}" onClick="Update_Delete('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')" value="1"  />
+                                   <input type="checkbox"   class="c_edit{{$menu->id}}"  onClick="Update_Edit('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id_modul}}')" value="1" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox"   class="c_delete{{$menu->id}}" onClick="Update_Delete('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id_modul}}')" value="1"  />
                                    
                                    </td>
 

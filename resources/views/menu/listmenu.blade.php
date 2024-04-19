@@ -2,7 +2,6 @@
 @section('content')
 
     
-  
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Page Content -->
@@ -341,5 +340,6 @@
             $('#email').val($(this).find(':selected').data('email'));
         });
     </script>
+    
     @endsection
 @endsection

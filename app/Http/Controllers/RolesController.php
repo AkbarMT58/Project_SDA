@@ -21,8 +21,22 @@ class RolesController extends Controller
     public function rolesPermissions(Request $request)
     {
         $rolesPermissions = roleTypeUser::All();
+        $roleid_input=$request->role_id;
+
         
-        $menus = DB::table('menus')->get();
+        //menus = DB::table('menus')->get();
+
+        $menus = DB::table('menus as a')
+
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+ 
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+        
+        ->where("b.role_id", $roleid_input)
+ 
+        ->orderBy("a.sub_categorymenu",'ASC')
+        
+        ->get();
        
         $title="Setting Roles SDA CMS";
 
@@ -39,6 +53,7 @@ class RolesController extends Controller
        ->orderBy("a.sub_categorymenu",'ASC')
        
        ->get();
+
        $permission_lists = DB::table('permission_lists')->get();
 
         return view('roles.rolespermission',compact('rolesPermissions','permission_lists','title','menus','modul_permission'));
@@ -304,7 +319,9 @@ class RolesController extends Controller
              DB::commit();
             
 
-            return response()->json(['data' => $updates], 200);
+            return response()->json(['data' => $updates,'status'=> 200], 200);
+
+           // return response()->json(['data' =>"","message"=>"modul sudah ada dalam sistem!","status"=>403]);
 
         }catch(\Exception $e){
             DB::rollback();
@@ -316,7 +333,7 @@ class RolesController extends Controller
 
     public function tampilkan_Dataaksesmodul(Request $request){
 
-        $role_id=Auth::user()->role_name;
+        // $role_id=Auth::user()->role_name;
 
         $modul_permission = DB::table('menus as a')
 

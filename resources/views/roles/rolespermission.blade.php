@@ -2,8 +2,10 @@
 @section('content')
 
 
-    <!-- Page Wrapper -->
-    <div class="page-wrapper">
+<!-- Page Wrapper -->
+
+<div class="page-wrapper">
+
         <!-- Page Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -84,7 +86,7 @@
                                     <td>
                                       
                                     <a class="btn btn-success" style="color:black;" data-toggle="modal" data-target="#add_modulakses{{$roles->id}}" onClick="GetDataAccess_Modul('{{count($menus)}}','{{$roles->id}}')" ><i class="fa fa-plus"></i> Add Modul Akses</a>
-                                    <a class="btn btn-warning" style="color:black;" data-toggle="modal" data-target="#edit_modulakses{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit Modul Akses</a>
+                                    <a class="btn btn-warning" style="color:black;" data-toggle="modal" data-target="#edit_modulakses{{$roles->id}}" onClick="GetDataEditAccess_Modul('{{count($menus)}}','{{$roles->id}}')"><i class="fa fa-pencil m-r-5"></i> Edit Modul Akses</a>
 
                                     </td>
                                   
@@ -111,8 +113,10 @@
         </div>
         <!-- /Page Content -->
 
-         <!-- Add Roles Modal -->
-         <div id="add_users" class="modal custom-modal fade" role="dialog">
+        
+
+          <!-- Add Roles Modal -->
+          <div id="add_users" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -146,8 +150,7 @@
                 </div>
             </div>
         </div>
-        <!-- /Add Roles Modal -->
-      
+        <!-- Add Roles Modal -->
 
         @foreach ($rolesPermissions as $roles )
         <!-- Edit Roles Modal -->
@@ -186,36 +189,14 @@
                 </div>
             </div>
         </div>
-        <!-- /Add Roles Modal -->
+        <!-- Edit Roles Modal -->
 
         @endforeach
 
 
-        
+
         @foreach ($rolesPermissions as $roles )
         <!-- Add Modul Akses Modal -->
-
-        
-        @php
-
-
-
-        $modul_permission = DB::table('menus as a')
-
-        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
-
-        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
-        
-        ->where("b.role_id",$roles->id)
-
-        ->orderBy("a.sub_categorymenu",'ASC')
-        
-        ->get();
-
-
-        @endphp
-
-    
 
         <div id="add_modulakses{{$roles->id}}" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -229,7 +210,7 @@
                     </div>
                     <div class="modal-body">
                        
-                        @csrf
+                       
                             <div class="row">
                                 <div class="col-sm-12">
 
@@ -254,14 +235,6 @@
                             <tbody>
                                 @foreach ($menus as $menu )
 
-                                @php
-
-
-
-                                    
-                            
-                                 @endphp
-                               
                                 <tr>
                                     <td>
                                     {{ $menu->id }}
@@ -330,33 +303,13 @@
                 </div>
             </div>
         </div>
-        <!-- /Add Modul Modal -->
+        <!-- Add Modul Modal -->
 
         @endforeach
 
 
-
         @foreach ($rolesPermissions as $roles )
         <!-- Edit Modul Akses Modal -->
-
-        @php
-
-
-
-        $modul_permission = DB::table('menus as a')
-
-        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
-
-        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
-        
-        ->where("b.role_id",$roles->id)
-
-        ->orderBy("a.index_no",'ASC')
-        
-        ->get();
-
-
-        @endphp
 
         <div id="edit_modulakses{{$roles->id}}" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -369,16 +322,16 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('users/update') }}" method="POST">
-                            @csrf
+                       
+                       
                             <div class="row">
                                 <div class="col-sm-12">
 
                                 <div class="table-responsive">
                                 
                         <br>
-                        <h4  >Roles : {{$roles->role_type}}</h4>
-                        <table class="table table-striped custom-table datatable" >
+                        <h4>Roles : {{$roles->role_type}}</h4>
+                        <table class="table table-striped custom-table datatable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -389,66 +342,60 @@
                                     <th>Create</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
-                                   
-                                    <th>Action</th>
-                           
-                           
-                                   
+             
                                 </tr>
                             </thead>
                             <tbody>
-                                 @foreach ($modul_permission as $modul )
+                                @foreach ($menus as $menu )
+
                                 <tr>
                                     <td>
-                                    {{ $modul->id }}
+                                    {{ $menu->id }}
+                                    <input type="hidden" name="idmenu" class="id_menu{{$roles->id}}" value="{{$menu->id}}"  />
+                                    <input type="hidden" name="roleid" class="id_roles{{$roles->id}}" value="{{$roles->id}}" />
                                     </td>
                                    
-                                    <td>{{ $modul->namamenu }}</td>
+                                    <td>{{ $menu->namamenu }}</td>
                                     <td>
-                                    {{ $modul->categorymenu}}
+                                    {{ $menu->categorymenu}}
                                     </td>
                                     <td>
-                                    {{ $modul->sub_categorymenu}}
+                                    {{ $menu->sub_categorymenu}}
+                                    
                                    </td>
-                                 
+
                                    <td>
 
-                                   <input type="checkbox" name="[]view"  id="c_view{{$modul->id}}"  onClick="Update_View('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')"  @if($modul->view == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   <input type="checkbox"    class="c_view{{$menu->id}}" onClick="Update_View('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')"  value="1"  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox" name="[]create" id="c_create{{$modul->id}}" onClick="Update_Create('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')" @if($modul->create == '1')  {{'Checked'}} @else {{''}} @endif  />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox" name="[]edit" id="c_edit{{$modul->id}}" onClick="Update_Edit('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')" @if($modul->edit == '1')  {{'Checked'}} @else {{''}} @endif  />
+                                   <input type="checkbox"   class="c_create{{$menu->id}}"  onClick="Update_Create('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')" value="1"  />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox" name="[]delete" id="c_delete{{$modul->id}}" onClick="Update_Delete('{{$roles->id}}','{{$modul->id}}',this,'{{$modul->id_modul}}')" @if($modul->delete == '1')  {{'Checked'}} @else {{''}} @endif />
+                                   <input type="checkbox"   class="c_edit{{$menu->id}}"  onClick="Update_Edit('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')" value="1" />
                                    
                                    </td>
                                  
+                                   <td>
+
+                                   <input type="checkbox"   class="c_delete{{$menu->id}}" onClick="Update_Delete('{{$roles->id}}','{{$menu->id}}',this,'{{$menu->id}}')" value="1"  />
+                                   
+                                   </td>
+
                                   
+                                 
+                                 
                                    
                                    
-                                    <td class="text-right">
-                                        <div class="dropdown dropdown-action">
-
-                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                          
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" data-toggle="modal" data-target="#edit_users{{$roles->id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item" href="{{url('all/employee/delete/'.$roles->id)}}"onclick="return confirm('Are you sure to want to delete it?')"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
+                                   
                                 </tr>
+
+                               
                                 @endforeach
                             </tbody>
                         </table>
@@ -462,21 +409,39 @@
                                
                             
                      </div>
-<!--                           
-                               <div class="submit-section">
-                                <button class="btn btn-primary submit-btn"  >Simpan</button>
-                              </div> -->
-                        </form>
+                          
+                             
+                        
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /Add Modul Modal -->
+        <!-- Edit Modul Modal -->
 
         @endforeach
-    </div>
-    <!-- /Page Wrapper -->
+
+
+
+
+
+
+     
+
+      
+
+
+
+</div>
+
+
+
+
+
+
+<!-- /Page Wrapper -->
+
     @section('script')
+
     <script>
         $("input:checkbox").on('click', function()
         {
@@ -512,18 +477,7 @@
         // var form=$(this)
         // e.preventDefault(); // avoid to execute the actual submit of the form.
 
-        
-            // var $box = $(this);
-            // if ($box.is(":checked"))
-            // {
-            //     var group = "input:checkbox[class='" + $box.attr("class") + "']";
-            //     $(group).prop("checked", false);
-            //     $box.prop("checked", true);
-            // }
-            // else
-            // {
-            //     $box.prop("checked", false);
-            // }
+       
 
             
             // const input_modulaccess = new FormData();
@@ -987,18 +941,24 @@
                       
                     },
 
-                    dataType: "text",
+                    dataType: "json",
                     success: function (response) {
 
                         console.log("after saving:",response);
 
-                        if(response!=''){
+                    if(response.status==200){
 
-                            toastr.success('Update view modules checked successfully :)');
-                            $('#edit_modulakses'+roleid).modal('hide');
-                        }
+                    toastr.success('Update View modules successfully :)');
+                    $('#add_modulakses'+roleid).modal('hide');
+                    }
 
-                    
+                    if(response.status==403){
+
+                    toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                    $('#add_modulakses'+roleid).modal('hide');
+
+                    }
+                                        
 
 
 
@@ -1036,16 +996,23 @@
                 
                 },
 
-                dataType: "text",
+                dataType: "json",
                 success: function (response) {
 
                     console.log("after saving:",response);
 
-                    if(response!=''){
+                    if(response.status==200){
 
-                        toastr.success('Update view modules unchecked successfully :)');
-                        $('#edit_modulakses'+roleid).modal('hide');
-                    }
+                toastr.success('Update Create modules successfully :)');
+                $('#add_modulakses'+roleid).modal('hide');
+                }
+
+                if(response.status==403){
+
+                toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                $('#add_modulakses'+roleid).modal('hide');
+
+                }
 
 
 
@@ -1104,17 +1071,23 @@
                         
                         },
 
-                        dataType: "text",
+                        dataType: "json",
                         success: function (response) {
 
                             console.log("after saving:",response);
 
-                            if(response!=''){
+                            if(response.status==200){
 
-                                toastr.success('Update create modules checked successfully :)');
-                                $('#edit_modulakses'+roleid).modal('hide');
+                            toastr.success('Update Create modules successfully :)');
+                            $('#add_modulakses'+roleid).modal('hide');
                             }
 
+                            if(response.status==403){
+
+                            toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                            $('#add_modulakses'+roleid).modal('hide');
+
+                            }
                         
 
 
@@ -1153,16 +1126,24 @@
                     
                     },
 
-                    dataType: "text",
+                    dataType: "json",
                     success: function (response) {
 
                         console.log("after saving:",response);
 
-                        if(response!=''){
+                        if(response.status==200){
 
-                            toastr.success('Update create modules unchecked successfully :)');
-                            $('#edit_modulakses'+roleid).modal('hide');
-                        }
+                            toastr.success('Update Create modules successfully :)');
+                            $('#add_modulakses'+roleid).modal('hide');
+                            }
+
+                            if(response.status==403){
+
+                            toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                            $('#add_modulakses'+roleid).modal('hide');
+
+                            }
+
 
 
 
@@ -1220,16 +1201,23 @@
                     
                     },
 
-                    dataType: "text",
+                    dataType: "json",
                     success: function (response) {
 
                         console.log("after saving:",response);
+                        if(response.status==200){
 
-                        if(response!=''){
+                            toastr.success('Update Edit modules successfully :)');
+                            $('#add_modulakses'+roleid).modal('hide');
+                            }
 
-                            toastr.success('Update edit modules checked successfully :)');
-                            $('#edit_modulakses'+roleid).modal('hide');
-                        }
+                            if(response.status==403){
+
+                            toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                            $('#add_modulakses'+roleid).modal('hide');
+
+                            }
+
 
                     
 
@@ -1274,11 +1262,19 @@
 
                     console.log("after saving:",response);
 
-                    if(response!=''){
+                    if(response.status==200){
 
-                        toastr.success('Update edit modules unchecked successfully :)');
-                        $('#edit_modulakses'+roleid).modal('hide');
-                    }
+                        toastr.success('Update Edit modules successfully :)');
+                        $('#add_modulakses'+roleid).modal('hide');
+                        }
+
+                        if(response.status==403){
+
+                        toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                        $('#add_modulakses'+roleid).modal('hide');
+
+                        }
+
 
 
 
@@ -1339,11 +1335,19 @@
 
                             console.log("after saving:",response);
 
-                            if(response!=''){
+                            if(response.status==200){
 
-                                toastr.success('Update delete modules checked successfully :)');
-                                $('#edit_modulakses'+roleid).modal('hide');
-                            }
+                                toastr.success('Update Delete modules successfully :)');
+                                $('#add_modulakses'+roleid).modal('hide');
+                                }
+
+                                if(response.status==403){
+
+                                toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                                $('#add_modulakses'+roleid).modal('hide');
+
+                                }
+
 
                         
 
@@ -1384,11 +1388,19 @@
 
                         console.log("after saving:",response);
 
-                        if(response!=''){
+                        if(response.status==200){
 
-                            toastr.success('Update edit modules unchecked successfully :)');
-                            $('#edit_modulakses'+roleid).modal('hide');
+                        toastr.success('Update Delete modules successfully :)');
+                        $('#add_modulakses'+roleid).modal('hide');
                         }
+
+                        if(response.status==403){
+
+                        toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                        $('#add_modulakses'+roleid).modal('hide');
+
+                        }
+
 
 
 
@@ -1420,8 +1432,6 @@
 
         function GetDataAccess_Modul(total_id,roleid){
 
-
-        
                 url_source =`listaksesbyrole`;
 
                 $.ajax({
@@ -1486,19 +1496,73 @@
 
             
 
-
-
-                
-
-
-            
-
-
-
-
-
         }
 
+
+
+        function GetDataEditAccess_Modul(total_id,roleid){
+
+                url_source =`listaksesbyrole`;
+
+                $.ajax({
+
+                type: 'GET' ,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url_source,
+                data:{
+
+                    "role_id":roleid
+
+
+                },
+
+
+                dataType: "json",
+                success: function (response) {
+
+                    //console.log("after clicked:",response.data);
+
+
+
+                    for(var i=0;i <= response.data.length; i++){
+
+                        var id_menu_array=response.data[i].id;
+                        var view_array=response.data[i].view;
+                        var create_array=response.data[i].create;
+                        var edit_array=response.data[i].edit;
+                        var delete_array=response.data[i].delete;
+                        
+
+
+                        $('.c_view'+id_menu_array+':input:checkbox').each(function() { this.checked = view_array; });
+                        $('.c_create'+id_menu_array+':input:checkbox').each(function() { this.checked = create_array; });
+                        $('.c_edit'+id_menu_array+':input:checkbox').each(function() { this.checked = edit_array; });
+                        $('.c_delete'+id_menu_array+':input:checkbox').each(function() { this.checked = delete_array; });
+
+
+                        console.log("c_view"+id_menu_array);
+                        console.log("c_create"+id_menu_array);
+                        console.log("c_edit"+id_menu_array);
+                        console.log("c_delete"+id_menu_array);
+
+                    
+
+                    }
+
+                }
+
+
+
+                });
+
+
+}
+
+
+
+     
 
 
 

@@ -10,7 +10,7 @@
 	<meta name="robots" content="noindex, nofollow">
 	<title>{{$title}}</title>
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/images/551906403.png') }}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/images/logo_dsda_putih.png') }}">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
 	<!-- Fontawesome CSS -->
@@ -61,7 +61,7 @@
 			<!-- Logo -->
 			<div class="header-left">
 				<a href="{{ route('home') }}" class="logo">
-					<img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" width="40" height="40" alt="">
+					<img src="{{ URL::to('/assets/images/logo_dsda_putih.png') }}" width="145" height="45" alt="">
 				</a>
 			</div>
 			<!-- /Logo -->

@@ -75,16 +75,65 @@
                       
                     </ul>
                 </li> -->
+
+                <!-- <li class="menu-title"> <span>Master Data</span> </li>
+                <li class="{{set_active(['all/employee/list','all/employee/list','all/employee/card','form/holidays/new','form/leaves/new',
+                    'form/leavesemployee/new','form/leavesettings/page','attendance/page',
+                    'attendance/employee/page','form/departments/page','form/designations/page',
+                    'form/timesheet/page','form/shiftscheduling/page','form/overtime/page'])}} submenu">
+                    <a href="#" class="{{ set_active(['all/employee/list','all/employee/card','form/holidays/new','form/leaves/new',
+                    'form/leavesemployee/new','form/leavesettings/page','attendance/page',
+                    'attendance/employee/page','form/departments/page','form/designations/page',
+                    'form/timesheet/page','form/shiftscheduling/page','form/overtime/page']) ? 'noti-dot' : '' }}">
+                        <i class="la la-user"></i> <span> Karyawan</span> <span class="menu-arrow"></span>
+                    </a>
+                    <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
+                        <li><a class="{{set_active(['all/employee/list','all/employee/card'])}}" href="{{ route('all/employee/card') }}">List Karyawan</a></li>
+                       
+                            <span class="badge badge-pill bg-primary float-right">1</span></a>
+                        </li>
+                       
+                    </ul>
+                </li> -->
              
 
                 <li class="menu-title">@if($modulmenu->categorymenu==1){{$modulmenu->namamenu}} @endif</li>
            
 
-                @if($modulmenu->categorymenu==2)
+               
     
-                    <li class="{{set_active([$modulmenu->link_menu]) ? 'noti-dot' : '' }}"><a href="{{url('/')}}{{$modulmenu->link_menu}}"><i class="{{$modulmenu->namaicons}}"></i><span>{{$modulmenu->namamenu}}</span></a></li>
-                
+                @if($modulmenu->categorymenu==2  )
+
+                  <li class="{{set_active([$modulmenu->link_menu])}} submenu">
+
+                    <a href="#" class="{{ set_active([$modulmenu->link_menu]) ? 'noti-dot' : '' }}">
+                        <i class="{{$modulmenu->namaicons}}"></i> <span>  {{$modulmenu->namamenu}} </span> <span class="menu-arrow"></span>
+                    </a>
+
+                   
+
+                    <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
+
+                    @foreach( $modulpermissionsubchildmenu as $subchildmenu)
+
+                 
+
+                        <li><a class="{{set_active(['all/employee/list','all/employee/card'])}}" href="{{ url('/') }}{{$subchildmenu->link_menu}}">   {{$subchildmenu->namamenu}}   </a></li>
+
+                       
+                            <!-- <span class="badge badge-pill bg-primary float-right">1</span></a> -->
+                        </li>
+
+                    @endforeach
+                       
+                    </ul>
+                   
+                    
+                </li> 
+
                 @endif
+                
+               
 
             </ul>
 

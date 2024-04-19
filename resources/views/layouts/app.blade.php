@@ -10,7 +10,7 @@
         <meta name="robots" content="noindex, nofollow">
         <title>{{$title}}</title>
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/images/logo_dsda.png') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/images/logo_dsda_putih.png') }}">
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
 		<!-- Fontawesome CSS -->

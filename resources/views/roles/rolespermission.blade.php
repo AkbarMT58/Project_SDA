@@ -253,24 +253,24 @@
 
                                    <td>
 
-                                   <input type="checkbox"    class="c_view{{$menu->id}}" onClick="Akses_View('{{$roles->id}}','{{$menu->id}}')"  value="1"  />
+                                   <input type="checkbox"    class="c_view{{$menu->id}}" onClick="Akses_View('{{$roles->id}}','{{$menu->id}}',this)"  value="1"  />
                                    
                                    </td>
                                  
                                    <td>
-                                   <input type="checkbox"   class="c_create{{$menu->id}}"  onClick="Akses_Create('{{$roles->id}}','{{$menu->id}}')" value="1"  />
-                                   
-                                   </td>
-                                 
-                                   <td>
-
-                                   <input type="checkbox"   class="c_edit{{$menu->id}}"  onClick="Akses_Edit('{{$roles->id}}','{{$menu->id}}')" value="1" />
+                                   <input type="checkbox"   class="c_create{{$menu->id}}"  onClick="Akses_Create('{{$roles->id}}','{{$menu->id}}',this)" value="1"  />
                                    
                                    </td>
                                  
                                    <td>
 
-                                   <input type="checkbox"   class="c_delete{{$menu->id}}" onClick="Akses_Delete('{{$roles->id}}','{{$menu->id}}')" value="1"  />
+                                   <input type="checkbox"   class="c_edit{{$menu->id}}"  onClick="Akses_Edit('{{$roles->id}}','{{$menu->id}}',this)" value="1" />
+                                   
+                                   </td>
+                                 
+                                   <td>
+
+                                   <input type="checkbox"   class="c_delete{{$menu->id}}" onClick="Akses_Delete('{{$roles->id}}','{{$menu->id}}', this)" value="1"  />
                                    
                                    </td>
 
@@ -587,175 +587,144 @@
         //add modul akses----------------------------------------------------------------------------------------------------------
 
 
-        function Akses_View(roleid,idmenu){
+        function Akses_View(roleid,idmenu,cb){
 
-        var chk_view=document.getElementsByClassName("c_view"+idmenu).value;
-
-
-        //kirim data add modul access
-
-            $.ajax({
-
-                type: 'POST' ,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: `modulaccess/save`,
-                data: 
-                {
-                    _token: "{{ csrf_token() }}",
-                    role_id                : roleid,
-                    module_permission      : idmenu,
-                    view                  : chk_view,
-                     create                : 0,
-                     edit                  : 0,
-                     delete                : 0
-                },
-               
-                dataType: "json",
-                success: function (response) {
-
-                    console.log("after saving:",response);
-                    console.log("after saving:",response.status);
-
-                    if(response.status==200){
-
-                          toastr.success('Create new add modules successfully :)');
-                          $('#add_modulakses'+roleid).modal('hide');
-                    }
-
-                    if(response.status==403){
-
-                       toastr.error('Failed Saving Data!Your Data Already Exist! :)');
-                        $('#add_modulakses'+roleid).modal('hide');
-
-                        }
-
-                  
-
-                //         var data = response.report;
-
-                //         $('#namakaryawan'+ no_urut).empty();
+      
+        cb.value = cb.checked ? 1 : 0;
 
 
-                // for (var i = 0; i < data.length; i++) {
+        console.log("cek view click:", cb.value );
 
+        if( cb.value=='1'){
 
-                // let select_option = '';
+             //kirim data add modul access
 
-                // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
+                        $.ajax({
 
+            type: 'POST' ,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: `modulaccess/save`,
+            data: 
+            {
+                _token: "{{ csrf_token() }}",
+                role_id                : roleid,
+                module_permission      : idmenu,
+                view                  :  cb.value,
+                create                : 0,
+                edit                  : 0,
+                delete                : 0
+            },
 
-                // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
+            dataType: "json",
+            success: function (response) {
 
+                console.log("after saving:",response);
+                console.log("after saving:",response.status);
 
-                // $("#namakaryawan"+no_urut).select2({
+                if(response.status==200){
 
-                // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
-
-                // });
-
-
-
-
-
-
-                // }
-
-
+                    toastr.success('Create new add modules successfully :)');
+                    $('#add_modulakses'+roleid).modal('hide');
                 }
 
-                });
+                if(response.status==403){
+
+                toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+                    $('#add_modulakses'+roleid).modal('hide');
+
+                    }
+
+            
 
 
-        console.log("id menu:", idmenu);
 
-        console.log("value:", chk_view);
+            }
+
+            });
+
+
+         
+
+
+        }else{
+
+            toastr.error('Failed Saving Data!You can not click unclicked! :)');
+                    $('#add_modulakses'+roleid).modal('hide');
 
 
         }
 
-        function Akses_Create(roleid,idmenu){
 
-        var chk_create=document.getElementsByClassName("c_create"+idmenu).value;
-
-          //kirim data add modul access
-
-                        $.ajax({
-
-                type: 'POST' ,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: `modulaccess/save`,
-                data: 
-                {
-                    _token: "{{ csrf_token() }}",
-                    role_id                : roleid,
-                    module_permission      : idmenu,
-                    create                : chk_create,
-                 
-                },
-
-                dataType: "json",
-                success: function (response) {
-
-                    console.log("after saving:",response);
-
-                    if(response.status==200){
-
-                        toastr.success('Create new add modules successfully :)');
-                        $('#add_modulakses'+roleid).modal('hide');
-                        }
-
-                        if(response.status==403){
-
-                        toastr.error('Failed Saving Data!Your Data Already Exist! :)');
-                        $('#add_modulakses'+roleid).modal('hide');
-
-                        }
-
-                
-
-                //         var data = response.report;
-
-                //         $('#namakaryawan'+ no_urut).empty();
+       
 
 
-                // for (var i = 0; i < data.length; i++) {
+        }
 
+        function Akses_Create(roleid,idmenu,cb){
 
-                // let select_option = '';
+        
 
-                // select_option += "<option value='" + data[i].ID + "'>" + data[i].name +"-"+data[i].Name_work+ "</option>";
+        cb.value = cb.checked ? 1 : 0;
 
+        if  (cb.value== '1'){
 
-                // $('#namakaryawan'+ no_urut).append(select_option).trigger('change');
+             //kirim data add modul access
 
+             $.ajax({
 
-                // $("#namakaryawan"+no_urut).select2({
+type: 'POST' ,
+headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+},
+url: `modulaccess/save`,
+data: 
+{
+    _token: "{{ csrf_token() }}",
+    role_id                : roleid,
+    module_permission      : idmenu,
+    create                : cb.value,
+ 
+},
 
-                // placeholder: "--Silahkan Pilih Nama Yang Dishare--"
+dataType: "json",
+success: function (response) {
 
-                // });
+    console.log("after saving:",response);
+
+    if(response.status==200){
+
+        toastr.success('Create new add modules successfully :)');
+        $('#add_modulakses'+roleid).modal('hide');
+        }
+
+        if(response.status==403){
+
+        toastr.error('Failed Saving Data!Your Data Already Exist! :)');
+        $('#add_modulakses'+roleid).modal('hide');
+
+        }
 
 
 
 
 
 
-                // }
+}
 
-
-                }
-
-                });
+});
 
 
 
-        console.log("id create:", idmenu);
 
-        console.log("value:", chk_create);
+
+        }else{
+
+
+        }
+
+         
 
 
         }

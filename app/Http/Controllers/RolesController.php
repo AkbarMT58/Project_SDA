@@ -44,23 +44,23 @@ class RolesController extends Controller
        
        ->get();
 
-       $modulpermissionsubchildmenu = DB::table('menus as a')
+       $data_subchidcategorymenu = DB::table('menus as a')
 
-       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
 
        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
        
        ->where("b.role_id", $role_id)
 
-       ->where("a.categorymenu", 3 )
-
        ->orderBy("a.sub_categorymenu",'ASC')
        
        ->get();
 
+
+
        $permission_lists = DB::table('permission_lists')->get();
 
-        return view('roles.rolespermission',compact('rolesPermissions','permission_lists','title','menus','modul_permission','modulpermissionsubchildmenu'));
+        return view('roles.rolespermission',compact('rolesPermissions','permission_lists','title','menus','modul_permission','data_subchidcategorymenu'));
     }
 
     // add role permissions

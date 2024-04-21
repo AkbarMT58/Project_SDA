@@ -627,6 +627,7 @@
 
                     toastr.success('Create new add modules successfully :)');
                     $('#add_modulakses'+roleid).modal('hide');
+                    location.reload();
                 }
 
                 if(response.status==403){
@@ -635,6 +636,7 @@
                     $('#add_modulakses'+roleid).modal('hide');
 
                     }
+                    location.reload();
 
             
 

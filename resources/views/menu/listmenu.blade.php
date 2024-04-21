@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('content')
 
+
+
     
     <!-- Page Wrapper -->
     <div class="page-wrapper">
@@ -66,10 +68,11 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nama Menu</th>
-                                    <th>Kategori Menu</th>
-                                    <th>Sub Kategori Menu</th>
+                                    <th>Kat. Menu</th>
+                                    <th>Sub Kat. Menu</th>
+                                    <th>Child Kat. Menu</th>
                                     <th>Link Menu</th>
-                                    <th>Index No</th> 
+                                    <!-- <th>Index No</th>  -->
                                     <th>Nama Class Icon</th>
                                     <th class="text-right no-sort">Action</th>
                                 </tr>
@@ -84,8 +87,9 @@
                                     <td>{{ $menu->namamenu }}</td>
                                     <td>{{ $menu->categorymenu }}</td>
                                     <td>{{ $menu->sub_categorymenu }}</td>
+                                    <td>{{ $menu->sub_childcategorymenu }}</td>
                                     <td>{{ $menu->link_menu }}</td>
-                                    <td>{{ $menu->index_no }}</td>
+                                    <!-- <td>{{ $menu->index_no }}</td> -->
                                     <td>{{ $menu->namaicons }}</td>
                                   
                        
@@ -157,6 +161,14 @@
                                         <input class="form-control" type="number" name="subcategorymenu" >
                                        
                                 </div>
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Sub Child Category Menu</label>
+                                        <input class="form-control" type="number" name="subchildcategorymenu" >
+                                       
+                                </div>
+
+                                
                                
                                    
                                 </div>
@@ -257,6 +269,13 @@
                                         <input class="form-control" type="number" name="subcategorymenu" value="{{$menu->sub_categorymenu}}" >
                                     
                                 </div>
+
+                                <div class="form-group">
+                                        <label class="col-form-label">Sub Child Category Menu</label>
+                                        <input class="form-control" type="number" name="subchildcategorymenu" value="{{$menu->sub_childcategorymenu}}" >
+                                       
+                                </div>
+
 
                                 
                                 </div>

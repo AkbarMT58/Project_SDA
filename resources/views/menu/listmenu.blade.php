@@ -86,7 +86,7 @@
     
                                     <td>{{ $menu->namamenu }}</td>
                                     <td>{{ $menu->categorymenu }}</td>
-                                    <td>{{ $menu->sub_categorymenu }}</td>
+                                    <td> {{ $menu->Nama_menus->namamenu ?? 'none' }}</td>
                                     <td>{{ $menu->sub_childcategorymenu }}</td>
                                     <td>{{ $menu->link_menu }}</td>
                                     <!-- <td>{{ $menu->index_no }}</td> -->

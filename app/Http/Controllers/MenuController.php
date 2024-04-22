@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Brian2694\Toastr\Facades\Toastr;
-use App\Models\Employee;
-use App\Models\department;
+
 use App\Models\User;
 use App\Models\module_permission;
 use App\Models\Menu;
@@ -18,7 +17,8 @@ class MenuController extends Controller
     // all menu list
     public function listAllMenu()
     {
-        $menus = DB::table('menus')->get();
+        $menus = Menu::with('Nama_menus')->get();
+
         $title="Setting Menu SDA CMS";
         $role_id=Auth::user()->role_name;
 

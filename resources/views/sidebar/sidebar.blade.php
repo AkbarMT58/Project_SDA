@@ -18,32 +18,23 @@
                         <i class="{{$modulmenu->namaicons}}"></i> <span style="font-size:12px;">  {{$modulmenu->namamenu}} </span> <span class="menu-arrow"></span>
                     </a>
 
-                   
-
                     <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
 
                       
                     @foreach($data_subchidcategorymenu as $subchild)
 
-                  
-                
-
                     @if( $subchild->sub_childcategorymenu == $modulmenu->id && $subchild->categorymenu ==3  )
                  
 
                         <li><a class="{{set_active([$subchild->link_menu])}}" style="font-size:12px;" href="{{ url('/') }}{{$subchild->link_menu}}">{{$subchild->namamenu}} </a></li>
-
-                       
-                           
+   
                         </li>
 
                     @endif
 
                     @endforeach
 
-                        
-
-                  
+                    
                        
                     </ul>
                    

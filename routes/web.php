@@ -78,7 +78,10 @@ Auth::routes();
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'index')->name('home');
     Route::get('em/dashboard', 'emDashboard')->name('em/dashboard');
+    Route::get('/dashboard/satgas/page', 'satgasDashboard')->middleware('auth')->name('dashboard/satgas/page');
 });
+
+
 
 // -----------------------------settings----------------------------------------//
 Route::controller(RolesController::class)->group(function () {

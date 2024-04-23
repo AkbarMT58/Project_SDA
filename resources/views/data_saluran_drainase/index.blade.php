@@ -20,7 +20,7 @@
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Saluran Primer</a>
+                        <!-- <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Saluran Primer</a> -->
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                             <a href="{{ route('all/employee/list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
@@ -33,6 +33,63 @@
             <!-- Search Filter -->
             <form action="{{ route('all/employee/list/search') }}" method="POST">
                 @csrf
+
+                <div class="row filter-row">
+                    <div class="col-sm-6 col-md-3">  
+                        <div class="form-group form-focus">
+                            <input type="text" class="form-control floating" name="employee_id">
+                            <label class="focus-label">Pencarian berdasar nama saluran</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">  
+                        <button type="sumit" class="btn btn-info btn-block">Cari </button>  
+                    </div>
+                    <div class="col-sm-6 col-md-3">  
+
+                   
+                    </div>
+
+                    <div class="col-sm-6 col-md-3 mb-4">  
+
+                    <img src="{{ URL::to('/assets/images/warning.png') }}" width="280" height="100" alt="">
+
+                     </div>
+
+                  
+
+
+                
+
+                 </div>
+
+                 <div class="row filter-row">
+                    <div class="col-sm-6 col-md-3">  
+                        <div class="form-group form-focus">
+                            <select class="form-control floating" name="kondisi_saluran">
+                           </select>
+                            <label class="focus-label">Kondisi saluran</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">  
+                        <div class="form-group form-focus">
+                        <select class="form-control floating" name="jenis_konstruksi">
+                           </select>
+                            <label class="focus-label">Jenis kontruksi</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">  
+                        <div class="form-group form-focus">
+                        <select class="form-control floating" name="kewenangan">
+                           </select>
+                            <label class="focus-label">Kewenangan</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">  
+                        <button type="sumit" class="btn btn-info btn-block">Filter</button>  
+                    </div>
+
+                 </div>
 
                 
 
@@ -72,7 +129,7 @@
                     <div class="card" style="width: 13rem;">
                   
                   <div class="card-body">
-                      <h6 >Kedalaman Maksimal</h6>
+                      <h6 >Lebar Minimal</h6>
                       <h3 class="card-title">10 m</h3>
                     
                   </div>
@@ -85,7 +142,7 @@
                     <div class="card" style="width: 13rem;">
                   
                   <div class="card-body">
-                      <h6 >Panjang</h6>
+                      <h6 >Kedalaman Maksimal</h6>
                       <h3 class="card-title">10 m</h3>
                     
                   </div>
@@ -98,7 +155,7 @@
                     <div class="card" style="width: 13rem;">
                   
                   <div class="card-body" style="text-align:center;">
-                      <h6  >Panjang</h6>
+                      <h6  >Kedalaman Minimal</h6>
                       <h3  class="card-title">10 m</h3>
                     
                   </div>
@@ -125,12 +182,13 @@
                         <table class="table table-striped custom-table datatable">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Nama Saluran</th>
                                     <th>Kewenangan</th>
                                     <th>Panjang</th>
                                     <th>Lebar</th>
-                                    <th>Kedalaman</th>
+                                    <th>K.Maksimal</th>
+                                    <th>K.Minimal</th>
                                    
                                     <th></th>
                                     <th>Kondisi</th>
@@ -150,6 +208,7 @@
                                     <td>{{ $menu->Nama_menus_childsubcategory->namamenu ?? 'none' }}</td>
                                     <td>{{ $menu->link_menu }}</td>
                                     <td>{{ $menu->index_no }}</td>
+                                    <td>{{ $menu->namaicons }}</td>
                                     <td>{{ $menu->namaicons }}</td>
                                   
                        

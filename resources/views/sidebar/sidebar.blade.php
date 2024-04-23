@@ -8,7 +8,8 @@
             <ul>
           
 
-                <li class="menu-title">@if($modulmenu->categorymenu==1){{$modulmenu->namamenu}} @endif</li>
+
+                <!-- <li class="menu-title">@if($modulmenu->categorymenu==1){{$modulmenu->namamenu}} @endif</li> -->
            
                 @if($modulmenu->categorymenu==2 )
 

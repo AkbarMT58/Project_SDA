@@ -17,6 +17,16 @@ class Menu extends Model
 
     }
 
+    public function Nama_menus_childsubcategory()
+    {
+       
+    
+        return $this->belongsTo(Menu::class, 'sub_childcategorymenu','id');
+
+
+    }
+
+
 
     
 

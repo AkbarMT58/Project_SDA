@@ -8700,3 +8700,16 @@ body{
     width: 250px;
   }
 }
+
+
+.card-body {
+
+	text-align:center;
+	
+
+}
+
+.card{
+
+	margin-top:25px;
+}

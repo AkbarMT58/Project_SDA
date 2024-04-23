@@ -10,16 +10,17 @@
         <div class="content container-fluid">
             <!-- Page Header -->
             <div class="page-header">
+               
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Menu</h3>
+                        <h3 class="page-title">Saluran Primer</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Menu</li>
+                            <li class="breadcrumb-item active">Saluran Primer</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Menu</a>
+                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Saluran Primer</a>
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                             <a href="{{ route('all/employee/list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
@@ -32,29 +33,87 @@
             <!-- Search Filter -->
             <form action="{{ route('all/employee/list/search') }}" method="POST">
                 @csrf
-                <div class="row filter-row">
-                    <div class="col-sm-6 col-md-3">  
-                        <div class="form-group form-focus">
-                            <input type="text" class="form-control floating" name="employee_id">
-                            <label class="focus-label">Parent</label>
-                        </div>
+
+                
+
+              
+                <div class="row filter-row" style="margin-left:100px;">
+                    <div class="col-md-2">  
+
+                    <div class="card" style="width: 13rem;float:center;background-color:#33B0E0;">
+                    <div class="card" style="width: 13rem;float:center;">
+                  
+                    <div class="card-body">
+                        
+                        <h6 >Panjang</h6>
+                        <h3 class="card-title">10 m</h3>
+                       
+                      
+                    </div> 
+
+            
                     </div>
-                    <div class="col-sm-6 col-md-3">  
-                        <div class="form-group form-focus">
-                            <input type="text" class="form-control floating">
-                            <label class="focus-label">Child</label>
-                        </div>
                     </div>
-                    <div class="col-sm-6 col-md-3"> 
-                        <div class="form-group form-focus">
-                            <input type="text" class="form-control floating">
-                            <label class="focus-label">Sub Child</label>
-                        </div>
+                     </div>
+                    <div class="col-md-2">  
+                    <div class="card" style="width: 13rem;float:center;background-color:#33B0E0;">
+                    <div class="card" style="width: 13rem;">
+                  
+                  <div class="card-body">
+                      <h6 >Lebar Maksimal</h6>
+                      <h3 class="card-title">10 m</h3>
+                    
+                  </div>
+                  </div>
+                  </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">  
-                        <button type="sumit" class="btn btn-success btn-block"> Search </button>  
+                    <div class="col-md-2"> 
+                    <div class="card" style="width: 13rem;float:center;background-color:#33B0E0;">
+                    <div class="card" style="width: 13rem;">
+                  
+                  <div class="card-body">
+                      <h6 >Kedalaman Maksimal</h6>
+                      <h3 class="card-title">10 m</h3>
+                    
+                  </div>
+                  </div>
+                 </div> 
                     </div>
+
+                    <div class="col-md-2"> 
+                    <div class="card" style="width: 13rem;float:center;background-color:#33B0E0;">
+                    <div class="card" style="width: 13rem;">
+                  
+                  <div class="card-body">
+                      <h6 >Panjang</h6>
+                      <h3 class="card-title">10 m</h3>
+                    
+                  </div>
+                  </div>
+                   </div>
+                    </div>
+                 
+                    <div class="col-md-2" > 
+                    <div class="card" style="width: 13rem;float:center;background-color:#33B0E0;">
+                    <div class="card" style="width: 13rem;">
+                  
+                  <div class="card-body" style="text-align:center;">
+                      <h6  >Panjang</h6>
+                      <h3  class="card-title">10 m</h3>
+                    
+                  </div>
+                  </div>
+                    </div>
+                  </div>
+
+
+                 
+                 
+                 
                 </div>
+
+        
+
             </form>
             <!-- Search Filter -->
             {{-- message --}}
@@ -67,13 +126,14 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nama Menu</th>
-                                    <th>Kategori Menu</th>
-                                    <th>Parent Cat. Menu</th>
-                                    <th>Child Cat. Menu</th>
-                                    <th>Link Menu</th>
-                                    <!-- <th>Index No</th>  -->
-                                    <th>Nama Class Icon</th>
+                                    <th>Nama Saluran</th>
+                                    <th>Kewenangan</th>
+                                    <th>Panjang</th>
+                                    <th>Lebar</th>
+                                    <th>Kedalaman</th>
+                                   
+                                    <th></th>
+                                    <th>Kondisi</th>
                                     <th class="text-right no-sort">Action</th>
                                 </tr>
                             </thead>
@@ -89,7 +149,7 @@
                                     <td> {{ $menu->Nama_menus->namamenu ?? 'none' }}</td>
                                     <td>{{ $menu->Nama_menus_childsubcategory->namamenu ?? 'none' }}</td>
                                     <td>{{ $menu->link_menu }}</td>
-                                    <!-- <td>{{ $menu->index_no }}</td> -->
+                                    <td>{{ $menu->index_no }}</td>
                                     <td>{{ $menu->namaicons }}</td>
                                   
                        

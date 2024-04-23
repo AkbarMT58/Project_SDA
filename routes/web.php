@@ -25,6 +25,7 @@ use App\Http\Controllers\PersonalInformationController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SaluranPrimerController;
 
 
 /*
@@ -356,6 +357,13 @@ Route::controller(SalesController::class)->group(function () {
     Route::post('expenses/search', 'searchRecord')->middleware('auth')->name('expenses/search');
     
 });
+
+// ----------------------------- main dashboard ------------------------------//
+Route::controller(SaluranPrimerController::class)->group(function () {
+    Route::get('saluranprimer', 'index')->name('saluranprimer');
+    
+});
+
 
 // ----------------------------- training type  ------------------------------//
 Route::controller(PersonalInformationController::class)->group(function () {

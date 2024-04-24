@@ -10,7 +10,7 @@ use App\Models\department;
 use App\Models\User;
 use App\Models\module_permission;
 
-class KonstruksiController extends Controller
+class MasterKonstruksiController extends Controller
 {
     // all saluran
     public function AllKonstruksi(Request $request)

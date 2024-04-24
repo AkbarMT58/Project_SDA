@@ -10,7 +10,7 @@ use App\Models\department;
 use App\Models\User;
 use App\Models\module_permission;
 
-class SaluranController extends Controller
+class MasterSaluranController extends Controller
 {
     // all saluran
     public function AllSaluran(Request $request)
@@ -22,7 +22,6 @@ class SaluranController extends Controller
     }
     // all saluran
    
-
     // save data saluran
     public function saveSaluran(Request $request)
     {
@@ -51,7 +50,7 @@ class SaluranController extends Controller
         }
     }
    
-    // update record saluran
+    // update saluran 
     public function updateSaluran( Request $request)
     {
         DB::beginTransaction();

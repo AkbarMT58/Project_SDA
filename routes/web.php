@@ -27,6 +27,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SaluranPrimerController;
 
+use App\Http\Controllers\MasterSaluranController;
+use App\Http\Controllers\MasterKonstruksiController;
+use App\Http\Controllers\MasterKewenanganController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -358,11 +362,30 @@ Route::controller(SalesController::class)->group(function () {
     
 });
 
-// ----------------------------- main dashboard ------------------------------//
+// ----------------------------- Data Saluran Air ------------------------------//
 Route::controller(SaluranPrimerController::class)->group(function () {
     Route::get('saluranprimer', 'index')->name('saluranprimer');
     
 });
+
+// ----------------------------- Master Data ------------------------------//
+
+
+// Route::controller(MasterSaluranController::class)->group(function () {
+  
+//     Route::get('saluran', 'AllSaluran')->name('saluran');
+  
+// });
+
+// Route::controller(MasterKonstruksiController::class)->group(function () {
+//     Route::get('konstruksi', 'index')->name('konstruksi');
+    
+// });
+// Route::controller(MasterKewenanganController::class)->group(function () {
+//     Route::get('kewenangan', 'index')->name('kewenangan');
+    
+// });
+
 
 
 // ----------------------------- training type  ------------------------------//

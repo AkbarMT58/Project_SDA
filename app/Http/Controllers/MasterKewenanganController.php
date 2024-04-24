@@ -10,7 +10,7 @@ use App\Models\department;
 use App\Models\User;
 use App\Models\module_permission;
 
-class KewenanganController extends Controller
+class MasterKewenanganController extends Controller
 {
     // all saluran
     public function AllKewenangan(Request $request)
@@ -18,6 +18,7 @@ class KewenanganController extends Controller
         $salurans = DB::table('kewenangan')->get(); 
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
+        
         return view('masterdata.kewenangan',compact('salurans','userList','permission_lists'));
     }
    

@@ -5,166 +5,99 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Brian2694\Toastr\Facades\Toastr;
-
+use App\Models\Employee;
+use App\Models\department;
 use App\Models\User;
 use App\Models\module_permission;
-use App\Models\Menu;
-use Auth;
 
-class SaluranPrimerController extends Controller
+class SaluranController extends Controller
 {
-  
-    // all menu list
-    public function index()
+    // all saluran
+    public function AllSaluran(Request $request)
     {
-        $menus = Menu::with('Nama_menus')->get();
-
-        $title="Data Saluran Drainase Menu";
-        $role_id=Auth::user()->role_name;
-
-        $modul_permission = DB::table('menus as a')
-
-       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
-
-       ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
-       
-       ->where("b.role_id", $role_id)
-
-       ->orderBy("a.sub_categorymenu",'ASC')
-       
-       ->get();
-
-       $data_subchidcategorymenu = DB::table('menus as a')
-
-       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
-
-       ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
-       
-       ->where("b.role_id", $role_id)
-
-       ->orderBy("a.sub_categorymenu",'ASC')
-       
-       ->get();
-
-
-         $userList = DB::table('users')->get();
-         $permission_lists = DB::table('permission_lists')->get();
-         
-        return view('data_saluran_drainase.index',compact('menus','userList','permission_lists','title','modul_permission','data_subchidcategorymenu'));
+        $salurans = DB::table('salurans')->get(); 
+        $userList = DB::table('users')->get();
+        $permission_lists = DB::table('permission_lists')->get();
+        return view('masterdata.saluran',compact('salurans','userList','permission_lists'));
     }
+    // all saluran
+   
 
-    // save data menu
-    public function addSaluranPrimer(Request $request)
+    // save data saluran
+    public function saveSaluran(Request $request)
     {
         $request->validate([
-
-            'namamenu'              => '',
-            'namaicons'             => '',
-            'categorymenu'          => '',
-            'subcategorymenu'       => '',
-            'sub_childcategorymenu' =>'',
-            'indexno'               => '',
-            'linkmenu'              => '',
-            
+            'name'        => 'required|string|max:255',
+          
         ]);
 
         DB::beginTransaction();
         try{
 
-                $menus = new Menu;
-                $menus->    namamenu        = $request->namamenu;
-                $menus->    namaicons       = $request->namaclassicon;
-                $menus->    categorymenu    = $request->namacategory;
-                $menus->    sub_categorymenu    = $request->subcategorymenu;
-                $menus->    sub_childcategorymenu    = $request->subchildcategorymenu;
-                $menus->    index_no        = $request->indexno;
-                $menus->    link_menu       = $request->linkmenu;
-                $menus->save();
+        
+                $salurans = new Saluran;
+                $salurans->namamenu  = $request->namamenu;
+                $salurans->save();
     
-                
+        
                 DB::commit();
-                Toastr::success('Penambahan data menu berhasil :)','Success');
-                return redirect()->route('menus/page');
-           
+                Toastr::success('Add new saluran successfully :)','Success');
+                return redirect()->route('all/saluran');
+          
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('Penambahan data menu gagal :)','Error');
+            Toastr::error('Add new saluran fail :)','Error');
             return redirect()->back();
         }
     }
-    // view edit record
-    public function editSaluranPrimer($id_menu)
-    {
-        $menus = DB::table('menus')
-            ->where('menus.id','=',$id_menu)
-            ->get();
-       
-        return view('menu.edit',compact('menus'));
-    }
-    // update record employee
-    public function updatedSaluranPrimer( Request $request)
+   
+    // update record saluran
+    public function updateSaluran( Request $request)
     {
         DB::beginTransaction();
-        $request->validate([
-
-            'namamenu'              => '',
-            'namaicons'             => '',
-            'categorymenu'          => '',
-            'indexno'               => '',
-            'linkmenu'              => '',
-            
-        ]);
-
-      
         try{
-
-              
-                $menus = [
-                    'namamenu'            => $request->namamenu,
-                    'namaicons'           => $request->namaclassicon,
-                    'categorymenu'        => $request->namacategory,
-                    'sub_categorymenu'    => $request->subcategorymenu,
-                    'sub_childcategorymenu'=>$request->subchildcategorymenu,
-                    'index_no'            => $request->indexno,
-                    'link_menu'           => $request->linkmenu,
-                   
-                ];
+            // update table Saluran
+            $updateSaluran = [
+               
+                'namasaluran'=>$request->namasaluran
+               
+            ];
+       
 
 
-                
-              
-            Menu::where('id',$request->id)->update($menus);
-            
+            Saluran::where('id',$request->id)->update($updateSaluran);
+          
         
             DB::commit();
-            Toastr::success('updated menus successfully :)','Success');
-            return redirect()->route('menus/page');
+            Toastr::success('updated saluran successfully :)','Success');
+            return redirect()->route('all/saluran');
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('updated menus fail :)','Error');
+            Toastr::error('updated saluran fail :)','Error');
             return redirect()->back();
         }
     }
     // delete record
-    public function deletedSaluranPrimer(Request $request)
+    public function deleteSaluran($saluran_id)
     {
         DB::beginTransaction();
         try{
 
-            Menu::where('id',$request->id)->delete();
-          
+            Saluran::where('d',$saluran_id)->delete();
+           
+
             DB::commit();
-            Toastr::success('Delete menu sukses :)','Success');
-            return redirect()->back();
+            Toastr::success('Delete record successfully :)','Success');
+            return redirect()->route('all/saluran');
 
         }catch(\Exception $e){
             DB::rollback();
-            Toastr::error('Delete menu gagal :)','Error');
+            Toastr::error('Delete record fail :)','Error');
             return redirect()->back();
         }
     }
-    // menu search
-    public function employeeSearch(Request $request)
+    // saluran search
+    public function SaluranSearch(Request $request)
     {
         $users = DB::table('users')
                     ->join('employees', 'users.user_id', '=', 'employees.employee_id')
@@ -325,6 +258,63 @@ class SaluranPrimerController extends Controller
         return view('form.employeelist',compact('users','userList','permission_lists'));
     }
 
-   
+    // employee profile with all controller user
+    public function profileEmployee($user_id)
+    {
+        $users = DB::table('users')
+                ->leftJoin('personal_information','personal_information.user_id','users.user_id')
+                ->leftJoin('profile_information','profile_information.user_id','users.user_id')
+                ->where('users.user_id',$user_id)
+                ->first();
+        $user = DB::table('users')
+                ->leftJoin('personal_information','personal_information.user_id','users.user_id')
+                ->leftJoin('profile_information','profile_information.user_id','users.user_id')
+                ->where('users.user_id',$user_id)
+                ->get(); 
+        return view('form.employeeprofile',compact('user','users'));
+    }
+
+    /** page departments */
+    public function index()
+    {
+        $departments = DB::table('departments')->get();
+        return view('form.departments',compact('departments'));
+    }
+
+    /** save record department */
+    public function saveRecordDepartment(Request $request)
+    {
+        $request->validate([
+            'department'        => 'required|string|max:255',
+        ]);
+
+        DB::beginTransaction();
+        try{
+
+            $department = department::where('department',$request->department)->first();
+            if ($department === null)
+            {
+                $department = new department;
+                $department->department = $request->department;
+                $department->save();
+    
+                DB::commit();
+                Toastr::success('Add new department successfully :)','Success');
+                return redirect()->route('form/departments/page');
+            } else {
+                DB::rollback();
+                Toastr::error('Add new department exits :)','Error');
+                return redirect()->back();
+            }
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Add new department fail :)','Error');
+            return redirect()->back();
+        }
+    }
+
+
+
+
 
 }

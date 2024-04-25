@@ -71,6 +71,7 @@
                                     <th>Kategori Menu</th>
                                     <th>Parent Cat. Menu</th>
                                     <th>Child Cat. Menu</th>
+                                    <th>Sub Child Cat. Menu</th>
                                     <th>Link Menu</th>
                                     <!-- <th>Index No</th>  -->
                                     <th>Nama Class Icon</th>
@@ -87,6 +88,7 @@
                                     <td>{{ $menu->namamenu }}</td>
                                     <td>{{ $menu->categorymenu }}</td>
                                     <td> {{ $menu->Nama_menus->namamenu ?? 'none' }}</td>
+                                    <td> {{ $menu->sub_categorymenu}}</td>
                                     <td>{{ $menu->Nama_menus_childsubcategory->namamenu ?? 'none' }}</td>
                                     <td>{{ $menu->link_menu }}</td>
                                     <!-- <td>{{ $menu->index_no }}</td> -->

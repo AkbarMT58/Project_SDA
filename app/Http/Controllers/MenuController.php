@@ -34,7 +34,7 @@ class MenuController extends Controller
        
        ->get();
 
-       $data_subchidcategorymenu = DB::table('menus as a')
+       $data_subchildcategorymenu = DB::table('menus as a')
 
        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
 
@@ -52,7 +52,7 @@ class MenuController extends Controller
          $userList = DB::table('users')->get();
          $permission_lists = DB::table('permission_lists')->get();
          
-        return view('menu.listmenu',compact('menus','userList','permission_lists','title','modul_permission','data_subchidcategorymenu'));
+        return view('menu.listmenu',compact('menus','userList','permission_lists','title','modul_permission','data_subchildcategorymenu'));
     }
 
     // save data menu

@@ -9,6 +9,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Models\User;
 use App\Models\module_permission;
 use App\Models\Menu;
+use App\Models\Saluran;
 use Auth;
 
 class SaluranPrimerController extends Controller
@@ -18,6 +19,8 @@ class SaluranPrimerController extends Controller
     public function index()
     {
         $menus = Menu::with('Nama_menus')->get();
+        $saluran = Saluran::all();
+
 
         $title="Data Saluran Drainase Menu";
         $role_id=Auth::user()->role_name;
@@ -50,7 +53,7 @@ class SaluranPrimerController extends Controller
          $userList = DB::table('users')->get();
          $permission_lists = DB::table('permission_lists')->get();
          
-        return view('data_saluran_drainase.index',compact('menus','userList','permission_lists','title','modul_permission','data_subchidcategorymenu'));
+        return view('data_saluran_drainase.index',compact('menus','userList','permission_lists','title','modul_permission','data_subchidcategorymenu','saluran'));
     }
 
     // save data menu

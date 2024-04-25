@@ -365,17 +365,20 @@ Route::controller(SalesController::class)->group(function () {
 // ----------------------------- Data Saluran Air ------------------------------//
 Route::controller(SaluranPrimerController::class)->group(function () {
     Route::get('saluranprimer', 'index')->name('saluranprimer');
+   
     
 });
 
 // ----------------------------- Master Data ------------------------------//
 
 
-// Route::controller(MasterSaluranController::class)->group(function () {
+Route::controller(MasterSaluranController::class)->group(function () {
   
-//     Route::get('saluran', 'AllSaluran')->name('saluran');
+    Route::get('saluran', 'AllSaluran')->name('saluran');
+    Route::post('saluran/save', 'saveSaluran')->middleware('auth')->name('saluran/save');
+    Route::post('saluran/update', 'updateSaluran')->middleware('auth')->name('saluran/update');
   
-// });
+});
 
 // Route::controller(MasterKonstruksiController::class)->group(function () {
 //     Route::get('konstruksi', 'index')->name('konstruksi');

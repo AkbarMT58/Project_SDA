@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Brian2694\Toastr\Facades\Toastr;
-use App\Models\Employee;
-use App\Models\department;
-use App\Models\User;
-use App\Models\module_permission;
+use App\Models\Saluran;
+
+
+use Auth;
 
 class MasterSaluranController extends Controller
 {
@@ -18,30 +18,50 @@ class MasterSaluranController extends Controller
         $salurans = DB::table('salurans')->get(); 
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
-        return view('masterdata.saluran',compact('salurans','userList','permission_lists'));
+        $role_id=Auth::user()->role_name;
+        $modul_permission = DB::table('menus as a')
+
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+ 
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+        
+        ->where("b.role_id", $role_id)
+ 
+        ->orderBy("a.sub_categorymenu",'ASC')
+        
+        ->get();
+
+        $data_subchidcategorymenu = DB::table('menus as a')
+
+       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+
+       ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+       
+       ->where("b.role_id", $role_id)
+
+       ->orderBy("a.sub_categorymenu",'ASC')
+       
+       ->get();
+
+        $title="Master Data Saluran SDA";
+        return view('masterdata.saluran',compact('salurans','userList','permission_lists','title','modul_permission','data_subchidcategorymenu'));
     }
     // all saluran
    
     // save data saluran
     public function saveSaluran(Request $request)
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-          
-        ]);
+    
 
         DB::beginTransaction();
         try{
-
-        
                 $salurans = new Saluran;
-                $salurans->namamenu  = $request->namamenu;
+                $salurans->namasaluran  = $request->namasaluran;
                 $salurans->save();
     
-        
                 DB::commit();
                 Toastr::success('Add new saluran successfully :)','Success');
-                return redirect()->route('all/saluran');
+                return redirect()->route('saluran');
           
         }catch(\Exception $e){
             DB::rollback();
@@ -63,13 +83,13 @@ class MasterSaluranController extends Controller
             ];
        
 
-
             Saluran::where('id',$request->id)->update($updateSaluran);
           
         
             DB::commit();
             Toastr::success('updated saluran successfully :)','Success');
-            return redirect()->route('all/saluran');
+            return redirect()->route('saluran');
+
         }catch(\Exception $e){
             DB::rollback();
             Toastr::error('updated saluran fail :)','Error');

@@ -66,6 +66,12 @@
                     <div class="col-sm-6 col-md-3">  
                         <div class="form-group form-focus">
                             <select class="form-control floating" name="kondisi_saluran">
+
+                                @foreach($saluran as $sal)
+
+                                <option value="{{$sal->id}}">{{$sal->namasaluran}}</option>
+
+                                @endforeach
                            </select>
                             <label class="focus-label">Kondisi saluran</label>
                         </div>

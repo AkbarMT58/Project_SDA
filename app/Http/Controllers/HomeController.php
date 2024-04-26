@@ -34,19 +34,7 @@ class HomeController extends Controller
 
         $role_id=Auth::user()->role_name;
 
-         $modul_permission = DB::table('menus as a')
-
-        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
-
-        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
-        
-        ->where("b.role_id", $role_id)
-
-        ->orderBy("a.sub_categorymenu",'ASC')
-        
-        ->get();
-
-        $data_subchidcategorymenu = DB::table('menus as a')
+        $modul_permission = DB::table('menus as a')
 
         ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
  
@@ -57,12 +45,25 @@ class HomeController extends Controller
         ->orderBy("a.sub_categorymenu",'ASC')
         
         ->get();
+
+        $data_subchildcategorymenu = DB::table('menus as a')
+
+       ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.jenis_menu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+
+       ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+       
+       ->where("b.role_id", $role_id)
+
+       ->orderBy("a.sub_categorymenu",'ASC')
+       
+       ->get();
+
  
       
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
 
-        return view('dashboard.dashboard',compact('title','modul_permission','data_subchidcategorymenu'));
+        return view('dashboard.dashboard',compact('title','modul_permission','data_subchildcategorymenu'));
     }
 
     public function satgasDashboard()

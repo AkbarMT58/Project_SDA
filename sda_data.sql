@@ -31,7 +31,7 @@ CREATE TABLE `activity_logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `activity_logs` (
 
 LOCK TABLES `activity_logs` WRITE;
 /*!40000 ALTER TABLE `activity_logs` DISABLE KEYS */;
-INSERT INTO `activity_logs` VALUES (1,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Fri, Apr 5, 2024 9:13 PM',NULL,NULL),(2,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 5, 2024 9:13 PM',NULL,NULL),(3,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 6, 2024 8:01 PM',NULL,NULL),(4,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 7, 2024 7:24 PM',NULL,NULL),(5,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 8, 2024 12:30 PM',NULL,NULL),(6,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 8, 2024 7:54 PM',NULL,NULL),(7,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 12, 2024 10:55 PM',NULL,NULL),(8,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 13, 2024 11:20 AM',NULL,NULL),(9,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 13, 2024 8:15 PM',NULL,NULL),(10,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 14, 2024 11:12 AM',NULL,NULL),(11,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 14, 2024 7:46 PM',NULL,NULL),(12,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 15, 2024 4:03 PM',NULL,NULL),(13,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 15, 2024 9:19 PM',NULL,NULL),(14,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 15, 2024 11:05 PM',NULL,NULL),(15,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 16, 2024 7:55 AM',NULL,NULL),(16,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 16, 2024 3:15 PM',NULL,NULL),(17,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 16, 2024 4:10 PM',NULL,NULL),(18,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 16, 2024 4:10 PM',NULL,NULL),(19,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 10:50 AM',NULL,NULL),(20,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 11:36 AM',NULL,NULL),(21,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 3:05 PM',NULL,NULL),(22,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 3:06 PM',NULL,NULL),(23,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 3:19 PM',NULL,NULL),(24,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 3:32 PM',NULL,NULL),(25,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 4:41 PM',NULL,NULL),(26,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 4:41 PM',NULL,NULL),(27,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 5:06 PM',NULL,NULL),(28,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 5:07 PM',NULL,NULL),(29,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 5:11 PM',NULL,NULL),(30,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 5:12 PM',NULL,NULL),(31,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 5:13 PM',NULL,NULL),(32,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 5:14 PM',NULL,NULL),(33,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 10:59 PM',NULL,NULL),(34,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 11:18 PM',NULL,NULL),(35,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Thu, Apr 18, 2024 9:20 AM',NULL,NULL),(36,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Thu, Apr 18, 2024 5:03 PM',NULL,NULL),(37,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 19, 2024 8:59 AM',NULL,NULL),(38,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Fri, Apr 19, 2024 11:33 AM',NULL,NULL),(39,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 19, 2024 1:22 PM',NULL,NULL),(40,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Fri, Apr 19, 2024 2:17 PM',NULL,NULL),(41,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 19, 2024 2:17 PM',NULL,NULL),(42,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 20, 2024 3:26 AM',NULL,NULL),(43,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 20, 2024 3:58 PM',NULL,NULL),(44,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 21, 2024 5:50 AM',NULL,NULL),(45,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 21, 2024 4:16 PM',NULL,NULL),(46,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 4:35 AM',NULL,NULL),(47,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 8:00 AM',NULL,NULL),(48,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 22, 2024 11:24 AM',NULL,NULL),(49,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 11:27 AM',NULL,NULL),(50,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 22, 2024 11:33 AM',NULL,NULL),(51,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 11:34 AM',NULL,NULL);
+INSERT INTO `activity_logs` VALUES (1,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Fri, Apr 5, 2024 9:13 PM',NULL,NULL),(2,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 5, 2024 9:13 PM',NULL,NULL),(3,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 6, 2024 8:01 PM',NULL,NULL),(4,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 7, 2024 7:24 PM',NULL,NULL),(5,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 8, 2024 12:30 PM',NULL,NULL),(6,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 8, 2024 7:54 PM',NULL,NULL),(7,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 12, 2024 10:55 PM',NULL,NULL),(8,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 13, 2024 11:20 AM',NULL,NULL),(9,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 13, 2024 8:15 PM',NULL,NULL),(10,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 14, 2024 11:12 AM',NULL,NULL),(11,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 14, 2024 7:46 PM',NULL,NULL),(12,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 15, 2024 4:03 PM',NULL,NULL),(13,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 15, 2024 9:19 PM',NULL,NULL),(14,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 15, 2024 11:05 PM',NULL,NULL),(15,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 16, 2024 7:55 AM',NULL,NULL),(16,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 16, 2024 3:15 PM',NULL,NULL),(17,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 16, 2024 4:10 PM',NULL,NULL),(18,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 16, 2024 4:10 PM',NULL,NULL),(19,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 10:50 AM',NULL,NULL),(20,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 11:36 AM',NULL,NULL),(21,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 3:05 PM',NULL,NULL),(22,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 3:06 PM',NULL,NULL),(23,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 3:19 PM',NULL,NULL),(24,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 3:32 PM',NULL,NULL),(25,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 4:41 PM',NULL,NULL),(26,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 4:41 PM',NULL,NULL),(27,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 5:06 PM',NULL,NULL),(28,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 5:07 PM',NULL,NULL),(29,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 5:11 PM',NULL,NULL),(30,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 5:12 PM',NULL,NULL),(31,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 5:13 PM',NULL,NULL),(32,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 5:14 PM',NULL,NULL),(33,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 17, 2024 10:59 PM',NULL,NULL),(34,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 17, 2024 11:18 PM',NULL,NULL),(35,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Thu, Apr 18, 2024 9:20 AM',NULL,NULL),(36,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Thu, Apr 18, 2024 5:03 PM',NULL,NULL),(37,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 19, 2024 8:59 AM',NULL,NULL),(38,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Fri, Apr 19, 2024 11:33 AM',NULL,NULL),(39,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 19, 2024 1:22 PM',NULL,NULL),(40,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Fri, Apr 19, 2024 2:17 PM',NULL,NULL),(41,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Fri, Apr 19, 2024 2:17 PM',NULL,NULL),(42,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 20, 2024 3:26 AM',NULL,NULL),(43,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sat, Apr 20, 2024 3:58 PM',NULL,NULL),(44,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 21, 2024 5:50 AM',NULL,NULL),(45,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Sun, Apr 21, 2024 4:16 PM',NULL,NULL),(46,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 4:35 AM',NULL,NULL),(47,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 8:00 AM',NULL,NULL),(48,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 22, 2024 11:24 AM',NULL,NULL),(49,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 11:27 AM',NULL,NULL),(50,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 22, 2024 11:33 AM',NULL,NULL),(51,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 11:34 AM',NULL,NULL),(52,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 22, 2024 11:57 AM',NULL,NULL),(53,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 1:12 PM',NULL,NULL),(54,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Mon, Apr 22, 2024 4:17 PM',NULL,NULL),(55,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Mon, Apr 22, 2024 5:14 PM',NULL,NULL),(56,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 23, 2024 8:58 AM',NULL,NULL),(57,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 23, 2024 4:17 PM',NULL,NULL),(58,'Doni Ariandana','doni@gmail.com','Has log in','Tue, Apr 23, 2024 4:18 PM',NULL,NULL),(59,'Doni Ariandana','doni@gmail.com','Has log out','Tue, Apr 23, 2024 4:18 PM',NULL,NULL),(60,'Doni Ariandana','doni@gmail.com','Has log in','Tue, Apr 23, 2024 4:18 PM',NULL,NULL),(61,'Doni Ariandana','doni@gmail.com','Has log out','Tue, Apr 23, 2024 4:19 PM',NULL,NULL),(62,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 23, 2024 4:19 PM',NULL,NULL),(63,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 23, 2024 4:21 PM',NULL,NULL),(64,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 23, 2024 4:21 PM',NULL,NULL),(65,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 23, 2024 4:21 PM',NULL,NULL),(66,'Doni Ariandana','doni@gmail.com','Has log in','Tue, Apr 23, 2024 4:22 PM',NULL,NULL),(67,'Doni Ariandana','doni@gmail.com','Has log out','Tue, Apr 23, 2024 4:22 PM',NULL,NULL),(68,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Tue, Apr 23, 2024 4:26 PM',NULL,NULL),(69,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Tue, Apr 23, 2024 4:59 PM',NULL,NULL),(70,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 24, 2024 8:11 AM',NULL,NULL),(71,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 24, 2024 1:23 PM',NULL,NULL),(72,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 24, 2024 1:33 PM',NULL,NULL),(73,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 24, 2024 1:45 PM',NULL,NULL),(74,'Doni Ariandana','doni@gmail.com','Has log in','Wed, Apr 24, 2024 1:45 PM',NULL,NULL),(75,'Doni Ariandana','doni@gmail.com','Has log out','Wed, Apr 24, 2024 1:56 PM',NULL,NULL),(76,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 24, 2024 2:01 PM',NULL,NULL),(77,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 24, 2024 10:02 PM',NULL,NULL),(78,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 24, 2024 10:04 PM',NULL,NULL),(79,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Wed, Apr 24, 2024 10:04 PM',NULL,NULL),(80,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Wed, Apr 24, 2024 10:12 PM',NULL,NULL),(81,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Thu, Apr 25, 2024 8:45 AM',NULL,NULL),(82,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Thu, Apr 25, 2024 11:55 AM',NULL,NULL),(83,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log out','Thu, Apr 25, 2024 1:18 PM',NULL,NULL),(84,'Muhammad Taufik Akbar','admin_sda@gmail.com','Has log in','Thu, Apr 25, 2024 1:25 PM',NULL,NULL);
 /*!40000 ALTER TABLE `activity_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,6 +130,62 @@ LOCK TABLES `failed_jobs` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `kewenangan`
+--
+
+DROP TABLE IF EXISTS `kewenangan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `kewenangan` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `namakewenangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kewenangan`
+--
+
+LOCK TABLES `kewenangan` WRITE;
+/*!40000 ALTER TABLE `kewenangan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kewenangan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `konstruksi`
+--
+
+DROP TABLE IF EXISTS `konstruksi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `konstruksi` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `namakonstruksi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `konstruksi`
+--
+
+LOCK TABLES `konstruksi` WRITE;
+/*!40000 ALTER TABLE `konstruksi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `konstruksi` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `menus`
 --
 
@@ -151,7 +207,7 @@ CREATE TABLE `menus` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +216,7 @@ CREATE TABLE `menus` (
 
 LOCK TABLES `menus` WRITE;
 /*!40000 ALTER TABLE `menus` DISABLE KEYS */;
-INSERT INTO `menus` VALUES (2,'Master Data','la la-book',2,2,2,3,NULL,NULL,NULL,NULL,'2024-04-06 13:06:08','2024-04-22 01:33:58'),(3,'Data Saluran Drainase','la la-water',2,3,NULL,2,NULL,NULL,NULL,NULL,'2024-04-06 13:07:37','2024-04-22 01:33:42'),(4,'Settings','la la-gear',2,4,NULL,4,NULL,NULL,NULL,NULL,'2024-04-06 13:08:00','2024-04-21 22:22:53'),(10,'List Menu','la la-building',3,4,4,1,'/menus/page',NULL,NULL,NULL,'2024-04-19 07:40:19','2024-04-21 22:24:09'),(11,'List Role & Modul Access','la la-key',3,4,4,1,'/roles/permissions/page',NULL,NULL,NULL,'2024-04-19 07:42:20','2024-04-21 22:24:32'),(12,'List User','la la-user',3,4,4,1,'/users/page',NULL,NULL,NULL,'2024-04-19 07:46:17','2024-04-21 22:24:47'),(13,'Sal.Primer',NULL,3,3,3,1,NULL,NULL,NULL,NULL,'2024-04-21 21:45:18','2024-04-21 22:09:46'),(14,'Sal.Sekunder',NULL,3,3,3,2,NULL,NULL,NULL,NULL,'2024-04-21 21:50:46','2024-04-21 22:10:49'),(15,'Sal.Tersier',NULL,3,3,3,3,NULL,NULL,NULL,NULL,'2024-04-21 21:57:42','2024-04-21 22:11:19'),(16,'Sal.Mikro',NULL,3,3,3,4,NULL,NULL,NULL,NULL,'2024-04-21 21:59:02','2024-04-21 22:11:42'),(17,'Data Waduk/Situ/Embung','la la-water',2,3,NULL,3,NULL,NULL,NULL,NULL,'2024-04-21 22:26:56','2024-04-21 22:44:10'),(18,'Data Daerah Rawan Banjir','la la-water',2,3,NULL,4,NULL,NULL,NULL,NULL,'2024-04-21 22:47:35','2024-04-21 22:49:33'),(19,'Data Vendor','la la-building',2,3,NULL,5,NULL,NULL,NULL,NULL,'2024-04-21 22:51:34','2024-04-21 22:55:27'),(20,'Data Dump Truck','la la-truck',2,3,NULL,5,NULL,NULL,NULL,NULL,'2024-04-21 22:52:08','2024-04-21 22:55:55'),(21,'Dashboard','la la-pie-chart',2,1,NULL,1,NULL,NULL,NULL,NULL,'2024-04-21 22:56:54','2024-04-21 22:58:03'),(22,'Jadwal Kerja Satgas','las la-calendar',2,3,NULL,8,NULL,NULL,NULL,NULL,'2024-04-22 01:13:26','2024-04-22 01:25:24'),(23,'Pembangunan','las la-building',2,3,NULL,9,NULL,NULL,NULL,NULL,'2024-04-22 01:14:17','2024-04-22 01:24:37'),(24,'Pemeliharaan','las la-tools',2,3,NULL,9,NULL,NULL,NULL,NULL,'2024-04-22 01:21:05','2024-04-22 01:21:05'),(25,'Dashboard Karyawan',NULL,3,21,21,1,'/dashboard/satgas/page',NULL,NULL,NULL,'2024-04-22 01:56:28','2024-04-22 02:56:42'),(26,'Dashboard SDA',NULL,3,21,21,2,'/home',NULL,NULL,NULL,'2024-04-22 02:03:04','2024-04-22 02:09:13');
+INSERT INTO `menus` VALUES (1,'Master Data','fa fa-book',1,1,1,1,NULL,NULL,NULL,NULL,'2024-04-25 07:31:19','2024-04-25 07:31:55'),(2,'Data Saluran Drainase',NULL,2,2,1,1,NULL,NULL,NULL,NULL,'2024-04-25 07:33:38','2024-04-25 07:33:38'),(3,'Saluran Primer',NULL,3,2,1,2,NULL,NULL,NULL,NULL,'2024-04-25 07:37:47','2024-04-25 07:45:05');
 /*!40000 ALTER TABLE `menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +263,7 @@ CREATE TABLE `module_permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +272,7 @@ CREATE TABLE `module_permissions` (
 
 LOCK TABLES `module_permissions` WRITE;
 /*!40000 ALTER TABLE `module_permissions` DISABLE KEYS */;
-INSERT INTO `module_permissions` VALUES (13,2,1,1,1,1,1,NULL,NULL),(14,2,2,1,1,1,0,NULL,NULL),(15,2,3,1,1,1,0,NULL,NULL),(16,2,4,1,1,1,1,NULL,NULL),(20,1,1,1,0,0,1,NULL,NULL),(21,5,1,1,1,1,1,NULL,NULL),(22,3,2,1,0,0,0,NULL,NULL),(31,4,1,1,0,0,1,NULL,NULL),(85,4,2,1,0,0,0,NULL,NULL),(86,4,3,1,0,0,0,NULL,NULL),(106,1,2,1,0,0,0,NULL,NULL),(107,5,2,1,1,1,1,NULL,NULL),(108,5,3,1,0,1,1,NULL,NULL),(109,5,9,1,1,1,1,NULL,NULL),(110,2,5,1,0,0,0,NULL,NULL),(111,2,6,1,0,0,0,NULL,NULL),(112,2,7,1,0,0,0,NULL,NULL),(113,2,8,1,0,0,0,NULL,NULL),(114,2,9,1,0,0,0,NULL,NULL),(115,1,4,1,0,0,0,NULL,NULL),(116,1,9,1,0,0,0,NULL,NULL),(117,2,10,1,0,0,0,NULL,NULL),(118,5,11,NULL,0,0,0,NULL,NULL),(119,5,12,NULL,0,0,0,NULL,NULL),(120,2,11,1,0,0,0,NULL,NULL),(121,2,12,1,0,0,0,NULL,NULL),(122,5,5,NULL,0,0,0,NULL,NULL),(123,5,4,NULL,0,0,0,NULL,NULL),(124,5,7,NULL,0,0,0,NULL,NULL),(125,5,8,NULL,0,0,0,NULL,NULL),(126,4,4,NULL,0,0,0,NULL,NULL),(127,3,1,1,0,0,0,NULL,NULL),(128,3,3,1,0,0,0,NULL,NULL),(129,2,13,1,0,0,0,NULL,NULL),(130,2,14,1,0,0,0,NULL,NULL),(131,2,15,1,0,0,0,NULL,NULL),(132,2,16,1,0,0,0,NULL,NULL),(133,2,17,1,0,0,0,NULL,NULL),(134,2,18,1,0,0,0,NULL,NULL),(135,2,19,1,0,0,0,NULL,NULL),(136,2,20,1,0,0,0,NULL,NULL),(137,2,21,1,0,0,0,NULL,NULL),(138,2,22,1,0,0,0,NULL,NULL),(139,2,23,1,0,0,0,NULL,NULL),(140,2,24,1,0,0,0,NULL,NULL),(141,2,25,1,0,0,0,NULL,NULL),(142,2,26,1,0,0,0,NULL,NULL);
+INSERT INTO `module_permissions` VALUES (13,2,1,1,1,1,1,NULL,NULL),(14,2,2,1,1,1,0,NULL,NULL),(15,2,3,1,1,1,0,NULL,NULL),(16,2,4,1,1,1,1,NULL,NULL),(20,1,1,1,0,0,1,NULL,NULL),(21,5,1,1,1,1,1,NULL,NULL),(22,3,2,1,0,0,0,NULL,NULL),(31,4,1,1,0,0,1,NULL,NULL),(85,4,2,1,0,0,0,NULL,NULL),(86,4,3,1,0,0,0,NULL,NULL),(106,1,2,1,0,0,0,NULL,NULL),(107,5,2,1,1,1,1,NULL,NULL),(108,5,3,1,0,1,1,NULL,NULL),(109,5,9,1,1,1,1,NULL,NULL),(110,2,5,1,0,0,0,NULL,NULL),(111,2,6,1,0,0,0,NULL,NULL),(112,2,7,1,0,0,0,NULL,NULL),(113,2,8,1,0,0,0,NULL,NULL),(114,2,9,1,0,0,0,NULL,NULL),(115,1,4,1,0,0,0,NULL,NULL),(116,1,9,1,0,0,0,NULL,NULL),(117,2,10,1,0,0,0,NULL,NULL),(118,5,11,NULL,0,0,0,NULL,NULL),(119,5,12,NULL,0,0,0,NULL,NULL),(120,2,11,1,0,0,0,NULL,NULL),(121,2,12,1,0,0,0,NULL,NULL),(122,5,5,NULL,0,0,0,NULL,NULL),(123,5,4,NULL,0,0,0,NULL,NULL),(124,5,7,NULL,0,0,0,NULL,NULL),(125,5,8,NULL,0,0,0,NULL,NULL),(126,4,4,NULL,0,0,0,NULL,NULL),(127,3,1,1,0,0,0,NULL,NULL),(128,3,3,1,0,0,0,NULL,NULL),(129,2,13,1,0,0,0,NULL,NULL),(130,2,14,1,0,0,0,NULL,NULL),(131,2,15,1,0,0,0,NULL,NULL),(132,2,16,1,0,0,0,NULL,NULL),(133,2,17,1,0,0,0,NULL,NULL),(134,2,18,1,0,0,0,NULL,NULL),(135,2,19,1,0,0,0,NULL,NULL),(136,2,20,1,0,0,0,NULL,NULL),(137,2,21,1,0,0,0,NULL,NULL),(138,2,22,1,0,0,0,NULL,NULL),(139,2,23,1,0,0,0,NULL,NULL),(140,2,24,1,0,0,0,NULL,NULL),(141,2,25,1,0,0,0,NULL,NULL),(142,2,26,1,0,0,0,NULL,NULL),(143,3,13,1,0,0,0,NULL,NULL),(144,2,27,1,0,0,0,NULL,NULL),(145,2,28,1,0,0,0,NULL,NULL),(146,2,29,1,0,0,0,NULL,NULL);
 /*!40000 ALTER TABLE `module_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -432,6 +488,35 @@ INSERT INTO `roles_permissions` VALUES (1,'Administrator',NULL,NULL),(2,'CEO',NU
 UNLOCK TABLES;
 
 --
+-- Table structure for table `salurans`
+--
+
+DROP TABLE IF EXISTS `salurans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `salurans` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `namasaluran` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `salurans`
+--
+
+LOCK TABLES `salurans` WRITE;
+/*!40000 ALTER TABLE `salurans` DISABLE KEYS */;
+INSERT INTO `salurans` VALUES (31,'Saluran A',NULL,NULL,NULL,'2024-04-25 03:37:30','2024-04-25 04:01:58'),(32,'Saluran B',NULL,NULL,NULL,'2024-04-25 04:02:14','2024-04-25 04:02:14');
+/*!40000 ALTER TABLE `salurans` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `sequence_estimates`
 --
 
@@ -463,7 +548,7 @@ DROP TABLE IF EXISTS `sequence_tbls`;
 CREATE TABLE `sequence_tbls` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -472,7 +557,7 @@ CREATE TABLE `sequence_tbls` (
 
 LOCK TABLES `sequence_tbls` WRITE;
 /*!40000 ALTER TABLE `sequence_tbls` DISABLE KEYS */;
-INSERT INTO `sequence_tbls` VALUES (1);
+INSERT INTO `sequence_tbls` VALUES (1),(2);
 /*!40000 ALTER TABLE `sequence_tbls` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -561,7 +646,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `users_join_date_unique` (`join_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -570,7 +655,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Muhammad Taufik Akbar','AkbarMT','KH_00001','admin_sda@gmail.com','Fri, Apr 5, 2024 9:12 PM','083832497471','Active','2','photo_defaults.jpg',NULL,NULL,NULL,'$2y$10$0zO2cb/7.PM8rYCS7sQbV.TBbUL5CNTnU33/vd5YpDGTjoa7a/LYC',NULL,'2024-04-05 14:13:00','2024-04-05 14:13:00');
+INSERT INTO `users` VALUES (1,'Muhammad Taufik Akbar','AkbarMT','KH_00001','admin_sda@gmail.com','Fri, Apr 5, 2024 9:12 PM','083832497471','Active','2','photo_defaults.jpg',NULL,NULL,NULL,'$2y$10$0zO2cb/7.PM8rYCS7sQbV.TBbUL5CNTnU33/vd5YpDGTjoa7a/LYC',NULL,'2024-04-05 14:13:00','2024-04-05 14:13:00'),(2,'Doni Ariandana','Doni1609','KH_00002','doni@gmail.com','Tue, Apr 23, 2024 4:17 PM','0853443343','Active','3',NULL,NULL,NULL,NULL,'$2y$10$Lnzy0wx78fpisJVJXhp9aeofqzqfMRoaZXd1tNfTY/hKhSatGkxaW',NULL,'2024-04-23 09:17:42','2024-04-23 09:17:42');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -601,4 +686,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-22 11:40:08
+-- Dump completed on 2024-04-26  8:39:42

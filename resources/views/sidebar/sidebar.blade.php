@@ -12,7 +12,7 @@
 
            
         
-                @if($modulmenu->categorymenu==1 && $modulmenu->sub_childcategorymenu == 1 )
+                @if($modulmenu->categorymenu==1 && $modulmenu->sub_childcategorymenu == 1 && $modulmenu->sub_childcategorymenu != ''  )
 
                   <li class="{{set_active([$modulmenu->link_menu])}} submenu">
 
@@ -99,7 +99,7 @@
 
                 @endif
 
-                @if($modulmenu->categorymenu==1 && $modulmenu->sub_categorymenu == $modulmenu->id && $modulmenu->sub_childcategorymenu == '')
+                @if($modulmenu->categorymenu==1 && $modulmenu->sub_categorymenu == $modulmenu->id && $modulmenu->sub_childcategorymenu == ''  )
 
                
                 <li class="{{set_active([$modulmenu->link_menu])}} submenu">
@@ -134,17 +134,12 @@
     
                   </li>
 
-                        <!-- @else
+              
+
+               
+                        <!-- @else -->
                   
-                      
-                          <li class="{{set_active([$subchild->link_menu])}} submenu">
-
-                          <a  class="{{ set_active([$subchild->link_menu]) ? 'noti-dot' : '' }}">
-                              <i class="{{$subchild->namaicons}}"></i> <span style="font-size:11px;">{{$subchild->namamenu}} </span> 
-                              <span class="menu-arrow"></span>
-                          </a>
-
-                          <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}"> -->
+                  
 
                   @endif
 
@@ -154,7 +149,7 @@
                   @foreach($data_subchildcategorymenu as $subchild)
 
                   
-                  @if( $subchild->sub_categorymenu!=  $subchild->id && $subchild->categorymenu == 3  && $subchild->jenis_menu == 3   ) 
+                  @if( $subchild->sub_categorymenu!=  $subchild->id && $subchild->categorymenu == 3  && $subchild->jenis_menu == 3  ) 
 
           
                     <li class="subchildmenu" >
@@ -163,13 +158,15 @@
 
                     </li>
 
-                  </li>
+                  
+
+                  @else 
+
+                  {{''}}
 
                   @endif
 
                
-
-
                   @endforeach
 
 
@@ -200,20 +197,28 @@
 
                   </li> 
 
+
                 
                   @endif
 
 
-
-                 
 
                 
                   </ul>
                 
                
 
-        @endforeach
-        </div>
+        
+        
+        
+                  @endforeach
+    
+                </div>
+
+
+                
+
+
     </div>
 </div>
 <!-- /Sidebar -->

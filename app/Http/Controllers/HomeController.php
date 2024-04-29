@@ -59,7 +59,6 @@ class HomeController extends Controller
        ->get();
 
  
-      
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
 

@@ -27,7 +27,7 @@
 
                 
 
-                    @if($subchild->sub_categorymenu== 2 &&  $subchild->categorymenu ==2   )
+                    @if($subchild->sub_childcategorymenu== $modulmenu->id &&  $subchild->categorymenu ==2   )
 
                   <li class="{{set_active([$subchild->link_menu])}} submenu">
 
@@ -135,13 +135,13 @@
                   </li>
 
               
-                        <!-- @else -->
-                  
-                  
+                         <!-- @else  -->
 
+
+                
                   @endif
 
-
+              
                   @foreach($data_subchildcategorymenu as $subchild)
 
                   

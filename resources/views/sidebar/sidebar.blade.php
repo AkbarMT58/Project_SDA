@@ -32,7 +32,7 @@
                   <li class="{{set_active([$subchild->link_menu])}} submenu">
 
                     <a href="#" class="{{ set_active([$subchild->link_menu]) ? 'noti-dot' : '' }}">
-                        <i class="{{$subchild->namaicons}}"></i> <span style="font-size:12px;">{{$subchild->namamenu}} </span> 
+                        <i class="{{$subchild->namaicons}}"></i> <span style="font-size:10px;">{{$subchild->namamenu}} </span> 
                         <span class="menu-arrow"></span>
                     </a>
 
@@ -51,7 +51,7 @@
 
                       <li class="subchildmenu" >
                             
-                        <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:12px;" href="{{ url('/') }}{{$subchild->link_menu}}">{{$subchild->namamenu}} </a>
+                        <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:11px;" href="{{ url('/') }}{{$subchild->link_menu}}">{{$subchild->namamenu}} </a>
 
                       </li>
 
@@ -130,7 +130,7 @@
 
                   <li class="subchildmenu" >
                           
-                          <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:12px;" href="{{ url('/') }}{{$subchild->link_menu}}"><span style="font-size:12px;">{{$subchild->namamenu}} </span>  </a>
+                          <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:10px;" href="{{ url('/') }}{{$subchild->link_menu}}"><span style="font-size:10px;">{{$subchild->namamenu}} </span>  </a>
     
                   </li>
 
@@ -140,7 +140,7 @@
                           <li class="{{set_active([$subchild->link_menu])}} submenu">
 
                           <a  class="{{ set_active([$subchild->link_menu]) ? 'noti-dot' : '' }}">
-                              <i class="{{$subchild->namaicons}}"></i> <span style="font-size:12px;">{{$subchild->namamenu}} </span> 
+                              <i class="{{$subchild->namaicons}}"></i> <span style="font-size:11px;">{{$subchild->namamenu}} </span> 
                               <span class="menu-arrow"></span>
                           </a>
 
@@ -159,7 +159,7 @@
           
                     <li class="subchildmenu" >
                           
-                      <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:12px;" href="{{ url('/') }}{{$subchild->link_menu}}">{{$subchild->namamenu}} </a>
+                      <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:10px;" href="{{ url('/') }}{{$subchild->link_menu}}">{{$subchild->namamenu}} </a>
 
                     </li>
 

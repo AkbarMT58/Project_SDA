@@ -25,9 +25,12 @@
 
                     @foreach($data_subchildcategorymenu as $subchild)
 
-                
+                  
+                   
 
                     @if($subchild->sub_childcategorymenu== $modulmenu->id &&  $subchild->categorymenu ==2   )
+
+                    <!-- {{$subchild->id}}  -->
 
                   <li class="{{set_active([$subchild->link_menu])}} submenu">
 
@@ -40,29 +43,45 @@
 
                  
 
-                    @foreach($data_subchildcategorymenu as $subchild)
-
-                    @foreach ($modul_permission as $modulmenu_access)
-
-                    @if( $subchild->sub_categorymenu == $modulmenu_access->id && $subchild->categorymenu == 3  && $subchild->jenis_menu=='' ) 
-
-                  
+                   
 
 
+                    @foreach($modul_permission as $modul_access)
+
+                    @if( $modul_access->categorymenu == 3 && $modul_access->sub_categorymenu==$subchild->id   )  
+
+                    
+                     @if( $subchild->sub_childcategorymenu = 1   )  
+
+                     <!-- {{ $subchild->sub_categorymenu}} -->
+
+                     <!-- {{ $modul_access->id}} 
+
+                     {{ $modul_access->sub_categorymenu}}  -->
+
+
+
+                
                       <li class="subchildmenu" >
                             
-                        <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:11px;" href="{{ url('/') }}{{$subchild->link_menu}}">{{$subchild->namamenu}} </a>
+                        <a class="{{set_active([$modul_access->link_menu])}}" id="s_childmenu" style="font-size:11px;" href="{{ url('/') }}{{$modul_access->link_menu}}">{{$modul_access->namamenu}} </a>
 
                       </li>
 
-                    </li>
+                    @endif
 
                     @endif
 
                     @endforeach
 
+                 
 
-                    @endforeach
+
+
+                 
+
+
+                   
 
 
                       
@@ -98,35 +117,29 @@
 
 
                 @endif
+                
 
                 @if($modulmenu->categorymenu==1 && $modulmenu->sub_categorymenu == $modulmenu->id && $modulmenu->sub_childcategorymenu == ''  )
 
-               
+                  <!-- {{$modulmenu->id}} -->
+
                 <li class="{{set_active([$modulmenu->link_menu])}} submenu">
 
-                  <a  class="{{ set_active([$modulmenu->link_menu]) ? 'noti-dot' : '' }}">
-                      <i class="{{$modulmenu->namaicons}}"></i> <span style="font-size:12px;">{{$modulmenu->namamenu}} </span> 
-                      <span class="menu-arrow"></span>
-                  </a>
+                <a  class="{{ set_active([$modulmenu->link_menu]) ? 'noti-dot' : '' }}">
+                    <i class="{{$modulmenu->namaicons}}"></i> <span style="font-size:12px;">{{$modulmenu->namamenu}} </span> 
+                    <span class="menu-arrow"></span>
+                </a>
 
-                  <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
+                <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
 
-                  @foreach($data_subchildcategorymenu as $subchild)
+                @foreach($data_subchildcategorymenu as $subchild)
+                   
+                
+               <!-- {{ $modulmenu->id}} -->
+              
+                @if($subchild->sub_childcategorymenu== $modulmenu->id &&  $subchild->categorymenu ==2 && $subchild->link_menu!='' )
 
-                   <!-- <a style="color:white;">{{$subchild->id}}</a>  -->
-
-                  <!-- @if($subchild->sub_categorymenu== $subchild->id &&  $subchild->categorymenu ==2 && $subchild->jenis_menu == 2 )
-
-                  <li class="{{set_active([$subchild->link_menu])}} submenu">
-
-                  <a  class="{{ set_active([$subchild->link_menu]) ? 'noti-dot' : '' }}">
-                      <i class="{{$subchild->namaicons}}"></i> <span style="font-size:12px;">{{$subchild->namamenu}} </span> 
-                      <span class="menu-arrow"></span>
-                  </a>
-
-                  <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}"> -->
-
-                  @if($subchild->sub_categorymenu== $subchild->id &&  $subchild->categorymenu ==2 && $subchild->jenis_menu == 2 && $subchild->link_menu!='' )
+               <!-- {{$subchild->sub_childcategorymenu}} -->
 
                   <li class="subchildmenu" >
                           
@@ -134,72 +147,37 @@
     
                   </li>
 
-              
-                         <!-- @else  -->
-
-
-                
-                  @endif
-
-              
-                  @foreach($data_subchildcategorymenu as $subchild)
-
-                  
-                  @if( $subchild->sub_categorymenu!=  $subchild->id && $subchild->categorymenu == 3  && $subchild->jenis_menu == 3  ) 
-
-          
-                    <li class="subchildmenu" >
-                          
-                      <a class="{{set_active([$subchild->link_menu])}}" id="s_childmenu" style="font-size:10px;" href="{{ url('/') }}{{$subchild->link_menu}}">{{$subchild->namamenu}} </a>
-
-                    </li>
-
-                  
-
-                  @else 
-
-                  {{''}}
-
-                  @endif
-
                
-                  @endforeach
 
 
-                    
+                @endif
+
+
+
+                
+
+                @endforeach
+
+
+
+                @else
+
+                {{''}}
+
+              
+
+                
+           
+
+                 @endif 
+
+
                   </ul>
 
 
                   </li> 
 
-                  @endif 
 
-
-                  <!-- batas collapse -->
-
-
-
-                  </li>
-
-
-
-
-                  @endforeach
-
-
-                    
-                  </ul>
-
-
-                  </li> 
-
-
-                
-                  @endif
-
-
-
-                
                   </ul>
                 
                

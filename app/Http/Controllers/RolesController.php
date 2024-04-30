@@ -8,6 +8,7 @@ use App\Models\module_permission;
 use Brian2694\Toastr\Facades\Toastr;
 use DB;
 use Auth;
+use App\Models\roleTypeUser;
 
 class RolesController extends Controller
 {
@@ -22,6 +23,8 @@ class RolesController extends Controller
     {
         $rolesPermissions = roleTypeUser::All();
         $roleid_input=$request->role_id;
+        $rolesPermissions = roleTypeUser::All();
+        $role_id=Auth::user()->role_name;
 
         
         $menus = DB::table('menus')->get();

@@ -95,20 +95,21 @@
 				<!-- /Search -->
 
 				<!-- Flag -->
-				<li class="nav-item dropdown has-arrow flag-nav">
+				<li class="nav-item dropdown has-arrow flag-nav" >
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-						<img src="{{ URL::to('assets/img/flags/ina.png') }}" alt="" height="20"> <span>Indonesia</span>
+						<img src="{{ URL::to('assets/images/ina.png') }}" alt="" height="20"> <span>Indonesia</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						
 						<a href="javascript:void(0);" class="dropdown-item">
-						<img src="{{ URL::to('assets/img/flags/ina.png') }}" alt="" height="16"> Indonesia </a>
+						<img src="{{ URL::to('assets/images/eng.png') }}" alt="" height="16"> English </a>
 					</div>
+					
 				</li>
 				<!-- /Flag -->
 
 				<!-- Notifications -->
-				<li class="nav-item dropdown">
+				<li class="nav-item dropdown" hidden>
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 						<i class="fa fa-bell-o"></i>
 						<span class="badge badge-pill">3</span> 
@@ -193,7 +194,7 @@
 				<!-- /Notifications -->
 				
 				<!-- Message Notifications -->
-				<li class="nav-item dropdown">
+				<li class="nav-item dropdown" hidden>
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 						<i class="fa fa-comment-o"></i> <span class="badge badge-pill">8</span>
 					</a>

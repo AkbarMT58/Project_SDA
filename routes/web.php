@@ -380,14 +380,18 @@ Route::controller(MasterSaluranController::class)->group(function () {
   
 });
 
-// Route::controller(MasterKonstruksiController::class)->group(function () {
-//     Route::get('konstruksi', 'index')->name('konstruksi');
+Route::controller(MasterKonstruksiController::class)->group(function () {
+    Route::get('konstruksi', 'AllKonstruksi')->name('konstruksi');
+    Route::post('konstruksi/save', 'saveKonstruksi')->middleware('auth')->name('konstruksi/save');
+    Route::post('konstruksi/update', 'updateKonstruksi')->middleware('auth')->name('konstruksi/update');
     
-// });
-// Route::controller(MasterKewenanganController::class)->group(function () {
-//     Route::get('kewenangan', 'index')->name('kewenangan');
+});
+Route::controller(MasterKewenanganController::class)->group(function () {
+    Route::get('kewenangan', 'AllKewenangan')->name('kewenangan');
+    Route::post('kewenangan/save', 'saveKewenangan')->middleware('auth')->name('kewenangan/save');
+    Route::post('kewenangan/update', 'updateKewenangan')->middleware('auth')->name('kewenangan/update');
     
-// });
+});
 
 
 

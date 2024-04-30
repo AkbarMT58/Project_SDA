@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\roleTypeUser;
+
 use App\Models\module_permission;
 use Brian2694\Toastr\Facades\Toastr;
 use DB;

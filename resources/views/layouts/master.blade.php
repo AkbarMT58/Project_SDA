@@ -98,7 +98,7 @@
 				<li class="nav-item dropdown has-arrow flag-nav" >
 					<!-- <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"> -->
 						<a class="mb-4">
-					<img src="{{ URL::to('assets/images/eng.png') }}" alt="" height="16"></a>
+					<img src="{{ URL::to('assets/images/eng.png') }}" alt="" height="20"></a>
 					<img src="{{ URL::to('assets/images/ina.png') }}" alt="" height="20"> <span></span>
 					<!-- </a> -->
 	                </a>

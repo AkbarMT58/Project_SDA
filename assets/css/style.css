@@ -8728,4 +8728,58 @@ padding:0px 20px 1px;
 
 } 
 
+.dashboard-icon{
+
+	background-image: url('../img/icon/dashboard.svg');
+	width:24px;
+	height:24px;
+
+}
+
+.masterdata-icon{
+
+	background-image: url('../img/icon/masterdata.svg');
+	width:24px;
+	height:24px;
+
+
+}
+
+.jadwalkerja-icon{
+
+	background-image: url('../img/icon/notes.svg');
+	width:24px;
+	height:24px;
+
+
+
+}
+
+.pembangunan-icon{
+
+	background-image: url('../img/icon/pembangunan.svg');
+	width:24px;
+	height:24px;
+
+
+}
+
+.pemeliharaan-icon{
+
+	background-image: url('../img/icon/pemeliharaan.svg');
+	width:24px;
+	height:24px;
+
+
+
+}
+
+.riwayat-icon{
+
+	background-image: url('../img/icon/riwayat.svg');
+	width:24px;
+	height:24px;
+
+}
+
 

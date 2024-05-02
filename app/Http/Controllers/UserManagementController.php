@@ -128,6 +128,31 @@ class UserManagementController extends Controller
         $user = DB::table('users')->get();
         $employees = DB::table('profile_information')->where('user_id',$profile)->first();
         $title="Profile Information";
+        $role_id=Auth::user()->role_name;
+
+        $modul_permission = DB::table('menus as a')
+
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+ 
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+        
+        ->where("b.role_id", $role_id)
+ 
+        ->orderBy("a.sub_categorymenu",'ASC')
+        
+        ->get();
+
+        $data_subchildcategorymenu = DB::table('menus as a')
+ 
+        ->select('a.id','b.id as id_modul','a.namamenu','a.namaicons','a.categorymenu','a.sub_categorymenu','a.jenis_menu','a.sub_childcategorymenu','a.index_no','a.link_menu','b.role_id','b.view','b.create','b.edit','b.delete')
+ 
+        ->leftJoin("module_permissions as b","b.module_permission","=","a.id")
+        
+        ->where("b.role_id", $role_id)
+ 
+        ->orderBy("a.sub_categorymenu",'ASC')
+        
+        ->get();
 
         if(empty($employees))
         {
@@ -139,10 +164,10 @@ class UserManagementController extends Controller
             if($user_id == $profile)
             {
                 $information = DB::table('profile_information')->where('user_id',$profile)->first();
-                return view('usermanagement.profile_user',compact('information','user','userInformation','title'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','title','modul_permission','role_id','data_subchildcategorymenu'));
             } else {
                 $information = ProfileInformation::all();
-                return view('usermanagement.profile_user',compact('information','user','userInformation','title'));
+                return view('usermanagement.profile_user',compact('information','user','userInformation','title','modul_permission','role_id','data_subchildcategorymenu'));
             } 
         }
     }

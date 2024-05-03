@@ -10,9 +10,7 @@
              
         <ul>
 
-           
-        
-                @if($modulmenu->categorymenu==1 && $modulmenu->sub_childcategorymenu == 1 && $modulmenu->sub_childcategorymenu != ''  )
+                @if($modulmenu->categorymenu==1 && $modulmenu->sub_childcategorymenu == 1 && $modulmenu->sub_childcategorymenu != '' && $modulmenu->view=='1'  )
 
                   <li class="{{set_active([$modulmenu->link_menu])}} submenu">
 
@@ -28,7 +26,7 @@
               
                     @if($subchild->sub_childcategorymenu== $modulmenu->id &&  $subchild->categorymenu ==2   )
 
-                    <!-- {{$subchild->id}}  -->
+                   
 
                    <li class="{{set_active([$subchild->link_menu])}} submenu">
 
@@ -40,9 +38,6 @@
                     <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
 
                  
-
-                   
-
 
                     @foreach($modul_permission as $modul_access)
 
@@ -117,7 +112,7 @@
                 @endif
                 
 
-                @if($modulmenu->categorymenu==1 && $modulmenu->sub_categorymenu == $modulmenu->id && $modulmenu->sub_childcategorymenu == ''  )
+                @if($modulmenu->categorymenu==1 && $modulmenu->sub_categorymenu == $modulmenu->id && $modulmenu->sub_childcategorymenu == '' && $modulmenu->view=='1'  )
 
                   <!-- {{$modulmenu->id}} -->
 
@@ -146,12 +141,9 @@
                   </li>
 
                 
-               
-
-
                 @endif
 
-                @if($subchild->sub_childcategorymenu== $modulmenu->id &&  $subchild->categorymenu ==2 && $subchild->link_menu=='' )
+                @if($subchild->sub_childcategorymenu== $modulmenu->id &&  $subchild->categorymenu ==2 && $subchild->link_menu=='' && $modulmenu->view=='1' )
 
 
 

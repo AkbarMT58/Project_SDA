@@ -697,6 +697,7 @@
 
         toastr.success('Create new add modules successfully :)');
         $('#add_modulakses'+roleid).modal('hide');
+        location.reload();
 
         }
 
@@ -717,6 +718,7 @@
 
             toastr.error('Failed Saving Data!You can not click unclicked! :)');
             $('#add_modulakses'+roleid).modal('hide');
+
 
 
         }
@@ -757,6 +759,7 @@
 
                             toastr.success('Create new edit modules successfully :)');
                             $('#add_modulakses'+roleid).modal('hide');
+                            location.reload();
                             }
 
                             if(response.status==403){
@@ -817,6 +820,7 @@
 
             toastr.success('Create new delete modules successfully :)');
             $('#add_modulakses'+roleid).modal('hide');
+            location.reload();
             }
 
             if(response.status==403){
@@ -884,6 +888,7 @@
 
                     toastr.success('Update View modules successfully :)');
                     $('#add_modulakses'+roleid).modal('hide');
+                    location.reload();
                     }
 
                     if(response.status==403){
@@ -939,6 +944,7 @@
 
                 toastr.success('Update Create modules successfully :)');
                 $('#add_modulakses'+roleid).modal('hide');
+                location.reload();
                 }
 
                 if(response.status==403){
@@ -1014,6 +1020,7 @@
 
                             toastr.success('Update Create modules successfully :)');
                             $('#add_modulakses'+roleid).modal('hide');
+                            location.reload();
                             }
 
                             if(response.status==403){
@@ -1143,6 +1150,7 @@
 
                             toastr.success('Update Edit modules successfully :)');
                             $('#add_modulakses'+roleid).modal('hide');
+                            location.reload();
                             }
 
                             if(response.status==403){
@@ -1200,6 +1208,7 @@
 
                         toastr.success('Update Edit modules successfully :)');
                         $('#add_modulakses'+roleid).modal('hide');
+                        location.reload();
                         }
 
                         if(response.status==403){
@@ -1273,6 +1282,7 @@
 
                                 toastr.success('Update Delete modules successfully :)');
                                 $('#add_modulakses'+roleid).modal('hide');
+                                location.reload();
                                 }
 
                                 if(response.status==403){
@@ -1326,6 +1336,7 @@
 
                         toastr.success('Update Delete modules successfully :)');
                         $('#add_modulakses'+roleid).modal('hide');
+                        location.reload();
                         }
 
                         if(response.status==403){
